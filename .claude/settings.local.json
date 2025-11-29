@@ -4,7 +4,8 @@
       "WebSearch",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(ls \"C:\\workspace\\freelance_projects\\cws\\cws-docs\\docs\\javascripts\"\" 2>/dev/null || echo \"Directory empty or removed \")"
     ],
     "deny": [],
     "ask": []
