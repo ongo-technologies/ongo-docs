@@ -1,6 +1,7 @@
 ---
 title: Contributing
 description: How to contribute to CarWash Qatar documentation
+icon: material/hand-heart-outline
 ---
 
 # Contributing

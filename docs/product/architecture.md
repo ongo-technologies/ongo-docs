@@ -1,6 +1,7 @@
 ---
-title: Technical Architecture
+title: Architecture
 description: Technology stack and system design for CarWash Qatar
+icon: material/sitemap
 ---
 
 # Technical Architecture

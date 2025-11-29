@@ -1,6 +1,7 @@
 ---
-title: Development Roadmap
+title: Roadmap
 description: Milestones and timeline for CarWash Qatar
+icon: material/road-variant
 ---
 
 # Development Roadmap
@@ -12,7 +13,7 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 ## Milestones
 
 ### Milestone 1: MVP Foundation
-**Duration**: 6-8 weeks
+**Target**: Q1 2026
 
 **Goal**: Functional platform with basic booking capability
 
@@ -33,7 +34,7 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 ---
 
 ### Milestone 2: Testing Deployment
-**Duration**: 2-3 weeks
+**Target**: Q1 2026
 
 **Goal**: Production-like environments for testing
 
@@ -54,7 +55,7 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 ---
 
 ### Milestone 3: Cultural Integration
-**Duration**: 3-4 weeks
+**Target**: Q2 2026
 
 **Goal**: Refined UX with Qatar-specific features
 
@@ -75,7 +76,7 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 ---
 
 ### Milestone 4: Feature Complete
-**Duration**: 4-5 weeks
+**Target**: Q2 2026
 
 **Goal**: All planned features for market readiness
 
@@ -96,7 +97,7 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 ---
 
 ### Milestone 5: Beta Testing
-**Duration**: 4-6 weeks
+**Target**: Q3 2026
 
 **Goal**: Real-world validation with selected providers
 
@@ -114,6 +115,18 @@ Phased approach with weekly milestone validation. Early testing, cultural adapta
 - Customer satisfaction >4.0/5.0
 - Provider satisfaction >4.0/5.0
 - System stable under real load
+
+---
+
+## Timeline Overview
+
+| Milestone | Target | Status |
+|-----------|--------|--------|
+| MVP Foundation | Q1 2026 | Planned |
+| Testing Deployment | Q1 2026 | Planned |
+| Cultural Integration | Q2 2026 | Planned |
+| Feature Complete | Q2 2026 | Planned |
+| Beta Testing | Q3 2026 | Planned |
 
 ## Key Risks
 

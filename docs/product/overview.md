@@ -1,6 +1,7 @@
 ---
-title: Product Overview
+title: Overview
 description: Vision, objectives, and value propositions for CarWash Qatar
+icon: material/lightbulb-outline
 ---
 
 # Product Overview

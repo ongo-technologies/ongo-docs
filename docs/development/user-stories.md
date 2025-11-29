@@ -1,6 +1,7 @@
 ---
 title: User Stories
 description: Epic structure and user stories for CarWash Qatar
+icon: material/account-group-outline
 ---
 
 # User Stories

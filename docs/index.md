@@ -1,6 +1,7 @@
 ---
-title: CarWash Qatar
+title: Home
 description: Qatar's premier car wash aggregator platform
+icon: material/home
 ---
 
 <div class="hero">

@@ -1,6 +1,7 @@
 ---
 title: Style Guide
 description: Writing and formatting standards for CarWash Qatar documentation
+icon: material/palette-outline
 ---
 
 # Style Guide

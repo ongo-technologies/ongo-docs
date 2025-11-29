@@ -1,6 +1,7 @@
 ---
 title: Requirements
 description: Functional and non-functional requirements for CarWash Qatar
+icon: material/clipboard-check-outline
 ---
 
 # Requirements
