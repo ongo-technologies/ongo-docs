@@ -100,6 +100,9 @@ nav:
   - Reference:
       - style-guide.md
       - contributing.md
+  - Legal:
+      - legal/privacy-policy.md
+      - legal/terms-and-conditions.md
 
 # Custom CSS
 extra_css:
