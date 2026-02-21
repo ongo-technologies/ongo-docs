@@ -84,7 +84,8 @@
 
 /* ===== NAVIGATION - Notion style ===== */
 .md-nav {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  padding-left: 0.75rem;
 }
 
 .md-nav__link {
@@ -453,6 +454,11 @@
   background: var(--cw-bg-subtle);
   border: 1px solid var(--cw-border);
   border-radius: var(--cw-radius-lg);
+}
+
+/* ===== IFRAME DARK MODE ===== */
+[data-md-color-scheme="slate"] iframe {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 /* ===== FOOTER ===== */

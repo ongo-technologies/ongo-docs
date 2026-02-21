@@ -20,6 +20,7 @@ nav = [
   { "Development" = [
     { "Requirements" = "development/requirements.md" },
     { "User Stories" = "development/user-stories.md" },
+    { "Database Schema" = "development/database-schema.md" },
   ]},
   { "Reference" = [
     { "Style Guide" = "style-guide.md" },
