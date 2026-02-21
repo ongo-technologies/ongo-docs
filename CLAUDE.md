@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-MkDocs documentation site for CarWash Qatar - a car wash aggregator platform PRD. Uses Material for MkDocs theme with a clean, Notion-inspired design.
+Zensical documentation site for CarWash Qatar - a car wash aggregator platform PRD. Uses Zensical (next-gen static site generator by the Material for MkDocs team) with a clean, Notion-inspired design.
 
 ## Commands
 
@@ -13,21 +13,21 @@ MkDocs documentation site for CarWash Qatar - a car wash aggregator platform PRD
 pip install -r requirements.txt
 
 # Serve locally (http://127.0.0.1:8000)
-mkdocs serve
+zensical serve
 
 # Build static site (outputs to ./site/)
-mkdocs build --clean
+zensical build
 ```
 
 ## Architecture
 
-- **Generator**: MkDocs with Material theme
+- **Generator**: Zensical (successor to MkDocs + Material)
 - **Styling**: Custom CSS in `docs/stylesheets/extra.css`
 - **Deployment**: GitHub Actions → GitHub Pages
 
 ### Key Files
 
-- `mkdocs.yml` - Site config, navigation, theme settings
+- `zensical.toml` - Site config, navigation, theme settings
 - `docs/stylesheets/extra.css` - Custom styles (Notion-inspired design)
 - `requirements.txt` - Python dependencies
 

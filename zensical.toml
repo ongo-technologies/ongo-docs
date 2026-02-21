@@ -1,0 +1,117 @@
+[project]
+site_name = "CarWash Qatar"
+site_description = "Product documentation for Qatar's car wash aggregator platform"
+site_author = "CarWash Qatar Team"
+site_url = "https://yourusername.github.io/cws-docs/"
+repo_name = "cws-docs"
+repo_url = "https://github.com/yourusername/cws-docs"
+edit_uri = "edit/main/docs/"
+copyright = "&copy; 2025 CarWash Qatar"
+
+extra_css = ["stylesheets/extra.css"]
+
+nav = [
+  { "Home" = "index.md" },
+  { "Product" = [
+    { "Overview" = "product/overview.md" },
+    { "Architecture" = "product/architecture.md" },
+    { "Roadmap" = "product/roadmap.md" },
+  ]},
+  { "Development" = [
+    { "Requirements" = "development/requirements.md" },
+    { "User Stories" = "development/user-stories.md" },
+  ]},
+  { "Reference" = [
+    { "Style Guide" = "style-guide.md" },
+    { "Contributing" = "contributing.md" },
+  ]},
+  { "Legal" = [
+    { "Privacy Policy" = "legal/privacy-policy.md" },
+    { "Terms & Conditions" = "legal/terms-and-conditions.md" },
+  ]},
+]
+
+# ----------------------------------------------------------------------------
+# Theme configuration
+# ----------------------------------------------------------------------------
+[project.theme]
+language = "en"
+custom_dir = "docs/overrides"
+features = [
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.tracking",
+    "navigation.sections",
+    "navigation.top",
+    "navigation.indexes",
+    "navigation.path",
+    "navigation.footer",
+    "search.highlight",
+    "content.code.copy",
+    "content.code.annotate",
+    "toc.follow",
+]
+
+[project.theme.font]
+text = "Inter"
+code = "JetBrains Mono"
+
+[project.theme.icon]
+logo = "material/car-wash"
+repo = "fontawesome/brands/github"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "white"
+accent = "blue"
+toggle.icon = "material/brightness-7"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "black"
+accent = "blue"
+toggle.icon = "material/brightness-4"
+toggle.name = "Switch to light mode"
+
+# ----------------------------------------------------------------------------
+# Markdown extensions
+# ----------------------------------------------------------------------------
+[project.markdown_extensions.abbr]
+
+[project.markdown_extensions.admonition]
+
+[project.markdown_extensions.attr_list]
+
+[project.markdown_extensions.def_list]
+
+[project.markdown_extensions.md_in_html]
+
+[project.markdown_extensions.toc]
+permalink = true
+title = "On this page"
+
+[project.markdown_extensions.pymdownx.details]
+
+[project.markdown_extensions.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji"
+emoji_generator = "zensical.extensions.emoji.to_svg"
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+
+[project.markdown_extensions.pymdownx.inlinehilite]
+
+[project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+
+# ----------------------------------------------------------------------------
+# Plugins
+# ----------------------------------------------------------------------------
+[project.plugins.search]
+lang = "en"
