@@ -1,138 +1,144 @@
 ---
 title: Roadmap
 description: Milestones and timeline for CarWash Qatar
-icon: material/road-variant
+icon: material/flag-outline
 ---
 
 # Development Roadmap
 
 ## Philosophy
 
-Phased approach with weekly milestone validation. Early testing, cultural adaptation, and stakeholder feedback integration.
+Phased delivery with continuous deployment and stakeholder validation. Each milestone builds on the last—infrastructure first, then features, then refinement, then launch.
 
 ## Milestones
 
-### Milestone 1: MVP Foundation
-**Target**: Q1 2026
+### Milestone 1: Foundation & Initial Deployment
+**Period**: December 2025 – February 2026 (Q4 2025 – Q1 2026)
+**Status**: ✅ Completed
 
-**Goal**: Functional platform with basic booking capability
-
-**Deliverables**:
-
-- Monorepo setup (Flutter, Angular, ASP.NET Core)
-- User authentication with SMS verification
-- Basic provider discovery with map
-- Core booking flow (no payments yet)
-- Simple admin dashboard
-
-**Success Criteria**:
-
-- Team can run all apps locally
-- Core flows work in dev environment
-- CI/CD pipeline operational
-
----
-
-### Milestone 2: Testing Deployment
-**Target**: Q1 2026
-
-**Goal**: Production-like environments for testing
+**Goal**: Establish core infrastructure, CI/CD, and initial working versions of all platforms
 
 **Deliverables**:
 
-- Flutter app on Google Play (internal) and TestFlight
-- Angular apps on Azure with SSL
-- Performance monitoring (APM)
-- Security scanning
-- Cross-device testing framework
+- API development with database connectivity (Azure PostgreSQL)
+- CI/CD pipeline setup (GitHub Actions + Terraform for infrastructure)
+- Initial development of admin and vendor web apps (Angular)
+- Initial development of customer mobile app (Flutter)
+- Mobile app deployed to Google Play Store
+- Web apps deployed to Azure
 
 **Success Criteria**:
 
-- All stakeholders can access and test
-- <3s load times, 99.5% uptime
-- >80% test coverage on critical paths
+- All apps running in production environments
+- CI/CD pipeline fully operational
+- Deployment to both Play Store and Azure confirmed
 
 ---
 
-### Milestone 3: Cultural Integration
+### Milestone 2: API Integration & UI Redesign
+**Period**: March – April 2026 (Q1–Q2 2026)
+**Status**: 🔄 In Progress
+
+**Goal**: Connect all platforms through core booking API endpoints and refresh the user experience
+
+**Deliverables**:
+
+- API endpoints covering the core booking feature (customer, admin, vendor, service unit)
+- CI/CD pipeline extended to deploy mobile app to Apple App Store
+- UI/UX redesign for mobile app (customer app + service unit app)
+- UI/UX redesign for web apps (vendor portal + admin dashboard)
+
+**Success Criteria**:
+
+- Booking flow functional end-to-end across all platforms
+- iOS deployment pipeline operational
+- Redesigned interfaces approved by stakeholders
+
+---
+
+### Milestone 3: Cultural Integration & Core Features
 **Target**: Q2 2026
 
-**Goal**: Refined UX with Qatar-specific features
+**Goal**: Deliver a polished, Qatar-ready experience with full cultural adaptations and feature completeness
 
 **Deliverables**:
 
-- Arabic RTL support
-- Prayer time integration
-- Advanced booking (custom packages, scheduling)
-- In-app messaging
-- Basic analytics dashboard
+- Arabic RTL support across all platforms
+- WhatsApp OTP verification flow
+- Standard service packages (Quick Wash, Shine Wash, Detail Wash)
+- Custom vendor packages with individual pricing
+- Status-based service tracking with estimated arrival times
+- In-app ratings and reviews (star rating + pre-set options)
+- SMS notifications for all booking events
 
 **Success Criteria**:
 
-- Zero critical bugs in core flows
-- Arabic interface fully functional
-- Internal satisfaction >4.0/5.0
+- Arabic interface fully functional with no critical layout issues
+- Complete booking flow with vendor assignment working end-to-end
+- Internal satisfaction score >4.0/5.0
 
 ---
 
-### Milestone 4: Feature Complete
-**Target**: Q2 2026
+### Milestone 4: Payments & Vendor Operations
+**Target**: Q2–Q3 2026
 
-**Goal**: All planned features for market readiness
+**Goal**: Enable real transactions and equip vendors with complete operational tools
 
 **Deliverables**:
 
-- Full payment integration (QNB, QIIB, cards)
-- Rating and review system
+- Payment integration (SkipCash, MyFatoorah, QNB — local cards, Visa, Google/Apple Pay)
+- Vendor earnings dashboard with commission tracking
+- Fleet management (multi-unit assignment by vendor admin)
+- Quality control checklist for service completion
+- Admin financial dashboard and vendor approval workflows
 - Enhanced security and audit logging
-- Provider analytics tools
-- Performance optimization
 
 **Success Criteria**:
 
 - Payment failure rate <1%
-- Security pen test passed
-- Supports 500+ concurrent users
+- Vendors can manage bookings, units, and earnings independently
+- Security review passed
 
 ---
 
-### Milestone 5: Beta Testing
+### Milestone 5: Beta Launch
 **Target**: Q3 2026
 
-**Goal**: Real-world validation with selected providers
+**Goal**: Real-world validation with selected vendors and live customers
 
 **Deliverables**:
 
-- 5-10 providers onboarded
+- 5–10 vendors onboarded and trained
 - Customer support system (Arabic + English)
-- Real transaction monitoring
+- Live transaction monitoring and dispute resolution
 - Feedback collection system
-- Provider training materials
+- Vendor training and onboarding materials
+- Performance optimization for production load
 
 **Success Criteria**:
 
-- 50+ successful transactions
+- 50+ successful transactions completed
 - Customer satisfaction >4.0/5.0
-- Provider satisfaction >4.0/5.0
+- Vendor satisfaction >4.0/5.0
 - System stable under real load
 
 ---
 
 ## Timeline Overview
 
-| Milestone | Target | Status |
+| Milestone | Period | Status |
 |-----------|--------|--------|
-| MVP Foundation | Q1 2026 | Planned |
-| Testing Deployment | Q1 2026 | Planned |
-| Cultural Integration | Q2 2026 | Planned |
-| Feature Complete | Q2 2026 | Planned |
-| Beta Testing | Q3 2026 | Planned |
+| Foundation & Initial Deployment | Dec 2025 – Feb 2026 | ✅ Completed |
+| API Integration & UI Redesign | Mar – Apr 2026 | 🔄 In Progress |
+| Cultural Integration & Core Features | Q2 2026 | Planned |
+| Payments & Vendor Operations | Q2–Q3 2026 | Planned |
+| Beta Launch | Q3 2026 | Planned |
 
 ## Key Risks
 
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | Payment gateway complexity | High | Start sandbox early, engage local specialists |
-| Flutter learning curve | Medium | Training in M1, pair programming |
-| Arabic RTL complexity | Medium | Incremental implementation, UX consultant |
-| Low provider adoption | High | Reduced early commissions, strong onboarding |
+| App Store review delays | Medium | Submit early, use TestFlight for internal testing |
+| Arabic RTL complexity | Medium | Incremental implementation, UX review at each stage |
+| Low vendor adoption | High | Reduced early commissions, strong onboarding support |

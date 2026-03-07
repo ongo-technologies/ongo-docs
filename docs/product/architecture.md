@@ -1,7 +1,7 @@
 ---
 title: Architecture
 description: Technology stack and system design for CarWash Qatar
-icon: material/sitemap
+icon: material/layers-outline
 ---
 
 # Technical Architecture
@@ -14,48 +14,9 @@ icon: material/sitemap
 | Backend API | ASP.NET Core | Team expertise, Azure integration |
 | Database | Azure PostgreSQL | Scalability, geospatial support |
 | Web Apps | Angular | Modern SPA, TypeScript |
-| Service Unit | Angular PWA | Native-like without app store |
+| Service Unit | Flutter | Cross-platform, consistent with customer app |
 | Cloud | Microsoft Azure | Qatar region, integrated ecosystem |
-| CI/CD | GitHub Actions | Free tier, good integration |
-
-## System Architecture
-
-```mermaid
-graph TB
-    subgraph Clients
-        A[Customer App<br/>Flutter]
-        B[Provider Portal<br/>Angular]
-        C[Service Unit<br/>PWA]
-        D[Admin Dashboard<br/>Angular]
-    end
-
-    subgraph Backend
-        E[ASP.NET Core API]
-    end
-
-    subgraph Data
-        F[(PostgreSQL)]
-        G[(Redis Cache)]
-    end
-
-    subgraph External
-        H[Google Maps]
-        I[Payment Gateway]
-        J[SMS Gateway]
-        K[Push Notifications]
-    end
-
-    A --> E
-    B --> E
-    C --> E
-    D --> E
-    E --> F
-    E --> G
-    E --> H
-    E --> I
-    E --> J
-    E --> K
-```
+| CI/CD | GitHub Actions + Terraform | Automated pipelines, infrastructure as code |
 
 ## External Integrations
 
@@ -63,27 +24,16 @@ graph TB
 
 | Service | Provider | Purpose |
 |---------|----------|---------|
-| Maps | Google Maps API | Location, routing |
-| Payments | QNB, QIIB | Local card processing |
-| SMS | Qatar provider | OTP, notifications |
-| Push | Firebase FCM | Real-time updates |
-
-### Future (Phase 2+)
-
-- Document verification for provider onboarding
-- Accounting integration (QuickBooks, SAP)
-- IoT for equipment monitoring
+| Maps | Google Maps API | Location pinning, service area definition |
+| Payments | SkipCash, MyFatoorah, QNB | Local card processing, Visa, Google/Apple Pay |
+| Messaging | WhatsApp OTP | User verification and OTP |
+| Notifications | SMS + Firebase FCM | Booking confirmations, status updates, push alerts |
 
 ## Security
 
-### Data Protection
-- AES-256 encryption at rest
-- TLS 1.3 for all communications
-- PCI DSS compliance for payments
-
 ### Authentication
 - JWT tokens with refresh mechanism
-- SMS-based OTP verification
+- WhatsApp OTP verification
 - Role-based access control
 - Session timeout after 30 minutes
 

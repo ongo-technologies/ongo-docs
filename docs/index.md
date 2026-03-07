@@ -1,7 +1,7 @@
 ---
 title: Home
 description: Qatar's premier car wash aggregator platform
-icon: material/home
+icon: material/home-outline
 ---
 
 <div class="hero">
@@ -25,13 +25,13 @@ A four-platform ecosystem that connects customers with car wash vendors in Qatar
   </div>
   <div class="card">
     <div class="card-icon">💼</div>
-    <h3>Provider Portal</h3>
+    <h3>Vendor Portal</h3>
     <p>Angular web dashboard for vendors to manage their business</p>
   </div>
   <div class="card">
     <div class="card-icon">🚐</div>
     <h3>Service Unit App</h3>
-    <p>PWA for on-road teams to coordinate service delivery</p>
+    <p>Flutter app for on-road teams to coordinate service delivery</p>
   </div>
   <div class="card">
     <div class="card-icon">⚙️</div>
@@ -39,33 +39,6 @@ A four-platform ecosystem that connects customers with car wash vendors in Qatar
     <p>Platform operations and monitoring for system administrators</p>
   </div>
 </div>
-
-## Key Numbers
-
-<div class="stats-grid">
-  <div class="stat-card">
-    <div class="stat-value">30-100</div>
-    <div class="stat-label">Daily transactions (Phase 1)</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">5-10%</div>
-    <div class="stat-label">Commission rate</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">6 mo</div>
-    <div class="stat-label">MVP timeline</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value">18 mo</div>
-    <div class="stat-label">Break-even target</div>
-  </div>
-</div>
-
-## Why Qatar?
-
-- **Market gap**: Fragmented car wash services with limited digital booking
-- **2 competitors**: Room for differentiation through better UX and cultural integration
-- **Cultural fit**: Built for local preferences—prayer times, weekend patterns, Arabic RTL
 
 ## Quick Links
 
