@@ -47,12 +47,20 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 - CI/CD pipeline extended to deploy mobile app to Apple App Store
 - UI/UX redesign for mobile app (customer app + service unit app)
 - UI/UX redesign for web apps (vendor portal + admin dashboard)
+- WhatsApp OTP integration for customer authentication and verification
+- MyFatoorah payment gateway integration (sandbox configuration and API setup)
+- Initial development of the on-road service unit mobile application
+- Initial implementation of the end-to-end booking flow with live API integration across all platforms
 
 **Success Criteria**:
 
 - Booking flow functional end-to-end across all platforms
 - iOS deployment pipeline operational
 - Redesigned interfaces approved by stakeholders
+- WhatsApp OTP verification flow operational in staging
+- MyFatoorah sandbox transactions processing successfully
+- Service unit app running with core screens and navigation
+- Booking flow connected to live API and functional across customer, vendor, and admin platforms
 
 ---
 
