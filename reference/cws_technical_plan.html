@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CWS MVP — Technical Planning</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0F2044;
+    --teal:     #0D9488;
+    --teal-lt:  #CCFBF1;
+    --teal-dim: #0a7a70;
+    --white:    #FFFFFF;
+    --off:      #F8FAFC;
+    --slate:    #475569;
+    --slate-lt: #94A3B8;
+    --slate-xlt:#F1F5F9;
+    --border:   #E2E8F0;
+    --green:    #10B981;
+    --red:      #EF4444;
+    --amber:    #F59E0B;
+    --blue:     #3B82F6;
+    --purple:   #8B5CF6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--navy);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 240px;
+    background: #0a1a38;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex; flex-direction: column;
+    z-index: 100;
+    transition: transform .3s ease;
+  }
+
+  .sidebar-logo {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .sidebar-logo .cws-mark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 28px;
+    color: var(--teal);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .sidebar-logo .cws-sub {
+    font-size: 10px; font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  .nav-section-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.25);
+    padding: 20px 24px 8px;
+  }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 24px;
+    cursor: pointer;
+    transition: all .2s;
+    border-left: 2px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.04); }
+  .nav-item.active {
+    background: rgba(13,148,136,0.12);
+    border-left-color: var(--teal);
+  }
+  .nav-item .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--teal);
+    opacity: .7; min-width: 18px;
+  }
+  .nav-item.active .nav-num { opacity: 1; }
+  .nav-item .nav-label {
+    font-size: 12px; font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    transition: color .2s;
+  }
+  .nav-item.active .nav-label,
+  .nav-item:hover .nav-label { color: rgba(255,255,255,0.9); }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 10px; color: rgba(255,255,255,0.2);
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: 240px;
+    background: var(--off);
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 56px;
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .topbar-section {
+    font-size: 11px; font-weight: 500; color: var(--slate-lt);
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .topbar-sep { color: var(--border); }
+  .topbar-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--navy);
+  }
+  .topbar-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .topbar-badge {
+    background: var(--teal-lt); color: var(--teal-dim);
+    font-size: 10px; font-weight: 600; padding: 3px 10px;
+    border-radius: 20px; letter-spacing: .5px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    padding: 40px;
+    animation: fadeIn .3s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px; font-weight: 800;
+    color: var(--navy); line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+  .section-header p {
+    margin-top: 6px;
+    font-size: 14px; color: var(--slate);
+    font-weight: 300;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .card-accent { border-top: 3px solid var(--teal); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 9px; border-radius: 4px;
+    letter-spacing: .6px; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .badge-amber  { background: #FEF3C7; color: #92400E; border: 1px solid #F59E0B; }
+  .badge-blue   { background: #EFF6FF; color: #1E40AF; border: 1px solid #3B82F6; }
+  .badge-red    { background: #FEF2F2; color: #991B1B; border: 1px solid #EF4444; }
+  .badge-green  { background: #ECFDF5; color: #065F46; border: 1px solid #10B981; }
+  .badge-teal   { background: #F0FDFA; color: #0f766e; border: 1px solid #0D9488; }
+  .badge-slate  { background: #F8FAFC; color: #475569; border: 1px solid #CBD5E1; }
+  .badge-purple { background: #F5F3FF; color: #5b21b6; border: 1px solid #8B5CF6; }
+
+  .method-get    { background: #ECFDF5; color: #065F46; border: 1px solid #10B981; }
+  .method-post   { background: #EFF6FF; color: #1E40AF; border: 1px solid #3B82F6; }
+  .method-put    { background: #FFFBEB; color: #92400E; border: 1px solid #F59E0B; }
+  .method-delete { background: #FEF2F2; color: #991B1B; border: 1px solid #EF4444; }
+  .method-getpost{ background: #F5F3FF; color: #5b21b6; border: 1px solid #8B5CF6; }
+  .method-getput { background: #F5F3FF; color: #5b21b6; border: 1px solid #8B5CF6; }
+
+  /* ── SECTION 1: COVER ── */
+  .hero {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 40px; align-items: center;
+    position: relative; overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--teal);
+  }
+  .hero-mark {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px; font-weight: 800;
+    color: var(--teal); line-height: 1;
+    letter-spacing: -3px;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 600;
+    color: var(--white); margin-top: 8px;
+  }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 4px; font-style: italic; }
+  .hero-divider { height: 1px; background: var(--teal); width: 200px; margin: 20px 0; opacity: .4; }
+  .hero-meta { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 2; }
+  .hero-agenda { }
+  .hero-agenda h3 { font-size: 11px; font-weight: 600; color: var(--teal); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .agenda-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer; transition: all .2s;
+  }
+  .agenda-item:hover { opacity: .8; }
+  .agenda-item:last-child { border: none; }
+  .agenda-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(13,148,136,0.2); border: 1px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--teal);
+    flex-shrink: 0;
+  }
+  .agenda-text { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  .meta-row {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 16px;
+    flex: 1; min-width: 160px;
+  }
+  .meta-chip .mc-icon { font-size: 18px; }
+  .meta-chip .mc-label { font-size: 10px; color: var(--slate-lt); text-transform: uppercase; letter-spacing: 1px; }
+  .meta-chip .mc-val { font-size: 13px; font-weight: 600; color: var(--navy); margin-top: 1px; }
+
+  /* ── SECTION 2: STATUS ── */
+  .status-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .status-card .sc-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .status-card h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-top: 8px; }
+  .status-card p { font-size: 13px; color: var(--slate); margin-top: 6px; line-height: 1.5; }
+  .status-card .sc-indicator {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── SECTION 3: FRAMEWORK ── */
+  .step-flow {
+    display: grid; grid-template-columns: 1fr 32px 1fr 32px 1fr;
+    gap: 0; align-items: start; margin-bottom: 24px;
+  }
+  .step-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .step-card.highlight {
+    background: var(--teal); border-color: var(--teal);
+  }
+  .step-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--teal); font-weight: 300;
+    padding-top: 40px;
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .step-num.light { background: var(--teal); color: var(--white); }
+  .step-num.dark  { background: var(--white); color: var(--teal); }
+  .step-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .step-card.highlight h3 { color: var(--white); }
+  .step-card p { font-size: 13px; line-height: 1.6; color: var(--slate); }
+  .step-card.highlight p { color: rgba(255,255,255,0.8); }
+
+  .rule-box {
+    background: #FFFBEB; border: 1px solid #F59E0B;
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .rule-box .rb-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .rule-box strong { color: #92400E; font-size: 13px; }
+  .rule-box p { color: #92400E; font-size: 13px; margin-top: 3px; }
+
+  .audit-box {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px;
+  }
+  .audit-box h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--navy); }
+  .audit-step {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .audit-step:last-child { border: none; padding-bottom: 0; }
+  .audit-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal); flex-shrink: 0; margin-top: 5px;
+  }
+  .audit-step span { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+  /* ── SECTION 4 & 5: ENDPOINT MAPS ── */
+  .tab-row {
+    display: flex; gap: 8px; margin-bottom: 24px;
+  }
+  .tab-btn {
+    padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--white); font-size: 12px; font-weight: 600;
+    color: var(--slate); cursor: pointer; transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .tab-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn .25s ease; }
+
+  .endpoint-group {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .endpoint-group-header {
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--white);
+  }
+  .endpoint-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 16px; border-top: 1px solid var(--border);
+    transition: background .15s;
+  }
+  .endpoint-row:hover { background: var(--off); }
+  .endpoint-row .ep-badge { flex-shrink: 0; margin-top: 2px; min-width: 72px; text-align: center; }
+  .endpoint-row .ep-path {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500; color: var(--navy);
+    line-height: 1.3;
+  }
+  .endpoint-row .ep-note { font-size: 11px; color: var(--slate-lt); margin-top: 2px; }
+
+  /* ── SECTION 6: DESIGN SYSTEM ── */
+  .color-swatch {
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  }
+  .swatch-block { height: 60px; }
+  .swatch-info { padding: 10px 12px; background: var(--white); border: 1px solid var(--border); border-top: none; }
+  .swatch-hex { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--slate-lt); }
+  .swatch-name { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 2px; }
+  .swatch-role { font-size: 10px; color: var(--slate-lt); }
+
+  .typo-row {
+    display: flex; align-items: center;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .typo-row:last-child { border: none; }
+  .typo-label { font-size: 12px; font-weight: 600; color: var(--navy); min-width: 120px; }
+  .typo-spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--slate); }
+  .typo-preview { margin-left: auto; }
+
+  .spacing-chip {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px; text-align: center;
+  }
+  .spacing-chip .sc-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); }
+  .spacing-chip .sc-lbl { font-size: 10px; color: var(--slate-lt); margin-top: 2px; }
+
+  /* ── SECTION 7: ON-ROAD APP ── */
+  .scope-note {
+    background: #EFF6FF; border: 1px solid #93C5FD;
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; gap: 12px; margin-bottom: 24px;
+  }
+  .scope-note .sn-icon { font-size: 18px; flex-shrink: 0; }
+  .scope-note p { font-size: 13px; color: #1E3A5F; line-height: 1.6; }
+
+  .screen-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .screen-card .sc-icon { font-size: 22px; margin-bottom: 10px; }
+  .screen-card h4 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); }
+  .screen-card p { font-size: 12px; color: var(--slate); margin-top: 5px; line-height: 1.5; }
+
+  /* ── SECTION 8: SPRINT ── */
+  .sprint-col {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .sprint-header {
+    padding: 14px 16px 10px; color: var(--white);
+  }
+  .sprint-header h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
+  .sprint-header p { font-size: 11px; opacity: .75; font-style: italic; margin-top: 2px; }
+
+  .sprint-task {
+    margin: 10px; background: var(--off);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .sprint-task .st-who { margin-bottom: 7px; }
+  .sprint-task p { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+  /* ── SECTION 9: GIT / CI ── */
+  .branch-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-top-width: 3px; border-radius: 10px; padding: 16px 18px;
+  }
+  .branch-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 600; margin-bottom: 6px;
+  }
+  .branch-desc { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+  .pipeline-step {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 16px;
+    text-align: center; position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .pipeline-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px;
+    color: var(--white); font-weight: 600; margin: 0 auto 10px;
+  }
+  .pipeline-step h4 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .pipeline-step p { font-size: 11px; color: var(--slate); line-height: 1.5; }
+
+  .pipeline-row {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; align-items: center; margin-bottom: 20px;
+  }
+  .pipeline-arrow {
+    text-align: center; font-size: 18px; color: var(--slate-lt); padding: 0 4px;
+    display: none;
+  }
+
+  .git-rules {
+    background: #F0FDF4; border: 1px solid #86EFAC;
+    border-radius: 10px; padding: 16px 20px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .git-rule {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #166534;
+  }
+  .git-rule::before { content: '✓'; font-weight: 700; color: var(--green); }
+
+  /* ── SECTION 10: NEXT ACTIONS ── */
+  .action-row {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px;
+    display: grid; grid-template-columns: 100px 200px 1fr;
+    gap: 16px; align-items: start;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: box-shadow .2s;
+  }
+  .action-row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); }
+  .action-day {
+    background: var(--navy); color: var(--white);
+    border-radius: 8px; padding: 8px 12px;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    text-align: center; align-self: stretch;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .action-meta { display: flex; flex-direction: column; gap: 6px; }
+  .action-text { font-size: 13px; color: var(--navy); line-height: 1.6; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  /* ── UTILS ── */
+  .mb-4 { margin-bottom: 4px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .mt-24 { margin-top: 24px; }
+  .gap-12 { gap: 12px; }
+  .section-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 8px; display: block;
+  }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  .flex { display: flex; }
+  .flex-col { display: flex; flex-direction: column; }
+  .items-center { align-items: center; }
+  .gap-8 { gap: 8px; }
+  .gap-16 { gap: 16px; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="cws-mark">CWS</div>
+    <div class="cws-sub">MVP Technical Plan</div>
+  </div>
+
+  <div class="nav-section-label">Overview</div>
+  <a class="nav-item active" data-section="s0" onclick="nav(this,'s0')">
+    <span class="nav-num">00</span>
+    <span class="nav-label">Cover & Agenda</span>
+  </a>
+  <a class="nav-item" data-section="s1" onclick="nav(this,'s1')">
+    <span class="nav-num">01</span>
+    <span class="nav-label">Where We Are Now</span>
+  </a>
+
+  <div class="nav-section-label">API Planning</div>
+  <a class="nav-item" data-section="s2" onclick="nav(this,'s2')">
+    <span class="nav-num">02</span>
+    <span class="nav-label">API Framework</span>
+  </a>
+  <a class="nav-item" data-section="s3" onclick="nav(this,'s3')">
+    <span class="nav-num">03</span>
+    <span class="nav-label">Mobile App Endpoints</span>
+  </a>
+  <a class="nav-item" data-section="s4" onclick="nav(this,'s4')">
+    <span class="nav-num">04</span>
+    <span class="nav-label">Admin Endpoints</span>
+  </a>
+
+  <div class="nav-section-label">Standards</div>
+  <a class="nav-item" data-section="s5" onclick="nav(this,'s5')">
+    <span class="nav-num">05</span>
+    <span class="nav-label">Design System</span>
+  </a>
+  <a class="nav-item" data-section="s6" onclick="nav(this,'s6')">
+    <span class="nav-num">06</span>
+    <span class="nav-label">On-Road Unit App</span>
+  </a>
+
+  <div class="nav-section-label">Execution</div>
+  <a class="nav-item" data-section="s7" onclick="nav(this,'s7')">
+    <span class="nav-num">07</span>
+    <span class="nav-label">Sprint Plan</span>
+  </a>
+  <a class="nav-item" data-section="s8" onclick="nav(this,'s8')">
+    <span class="nav-num">08</span>
+    <span class="nav-label">Git & CI/CD</span>
+  </a>
+  <a class="nav-item" data-section="s9" onclick="nav(this,'s9')">
+    <span class="nav-num">09</span>
+    <span class="nav-label">Next Actions</span>
+  </a>
+
+  <div class="sidebar-footer">CWS MVP · March 2026</div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span class="topbar-section">CWS</span>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-title" id="topbar-title">Cover & Agenda</span>
+    <div class="topbar-right">
+      <span class="topbar-badge">v1.0</span>
+      <span class="topbar-badge" style="background:#FEF3C7;color:#92400E;">March 2026</span>
+    </div>
+  </div>
+
+  <!-- ── SECTION 0: COVER ── -->
+  <div class="section active" id="s0">
+    <div class="hero">
+      <div>
+        <div class="hero-mark">CWS</div>
+        <div class="hero-title">Mobile Car Wash App</div>
+        <div class="hero-sub">MVP Technical Planning Document</div>
+        <div class="hero-divider"></div>
+        <div class="hero-meta">
+          Angular  ·  .NET  ·  Flutter  ·  PostgreSQL<br>
+          Team: 1 Senior · 1 Mid · 2 Junior<br>
+          March 2026
+        </div>
+      </div>
+      <div class="hero-agenda">
+        <h3>Agenda</h3>
+        <div class="agenda-item" onclick="nav(document.querySelector('[data-section=s2]'),'s2')">
+          <div class="agenda-num">1</div>
+          <div class="agenda-text">API Endpoint Planning</div>
+        </div>
+        <div class="agenda-item" onclick="nav(document.querySelector('[data-section=s5]'),'s5')">
+          <div class="agenda-num">2</div>
+          <div class="agenda-text">Design System</div>
+        </div>
+        <div class="agenda-item" onclick="nav(document.querySelector('[data-section=s7]'),'s7')">
+          <div class="agenda-num">3</div>
+          <div class="agenda-text">Sprint Structure</div>
+        </div>
+        <div class="agenda-item" onclick="nav(document.querySelector('[data-section=s6]'),'s6')">
+          <div class="agenda-num">4</div>
+          <div class="agenda-text">On-Road Unit App</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-chip">
+        <span class="mc-icon">🧑‍💻</span>
+        <div>
+          <div class="mc-label">Team Size</div>
+          <div class="mc-val">4 People</div>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="mc-icon">📱</span>
+        <div>
+          <div class="mc-label">Mobile</div>
+          <div class="mc-val">Flutter</div>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="mc-icon">🌐</span>
+        <div>
+          <div class="mc-label">Web Admin</div>
+          <div class="mc-val">Angular</div>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="mc-icon">⚙️</span>
+        <div>
+          <div class="mc-label">Backend</div>
+          <div class="mc-val">.NET + PostgreSQL</div>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="mc-icon">☁️</span>
+        <div>
+          <div class="mc-label">Hosting</div>
+          <div class="mc-val">Azure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: STATUS ── -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-label">Overview</span>
+      <h1>Where We Are Now</h1>
+      <p>Current build status across all components and known gaps to resolve.</p>
+    </div>
+
+    <div class="grid-2" style="gap:16px">
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-amber">PARTIAL</span>
+          <span class="sc-indicator" style="background:#F59E0B"></span>
+        </div>
+        <h3>Web API (.NET)</h3>
+        <p>Endpoints created but not validated against actual UI needs. Many may be placeholder or unused.</p>
+      </div>
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-red">NOT STARTED</span>
+          <span class="sc-indicator" style="background:#EF4444"></span>
+        </div>
+        <h3>On-Road Unit App (Flutter)</h3>
+        <p>Not yet planned or developed. Scope, screens, and APIs still need to be defined.</p>
+      </div>
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-blue">IN PROGRESS</span>
+          <span class="sc-indicator" style="background:#3B82F6"></span>
+        </div>
+        <h3>Web Admin (Angular)</h3>
+        <p>Built, but no unified design system applied. Visual consistency with mobile not established.</p>
+      </div>
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-red">MISSING</span>
+          <span class="sc-indicator" style="background:#EF4444"></span>
+        </div>
+        <h3>Design System</h3>
+        <p>No shared font, color scheme, or widget standards defined for Flutter or Angular.</p>
+      </div>
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-blue">IN PROGRESS</span>
+          <span class="sc-indicator" style="background:#3B82F6"></span>
+        </div>
+        <h3>Customer Mobile (Flutter)</h3>
+        <p>Built, but no unified design system applied. Requires design pass before Sprint 2.</p>
+      </div>
+      <div class="status-card">
+        <div class="sc-top">
+          <span class="badge badge-red">MISSING</span>
+          <span class="sc-indicator" style="background:#EF4444"></span>
+        </div>
+        <h3>API–UI Traceability</h3>
+        <p>Unknown which endpoints are actually needed. No screen-to-endpoint mapping exists yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: FRAMEWORK ── -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-label">API Planning</span>
+      <h1>API Planning Framework</h1>
+      <p>How to decide what endpoints to build — UI-first approach.</p>
+    </div>
+
+    <div class="step-flow mb-24">
+      <div class="step-card">
+        <div class="step-num light">1</div>
+        <h3>Start from the Screen</h3>
+        <p>List every screen in the Mobile App and Web Admin. Each screen = a data requirement.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card highlight">
+        <div class="step-num dark">2</div>
+        <h3>Map Data Needs</h3>
+        <p>For each screen, write what data it reads (GET) and what it changes (POST/PUT/DELETE).</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num light">3</div>
+        <h3>Derive Endpoints</h3>
+        <p>Only create an endpoint when a screen needs it. Delete or defer any placeholder with no screen owner.</p>
+      </div>
+    </div>
+
+    <div class="rule-box mb-24">
+      <div class="rb-icon">⚠️</div>
+      <div>
+        <strong>Golden Rule:</strong>
+        <p>If no screen in Mobile or Web Admin calls an endpoint, mark it <strong>DEFERRED</strong> and do not spend time on it.</p>
+      </div>
+    </div>
+
+    <div class="audit-box">
+      <h3>Immediate Action: API Audit</h3>
+      <div class="audit-step">
+        <div class="audit-dot"></div>
+        <span>Export list of ALL current API endpoints from the .NET project</span>
+      </div>
+      <div class="audit-step">
+        <div class="audit-dot"></div>
+        <span>Against each endpoint, write which screen uses it (Mobile or Admin)</span>
+      </div>
+      <div class="audit-step">
+        <div class="audit-dot"></div>
+        <span>Any endpoint with no screen owner → mark <strong>PLACEHOLDER / DELETE</strong></span>
+      </div>
+      <div class="audit-step">
+        <div class="audit-dot"></div>
+        <span>Any missing endpoint a screen needs → mark <strong>TODO / SPRINT BACKLOG</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: MOBILE ENDPOINTS ── -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-label">API Endpoint Map</span>
+      <h1>Mobile App Endpoints</h1>
+      <p>16 endpoints required to support the Customer Flutter app — mapped to feature areas.</p>
+    </div>
+
+    <div class="grid-2" style="gap:16px">
+      <!-- Auth & Profile -->
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#3B82F6">
+          <span>🔐 Auth & Profile</span>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/auth/otp/send</div><div class="ep-note">Send OTP to phone number</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/auth/otp/verify</div><div class="ep-note">Verify OTP → return JWT token</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-getput">GET/PUT</span></div>
+          <div><div class="ep-path">/customers/me</div><div class="ep-note">Profile read / update</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/customers/vehicles</div><div class="ep-note">Add vehicle to profile</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/customers/addresses</div><div class="ep-note">Save delivery address</div></div>
+        </div>
+      </div>
+
+      <!-- Booking Flow -->
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#0D9488">
+          <span>📅 Booking Flow</span>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/packages/standard</div><div class="ep-note">List Quick / Shine / Detail packages</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/vendors?lat&amp;lng</div><div class="ep-note">Find available vendors near address</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/vendors/:id/packages</div><div class="ep-note">Custom packages per vendor</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/bookings</div><div class="ep-note">Create booking (quick or custom)</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/bookings/:id</div><div class="ep-note">Booking detail + status</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-delete">DELETE</span></div>
+          <div><div class="ep-path">/bookings/:id</div><div class="ep-note">Cancel (within 5-min window)</div></div>
+        </div>
+      </div>
+
+      <!-- Payments -->
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#8B5CF6">
+          <span>💳 Payments</span>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/payments/initiate</div><div class="ep-note">Trigger gateway (SkipCash / MyFatoorah)</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/payments/webhook</div><div class="ep-note">Gateway callback → update payment status</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/bookings/:id/receipt</div><div class="ep-note">Itemised receipt for customer</div></div>
+        </div>
+      </div>
+
+      <!-- Post-Service -->
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#10B981">
+          <span>⭐ Post-Service</span>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-post">POST</span></div>
+          <div><div class="ep-path">/bookings/:id/ratings</div><div class="ep-note">Submit star rating + pre-set options</div></div>
+        </div>
+        <div class="endpoint-row">
+          <div class="ep-badge"><span class="badge method-get">GET</span></div>
+          <div><div class="ep-path">/customers/me/bookings</div><div class="ep-note">Order history list</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: ADMIN ENDPOINTS ── -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-label">API Endpoint Map</span>
+      <h1>Web Admin Endpoints</h1>
+      <p>19 endpoints required to support the Angular Admin Panel — organized by feature area.</p>
+    </div>
+
+    <div class="grid-3" style="gap:16px">
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#3B82F6">🏢 Vendor Management</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/vendors</div><div class="ep-note">List all vendors + approval status</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/vendors/:id/approve</div><div class="ep-note">Approve vendor account</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/vendors/:id/documents</div><div class="ep-note">View submitted documents</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/vendors/:id/commission</div><div class="ep-note">Set commission rate</div></div></div>
+      </div>
+
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#0D9488">📦 Packages & Services</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-getpost">GET/POST</span></div><div><div class="ep-path">/admin/packages/standard</div><div class="ep-note">Manage standard packages (SSPs)</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/packages/custom</div><div class="ep-note">Review pending custom packages</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/packages/custom/:id/approve</div><div class="ep-note">Approve or reject CSP</div></div></div>
+      </div>
+
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#8B5CF6">📋 Booking Oversight</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/bookings</div><div class="ep-note">All bookings with filters</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/bookings/:id/refund</div><div class="ep-note">Trigger refund for booking</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/bookings/:id/resolve</div><div class="ep-note">Resolve booking dispute</div></div></div>
+      </div>
+
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#F59E0B">💰 Finance & Payouts</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/revenue</div><div class="ep-note">Revenue dashboard data</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/payouts</div><div class="ep-note">List vendor payout cycles</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-post">POST</span></div><div><div class="ep-path">/admin/payouts/:id/approve</div><div class="ep-note">Approve payout for transfer</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/payouts/export</div><div class="ep-note">Export CSV / report</div></div></div>
+      </div>
+
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#EF4444">👥 Users & Roles</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/users</div><div class="ep-note">All customers + status</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/admin/users/:id/deactivate</div><div class="ep-note">Disable a user account</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/admin/users/stats</div><div class="ep-note">User overview dashboard data</div></div></div>
+      </div>
+
+      <div class="endpoint-group">
+        <div class="endpoint-group-header" style="background:#10B981">⚙️ Content & Config</div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-getpost">GET/POST/PUT</span></div><div><div class="ep-path">/admin/cms</div><div class="ep-note">FAQs, T&amp;C, banners</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-post">POST</span></div><div><div class="ep-path">/admin/notifications/broadcast</div><div class="ep-note">Mass push notification</div></div></div>
+        <div class="endpoint-row"><div class="ep-badge"><span class="badge method-getput">GET/PUT</span></div><div><div class="ep-path">/admin/settings</div><div class="ep-note">App config (commission, radius, etc.)</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: DESIGN SYSTEM ── -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-label">Standards</span>
+      <h1>Design System</h1>
+      <p>Unified standards applied to Flutter (Mobile) and Angular (Web Admin).</p>
+    </div>
+
+    <span class="section-label">Color Palette</span>
+    <div class="grid-4 mb-24" style="grid-template-columns:repeat(8,1fr); gap:10px">
+      <div class="color-swatch"><div class="swatch-block" style="background:#0F2044"></div><div class="swatch-info"><div class="swatch-hex">#0F2044</div><div class="swatch-name">Navy</div><div class="swatch-role">Primary / Headers</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#0D9488"></div><div class="swatch-info"><div class="swatch-hex">#0D9488</div><div class="swatch-name">Teal</div><div class="swatch-role">CTA / Actions</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#CCFBF1; border:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-hex">#CCFBF1</div><div class="swatch-name">Teal Light</div><div class="swatch-role">Backgrounds</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#475569"></div><div class="swatch-info"><div class="swatch-hex">#475569</div><div class="swatch-name">Slate</div><div class="swatch-role">Body Text</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#F8FAFC; border:1px solid #E2E8F0"></div><div class="swatch-info"><div class="swatch-hex">#F8FAFC</div><div class="swatch-name">Off-White</div><div class="swatch-role">Page BG</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#10B981"></div><div class="swatch-info"><div class="swatch-hex">#10B981</div><div class="swatch-name">Green</div><div class="swatch-role">Success</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#EF4444"></div><div class="swatch-info"><div class="swatch-hex">#EF4444</div><div class="swatch-name">Red</div><div class="swatch-role">Error / Cancel</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#F59E0B"></div><div class="swatch-info"><div class="swatch-hex">#F59E0B</div><div class="swatch-name">Amber</div><div class="swatch-role">Warning</div></div></div>
+    </div>
+
+    <hr class="divider">
+    <span class="section-label">Typography</span>
+    <div class="card mb-24">
+      <div class="typo-row">
+        <div class="typo-label">H1 — Page Title</div>
+        <div class="typo-spec">Poppins Bold · 24sp (Mobile) / 32px (Web)</div>
+        <div class="typo-preview"><span style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#0F2044">Heading One</span></div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-label">H2 — Section</div>
+        <div class="typo-spec">Poppins SemiBold · 18sp / 24px</div>
+        <div class="typo-preview"><span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#0F2044">Section Title</span></div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-label">Body</div>
+        <div class="typo-spec">Inter Regular · 14sp / 16px</div>
+        <div class="typo-preview"><span style="font-size:14px;color:#475569">Body text sample</span></div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-label">Caption</div>
+        <div class="typo-spec">Inter Regular · 12sp / 12px, muted</div>
+        <div class="typo-preview"><span style="font-size:12px;color:#94A3B8">Caption text</span></div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-label">Button</div>
+        <div class="typo-spec">Poppins SemiBold · 14sp / 16px, uppercase</div>
+        <div class="typo-preview"><span style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0D9488">CONFIRM BOOKING</span></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <span class="section-label">Spacing & Radius</span>
+    <div class="grid-4" style="grid-template-columns:repeat(5,1fr);gap:12px">
+      <div class="spacing-chip"><div class="sc-val">4dp</div><div class="sc-lbl">Base unit</div></div>
+      <div class="spacing-chip"><div class="sc-val">8dp</div><div class="sc-lbl">Component radius</div></div>
+      <div class="spacing-chip"><div class="sc-val">16dp</div><div class="sc-lbl">Page padding</div></div>
+      <div class="spacing-chip"><div class="sc-val">24dp</div><div class="sc-lbl">Button radius</div></div>
+      <div class="spacing-chip"><div class="sc-val">1280px</div><div class="sc-lbl">Max web width</div></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 6: ON-ROAD APP ── -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-label">On-Road Unit App</span>
+      <h1>On-Road Service Unit App</h1>
+      <p>Flutter app for wash technicians — scoped to the minimum needed for MVP.</p>
+    </div>
+
+    <div class="scope-note mb-24">
+      <div class="sn-icon">ℹ️</div>
+      <p>Per MVP spec, this is a lightweight Flutter app for on-road units. No complex features — just receive assigned jobs, update status at key moments, and submit a completion checklist with before/after photos. The vendor admin assigns jobs; this app is the technician's tool.</p>
+    </div>
+
+    <span class="section-label mb-8">App Screens</span>
+    <div class="grid-3 mb-24" style="gap:14px">
+      <div class="screen-card"><div class="sc-icon">🔐</div><h4>Login</h4><p>Phone + OTP authentication — reuses the same auth API as the customer app.</p></div>
+      <div class="screen-card"><div class="sc-icon">📋</div><h4>Job Queue</h4><p>List of bookings assigned by the vendor admin, ordered by scheduled time.</p></div>
+      <div class="screen-card"><div class="sc-icon">🚗</div><h4>Job Detail</h4><p>Customer info, vehicle details, service address, package type, and special requests.</p></div>
+      <div class="screen-card"><div class="sc-icon">📍</div><h4>Status Updates</h4><p>Simple button flow: <strong>En Route → Arrived → In Progress → Completed</strong></p></div>
+      <div class="screen-card"><div class="sc-icon">✅</div><h4>Completion Checklist</h4><p>Tick required items + upload before/after photos to Azure Blob before submitting.</p></div>
+      <div class="screen-card"><div class="sc-icon">🔔</div><h4>Push Notifications</h4><p>Alert when a new job is assigned by the vendor admin. No in-app messaging needed.</p></div>
+    </div>
+
+    <hr class="divider">
+    <span class="section-label mb-8">Additional APIs Required</span>
+    <div class="endpoint-group" style="max-width:700px">
+      <div class="endpoint-group-header" style="background:#0F2044">🛠 On-Road Unit API</div>
+      <div class="endpoint-row"><div class="ep-badge"><span class="badge method-get">GET</span></div><div><div class="ep-path">/personnel/me/bookings</div><div class="ep-note">Assigned jobs for this unit</div></div></div>
+      <div class="endpoint-row"><div class="ep-badge"><span class="badge method-put">PUT</span></div><div><div class="ep-path">/bookings/:id/status</div><div class="ep-note">Update en_route / arrived / in_progress / completed</div></div></div>
+      <div class="endpoint-row"><div class="ep-badge"><span class="badge method-post">POST</span></div><div><div class="ep-path">/bookings/:id/checklist</div><div class="ep-note">Submit completion checklist + photo URLs</div></div></div>
+      <div class="endpoint-row"><div class="ep-badge"><span class="badge method-post">POST</span></div><div><div class="ep-path">/storage/upload</div><div class="ep-note">Upload before/after photos to Azure Blob Storage</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 7: SPRINT ── -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <span class="section-label">Execution</span>
+      <h1>Sprint Plan — 4-Person Team</h1>
+      <p>Lean 2-week sprints. Senior leads, Mid executes, Juniors support. 8 weeks to MVP.</p>
+    </div>
+
+    <div class="grid-4" style="gap:14px">
+      <div class="sprint-col">
+        <div class="sprint-header" style="background:#3B82F6">
+          <h3>Sprint 1</h3><p>Foundation</p>
+        </div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-red">Senior</span></div><p>API Audit: map all endpoints to screens. Delete orphan endpoints.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-red">Senior</span></div><p>Define Design System doc (colors, fonts, spacing, components).</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-blue">Mid</span></div><p>Apply design system to existing Admin screens.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 1</span></div><p>Apply design system to existing Mobile screens.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 2</span></div><p>Setup Flutter project for On-Road Unit App (auth flow).</p></div>
+      </div>
+
+      <div class="sprint-col">
+        <div class="sprint-header" style="background:#0D9488">
+          <h3>Sprint 2</h3><p>Core Booking APIs</p>
+        </div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-red">Senior</span></div><p>Implement + test: POST /bookings, GET /vendors (proximity), booking dispatch logic.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-blue">Mid</span></div><p>Admin: Vendor approval screens + API integration.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 1</span></div><p>Mobile: Booking flow screens + API integration.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 2</span></div><p>On-Road: Job queue screen + status update API.</p></div>
+      </div>
+
+      <div class="sprint-col">
+        <div class="sprint-header" style="background:#8B5CF6">
+          <h3>Sprint 3</h3><p>Payments & Completion</p>
+        </div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-red">Senior</span></div><p>Payment gateway integration (SkipCash / MyFatoorah). Webhook handler.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-blue">Mid</span></div><p>Admin: Bookings overview, revenue dashboard.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 1</span></div><p>Mobile: Payment screens, receipt, order history.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 2</span></div><p>On-Road: Completion checklist + photo upload.</p></div>
+      </div>
+
+      <div class="sprint-col">
+        <div class="sprint-header" style="background:#10B981">
+          <h3>Sprint 4</h3><p>QA & Polish</p>
+        </div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-red">Senior</span></div><p>End-to-end booking flow testing. Security review. CI/CD pipeline (GitHub Actions → Azure).</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-blue">Mid</span></div><p>Admin: Ratings moderation, payout approval, CMS.</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 1</span></div><p>Mobile: Ratings, notifications, language toggle (EN/AR).</p></div>
+        <div class="sprint-task"><div class="st-who"><span class="badge badge-teal">Junior 2</span></div><p>On-Road: Push notifications. Full flow test.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 8: GIT / CI ── -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <span class="section-label">Execution</span>
+      <h1>Git Workflow & CI/CD</h1>
+      <p>Lean branching strategy for a 4-person team using GitHub + GitHub Actions + Azure.</p>
+    </div>
+
+    <span class="section-label mb-8">Branching Strategy</span>
+    <div class="grid-4 mb-24" style="gap:12px">
+      <div class="branch-card" style="border-top-color:#10B981">
+        <div class="branch-name" style="color:#10B981">main</div>
+        <div class="branch-desc">Production. Protected. Merge via PR only. No direct pushes allowed.</div>
+      </div>
+      <div class="branch-card" style="border-top-color:#3B82F6">
+        <div class="branch-name" style="color:#3B82F6">develop</div>
+        <div class="branch-desc">Integration branch. All features merge here first before going to main.</div>
+      </div>
+      <div class="branch-card" style="border-top-color:#0D9488">
+        <div class="branch-name" style="color:#0D9488">feature/*</div>
+        <div class="branch-desc">One branch per task. e.g. <span class="font-mono" style="font-size:11px">feature/booking-api</span></div>
+      </div>
+      <div class="branch-card" style="border-top-color:#EF4444">
+        <div class="branch-name" style="color:#EF4444">hotfix/*</div>
+        <div class="branch-desc">Emergency production fixes only. Branch from main, merge to main + develop.</div>
+      </div>
+    </div>
+
+    <span class="section-label mb-8">GitHub Actions Pipeline</span>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
+      <div class="pipeline-step">
+        <div class="pipeline-num" style="background:#475569">1</div>
+        <h4>Push / PR</h4>
+        <p>Triggers on push to feature/* or PR opened to develop</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-num" style="background:#3B82F6">2</div>
+        <h4>Build + Test</h4>
+        <p>.NET: dotnet build + test<br>Angular: ng build<br>Flutter: flutter test</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-num" style="background:#F59E0B">3</div>
+        <h4>PR Review</h4>
+        <p>Senior or Mid must approve PR before merge to develop</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-num" style="background:#0D9488">4</div>
+        <h4>Deploy Staging</h4>
+        <p>Auto-deploy to Azure (App Service + Static Web App) on merge to develop</p>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-num" style="background:#10B981">5</div>
+        <h4>Deploy Prod</h4>
+        <p>Manual trigger. PR from develop → main + required approval</p>
+      </div>
+    </div>
+
+    <div class="git-rules">
+      <div class="git-rule">No direct push to main or develop</div>
+      <div class="git-rule">All PRs need 1 review minimum</div>
+      <div class="git-rule">Failing tests block merge</div>
+      <div class="git-rule">Secrets stored in GitHub Secrets — never in code</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 9: NEXT ACTIONS ── -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <span class="section-label">Next Steps</span>
+      <h1>Immediate Next Actions</h1>
+      <p>What the team does in the next 5 working days to unblock progress.</p>
+    </div>
+
+    <div class="flex-col gap-12">
+      <div class="action-row">
+        <div class="action-day">Day 1</div>
+        <div class="action-meta">
+          <span class="badge badge-red">CRITICAL</span>
+          <span class="badge badge-red" style="margin-top:4px">Senior</span>
+        </div>
+        <div class="action-text">Run API audit. Create a spreadsheet: <strong>endpoint → screen → status</strong> (needed / orphan / missing). This unlocks every other decision.</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-day">Day 1–2</div>
+        <div class="action-meta">
+          <span class="badge badge-red">CRITICAL</span>
+          <span class="badge badge-red" style="margin-top:4px">Senior</span>
+        </div>
+        <div class="action-text">Publish Design System document (Figma or shared doc): colors, fonts, spacing, reusable components. This is the reference for all UI work going forward.</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-day">Day 2</div>
+        <div class="action-meta">
+          <span class="badge badge-amber">HIGH</span>
+          <span class="badge badge-blue" style="margin-top:4px">Mid + Junior 1</span>
+        </div>
+        <div class="action-text">Apply design system to existing Admin and Mobile screens. <strong>Do not build new features yet</strong> — consistency first.</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-day">Day 2–3</div>
+        <div class="action-meta">
+          <span class="badge badge-amber">HIGH</span>
+          <span class="badge badge-teal" style="margin-top:4px">Junior 2</span>
+        </div>
+        <div class="action-text">Bootstrap On-Road Unit Flutter project. Implement login screen + job list screen using the existing auth API.</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-day">Day 3–5</div>
+        <div class="action-meta">
+          <span class="badge badge-blue">MEDIUM</span>
+          <span class="badge badge-slate" style="margin-top:4px">All</span>
+        </div>
+        <div class="action-text">Sprint 1 planning meeting. Assign tasks from backlog based on API audit output. Set definition of done for each task.</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-day">Ongoing</div>
+        <div class="action-meta">
+          <span class="badge badge-slate">ONGOING</span>
+          <span class="badge badge-red" style="margin-top:4px">Senior</span>
+        </div>
+        <div class="action-text">Review all PRs. Enforce the golden rule: <strong>no endpoint created without a linked screen requirement</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  const titles = {
+    s0: 'Cover & Agenda',
+    s1: 'Where We Are Now',
+    s2: 'API Planning Framework',
+    s3: 'Mobile App Endpoints',
+    s4: 'Web Admin Endpoints',
+    s5: 'Design System',
+    s6: 'On-Road Unit App',
+    s7: 'Sprint Plan',
+    s8: 'Git & CI/CD',
+    s9: 'Next Actions',
+  };
+
+  function nav(el, sectionId) {
+    // Update nav items
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if (el) el.classList.add('active');
+
+    // Update sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+
+    // Update topbar title
+    document.getElementById('topbar-title').textContent = titles[sectionId] || '';
+
+    // Scroll to top
+    document.getElementById('main').scrollTo(0, 0);
+  }
+
+  // Keyboard navigation
+  const sectionIds = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+  document.addEventListener('keydown', e => {
+    const current = document.querySelector('.section.active').id;
+    const idx = sectionIds.indexOf(current);
+    if ((e.key === 'ArrowDown' || e.key === 'ArrowRight') && idx < sectionIds.length - 1) {
+      const nextId = sectionIds[idx + 1];
+      const navEl = document.querySelector(`[data-section="${nextId}"]`);
+      nav(navEl, nextId);
+    }
+    if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && idx > 0) {
+      const prevId = sectionIds[idx - 1];
+      const navEl = document.querySelector(`[data-section="${prevId}"]`);
+      nav(navEl, prevId);
+    }
+  });
+</script>
+</body>
+</html>

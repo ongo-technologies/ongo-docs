@@ -28,4 +28,13 @@ Data models and entity relationships
 
 </div>
 
+<div class="card" markdown>
+<div class="card-icon">🔌</div>
+
+### [API Endpoints](api-endpoints.md)
+
+REST endpoint map for Mobile App and Web Admin — 35 endpoints across 10 feature areas
+
+</div>
+
 </div>

@@ -1,5 +1,7 @@
 ---
-icon: material/database
+title: Database Schema
+description: Entity relationship model and table definitions for CarWash Qatar
+icon: material/database-outline
 ---
 
 # Database Schema

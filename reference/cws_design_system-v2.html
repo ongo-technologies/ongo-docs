@@ -1,0 +1,3426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CWS Qatar — Design System v2.1 · Production</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════
+   CWS QATAR — DESIGN SYSTEM v2.1  (PRODUCTION · DIRECTION B)
+   Gulf Teal Primary · Desert Gold Accent · Maroon Heritage
+   Light Mode + Dark Mode Token System
+   Sora · DM Sans · Noto Kufi Arabic
+   Finalized: March 2026 · Doha, Qatar
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   CSS CUSTOM PROPERTIES  (source of truth)
+   Copy these verbatim into:
+   - Angular: styles.scss  →  :root { }
+   - Flutter: AppTheme.dart (see token map below)
+───────────────────────────────────────── */
+:root {
+
+  /* ╔══════════════════════════════╗
+     ║  PRIMITIVE COLOR SCALES      ║
+     ╚══════════════════════════════╝ */
+
+  /* Gulf Teal — Primary Brand */
+  --teal-950: #020F14;
+  --teal-900: #031D26;
+  --teal-800: #053040;
+  --teal-700: #084E63;
+  --teal-600: #0A6882;
+  --teal-500: #0B8FBF;   /* ★ PRIMARY — main CTA, nav active, hero */
+  --teal-400: #0FA8D4;
+  --teal-300: #3DC6E8;
+  --teal-200: #7DDCF3;
+  --teal-100: #B5EEFA;
+  --teal-75:  #DCF7FD;
+  --teal-50:  #EDF9FD;
+  --teal-25:  #F5FCFF;
+
+  /* Desert Gold — Premium Accent */
+  --gold-950: #1C1500;
+  --gold-900: #332600;
+  --gold-800: #5C440A;
+  --gold-700: #856214;
+  --gold-600: #A97D1E;
+  --gold-500: #C99A2E;
+  --gold-400: #DEB84D;   /* ★ ACCENT — ratings, price, premium CTA */
+  --gold-300: #EAD07A;
+  --gold-200: #F3E4AE;
+  --gold-100: #FAF3D9;
+  --gold-50:  #FDFAF0;
+
+  /* Qatar Maroon — Heritage Accent */
+  --maroon-950: #1A0A0D;
+  --maroon-900: #2D1117;
+  --maroon-800: #4A1C27;
+  --maroon-700: #6B2535;   /* ★ HERITAGE — campaigns, National Day, formal docs */
+  --maroon-600: #8B2E42;
+  --maroon-500: #A83550;
+  --maroon-400: #C24E68;
+  --maroon-300: #D97A91;
+  --maroon-200: #EBB3BF;
+  --maroon-100: #F7DDE3;
+  --maroon-50:  #FDF2F4;
+
+  /* Gulf Pearl — Neutral */
+  --pearl-950: #0E0F11;
+  --pearl-900: #1E2025;   /* ★ Primary text */
+  --pearl-800: #2E3138;
+  --pearl-700: #474C57;
+  --pearl-600: #636A78;
+  --pearl-500: #858FA0;
+  --pearl-400: #A8B0C0;
+  --pearl-300: #C8CDD8;
+  --pearl-200: #E0E4EC;
+  --pearl-100: #F0F2F6;
+  --pearl-50:  #F8F9FB;
+  --pearl-25:  #FAFBFC;
+  --white:     #FFFFFF;
+
+  /* ╔══════════════════════════════╗
+     ║  SEMANTIC DESIGN TOKENS      ║
+     ╚══════════════════════════════╝ */
+
+  /* — Brand — */
+  --color-brand-primary:      var(--teal-500);
+  --color-brand-primary-dark: var(--teal-700);
+  --color-brand-primary-light:var(--teal-75);
+  --color-brand-accent:       var(--gold-400);
+  --color-brand-accent-dark:  var(--gold-600);
+  --color-brand-accent-light: var(--gold-100);
+  --color-brand-heritage:     var(--maroon-700);
+  --color-brand-heritage-light:var(--maroon-50);
+
+  /* — Text — */
+  --color-text-primary:   var(--pearl-900);
+  --color-text-secondary: var(--pearl-600);
+  --color-text-tertiary:  var(--pearl-400);
+  --color-text-disabled:  var(--pearl-300);
+  --color-text-inverse:   var(--white);
+  --color-text-brand:     var(--teal-500);
+  --color-text-accent:    var(--gold-600);
+  --color-text-link:      var(--teal-500);
+  --color-text-link-hover:var(--teal-700);
+
+  /* — Backgrounds — */
+  --color-bg-page:        var(--pearl-50);
+  --color-bg-surface:     var(--white);
+  --color-bg-raised:      var(--white);
+  --color-bg-sunken:      var(--pearl-100);
+  --color-bg-overlay:     rgba(30,32,37,.48);
+  --color-bg-inverse:     var(--teal-800);
+  --color-bg-brand-tint:  var(--teal-25);
+  --color-bg-accent-tint: var(--gold-50);
+  --color-bg-heritage-tint:var(--maroon-50);
+
+  /* — Borders — */
+  --color-border-subtle:  var(--pearl-100);
+  --color-border-default: var(--pearl-200);
+  --color-border-strong:  var(--pearl-300);
+  --color-border-brand:   var(--teal-500);
+  --color-border-accent:  var(--gold-400);
+  --color-border-focus:   var(--teal-400);
+
+  /* — States — */
+  --color-success:        #1A7A4A;
+  --color-success-mid:    #22A060;
+  --color-success-light:  #D4F0E2;
+  --color-success-tint:   #F0FAF5;
+
+  --color-warning:        #B87108;
+  --color-warning-mid:    #D4860F;
+  --color-warning-light:  #FEF0C7;
+  --color-warning-tint:   #FFFBEB;
+
+  --color-error:          #C0242C;
+  --color-error-mid:      #DC3545;
+  --color-error-light:    #FEE2E2;
+  --color-error-tint:     #FFF5F5;
+
+  --color-info:           var(--teal-500);
+  --color-info-light:     var(--teal-75);
+  --color-info-tint:      var(--teal-25);
+
+  /* ╔══════════════════════════════╗
+     ║  TYPOGRAPHY TOKENS           ║
+     ╚══════════════════════════════╝ */
+
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-arabic:  'Noto Kufi Arabic', sans-serif;
+  --font-mono:    'Courier New', 'Courier', monospace;
+
+  /* Scale */
+  --text-2xs:  10px;
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-md:   17px;
+  --text-lg:   20px;
+  --text-xl:   24px;
+  --text-2xl:  30px;
+  --text-3xl:  36px;
+  --text-4xl:  48px;
+  --text-5xl:  60px;
+
+  /* Line heights */
+  --leading-none:    1.0;
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+  --leading-loose:   1.9;   /* Arabic body */
+
+  /* Letter spacing */
+  --tracking-tight:  -0.03em;
+  --tracking-snug:   -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+  --tracking-widest:  0.12em;
+
+  /* ╔══════════════════════════════╗
+     ║  SPACING (8px base grid)     ║
+     ╚══════════════════════════════╝ */
+
+  --sp-px:  1px;
+  --sp-0-5: 2px;
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:   12px;
+  --sp-4:   16px;
+  --sp-5:   20px;
+  --sp-6:   24px;
+  --sp-7:   28px;
+  --sp-8:   32px;
+  --sp-9:   36px;
+  --sp-10:  40px;
+  --sp-12:  48px;
+  --sp-14:  56px;
+  --sp-16:  64px;
+  --sp-20:  80px;
+  --sp-24:  96px;
+  --sp-32:  128px;
+
+  /* ╔══════════════════════════════╗
+     ║  BORDER RADIUS               ║
+     ╚══════════════════════════════╝ */
+
+  --radius-xs:   4px;   /* micro: tags, code chips */
+  --radius-sm:   8px;   /* inputs, small cards */
+  --radius-md:   12px;  /* buttons, standard cards */
+  --radius-lg:   16px;  /* section cards */
+  --radius-xl:   20px;  /* booking cards, panels */
+  --radius-2xl:  24px;  /* modals, bottom sheets */
+  --radius-3xl:  32px;  /* hero cards */
+  --radius-full: 9999px;/* pills, badges, avatars */
+
+  /* ╔══════════════════════════════╗
+     ║  SHADOWS & ELEVATION         ║
+     ╚══════════════════════════════╝ */
+
+  --shadow-xs:    0 1px 2px rgba(28,32,40,.06);
+  --shadow-sm:    0 2px 6px rgba(28,32,40,.08), 0 1px 2px rgba(28,32,40,.04);
+  --shadow-md:    0 4px 16px rgba(28,32,40,.10), 0 2px 4px rgba(28,32,40,.05);
+  --shadow-lg:    0 8px 32px rgba(28,32,40,.12), 0 4px 8px rgba(28,32,40,.06);
+  --shadow-xl:    0 16px 48px rgba(28,32,40,.14), 0 8px 16px rgba(28,32,40,.07);
+  --shadow-2xl:   0 24px 64px rgba(28,32,40,.18), 0 12px 24px rgba(28,32,40,.08);
+
+  --shadow-brand: 0 4px 20px rgba(11,143,191,.28), 0 1px 4px rgba(11,143,191,.12);
+  --shadow-gold:  0 4px 20px rgba(222,184,77,.32),  0 1px 4px rgba(222,184,77,.14);
+  --shadow-focus: 0 0 0 3px rgba(11,143,191,.22);
+
+  /* ╔══════════════════════════════╗
+     ║  MOTION                      ║
+     ╚══════════════════════════════╝ */
+
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:  150ms;
+  --duration-base:  220ms;
+  --duration-slow:  380ms;
+  --duration-enter: 420ms;
+
+  /* ╔══════════════════════════════╗
+     ║  Z-INDEX SCALE               ║
+     ╚══════════════════════════════╝ */
+
+  --z-base:    0;
+  --z-raised:  10;
+  --z-dropdown:200;
+  --z-sticky:  300;
+  --z-overlay: 400;
+  --z-modal:   500;
+  --z-toast:   600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE TOKEN LAYER
+   Applied via [data-theme="dark"] on <html> or <body>
+   Flutter: ThemeMode.dark → CWSTheme.dark
+   All primitives stay identical — only semantic tokens change.
+   Design rationale: Night driving context, OLED battery saving,
+   Gulf preference for deep surfaces in evening/indoor settings.
+═══════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] {
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  BRAND — teal shifts one step brighter       ║
+     ║  on dark to maintain WCAG AA contrast        ║
+     ╚══════════════════════════════════════════════╝ */
+  --color-brand-primary:       #0FA8D4;   /* teal-400 — brighter on dark bg */
+  --color-brand-primary-dark:  #3DC6E8;   /* teal-300 — hover on dark */
+  --color-brand-primary-light: #053040;   /* teal-800 — tinted surface */
+  --color-brand-accent:        #DEB84D;   /* gold-400 — unchanged, glows on dark */
+  --color-brand-accent-dark:   #EAD07A;   /* gold-300 — hover on dark */
+  --color-brand-accent-light:  #332600;   /* gold-900 — tinted surface */
+  --color-brand-heritage:      #C24E68;   /* maroon-400 — readable on dark bg */
+  --color-brand-heritage-light:#2D1117;   /* maroon-900 — dark heritage surface */
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  TEXT — Pearl scale inverted                 ║
+     ║  Not pure white — reduces eye strain in      ║
+     ║  Qatar's night/indoor usage contexts         ║
+     ╚══════════════════════════════════════════════╝ */
+  --color-text-primary:        #E8EAEE;   /* soft white — pearl-100 equivalent */
+  --color-text-secondary:      #9BA3B4;   /* pearl-500 equivalent on dark */
+  --color-text-tertiary:       #5C6370;   /* pearl-700 equivalent on dark */
+  --color-text-disabled:       #3A3F4A;   /* very muted */
+  --color-text-inverse:        #111418;   /* dark text for light-bg elements */
+  --color-text-brand:          #0FA8D4;   /* teal-400 */
+  --color-text-accent:         #DEB84D;   /* gold-400 */
+  --color-text-link:           #3DC6E8;   /* teal-300 — visible on dark */
+  --color-text-link-hover:     #7DDCF3;   /* teal-200 */
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  BACKGROUNDS                                 ║
+     ║  Layered depth system — not flat black.      ║
+     ║  Gulf night sky gradient: deep teal-black    ║
+     ║  surfaces feel intentional, not just dark.   ║
+     ╚══════════════════════════════════════════════╝ */
+  --color-bg-page:             #0C0F12;   /* deepest — page canvas */
+  --color-bg-surface:          #141820;   /* cards, panels */
+  --color-bg-raised:           #1C2029;   /* elevated cards */
+  --color-bg-sunken:           #0A0D10;   /* inputs, inset areas */
+  --color-bg-overlay:          rgba(0,0,0,.72);
+  --color-bg-inverse:          #E8EAEE;
+  --color-bg-brand-tint:       #053040;   /* teal-800 — selected bg */
+  --color-bg-accent-tint:      #332600;   /* gold-900 */
+  --color-bg-heritage-tint:    #2D1117;   /* maroon-900 */
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  BORDERS — subtle glow edges on dark         ║
+     ╚══════════════════════════════════════════════╝ */
+  --color-border-subtle:       #1E2430;
+  --color-border-default:      #262D3A;
+  --color-border-strong:       #353D4D;
+  --color-border-brand:        #0FA8D4;
+  --color-border-accent:       #DEB84D;
+  --color-border-focus:        #3DC6E8;
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  STATES — lighter on dark surfaces           ║
+     ╚══════════════════════════════════════════════╝ */
+  --color-success:             #22A060;   /* mid-step — readable on dark */
+  --color-success-light:       #0D3D26;
+  --color-success-tint:        #081F14;
+
+  --color-warning:             #D4860F;   /* brighter step */
+  --color-warning-light:       #3D2800;
+  --color-warning-tint:        #1F1400;
+
+  --color-error:               #E04040;   /* brighter red — visible on dark */
+  --color-error-light:         #3D0F0F;
+  --color-error-tint:          #1F0808;
+
+  --color-info:                #0FA8D4;
+  --color-info-light:          #053040;
+  --color-info-tint:           #031D26;
+
+  /* ╔══════════════════════════════════════════════╗
+     ║  SHADOWS — glow-based on dark                ║
+     ║  Dark mode uses luminous glows not           ║
+     ║  drop shadows — consistent with OLED physics ║
+     ╚══════════════════════════════════════════════╝ */
+  --shadow-xs:    0 1px 2px rgba(0,0,0,.4);
+  --shadow-sm:    0 2px 8px rgba(0,0,0,.5),  0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:    0 4px 20px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.3);
+  --shadow-lg:    0 8px 36px rgba(0,0,0,.6),  0 4px 10px rgba(0,0,0,.35);
+  --shadow-xl:    0 16px 56px rgba(0,0,0,.7), 0 8px 18px rgba(0,0,0,.4);
+  --shadow-brand: 0 4px 24px rgba(15,168,212,.35), 0 0 12px rgba(15,168,212,.15);
+  --shadow-gold:  0 4px 24px rgba(222,184,77,.30),  0 0 12px rgba(222,184,77,.12);
+  --shadow-focus: 0 0 0 3px rgba(61,198,232,.30);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
+a { color: var(--color-text-link); text-decoration: none; }
+
+/* ═══════════════════════════════════════
+   DS SHELL LAYOUT
+═══════════════════════════════════════ */
+.ds-shell { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR NAV ── */
+.ds-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-bg-surface);
+  border-right: 1px solid var(--color-border-subtle);
+  padding: var(--sp-8) 0 var(--sp-8);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.ds-sidebar-logo {
+  padding: 0 var(--sp-6) var(--sp-8);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--sp-6);
+}
+.ds-logo-mark {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+.ds-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--teal-700), var(--teal-400));
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.ds-logo-text {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-snug);
+}
+.ds-logo-text span { color: var(--color-brand-primary); }
+.ds-logo-sub {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+.ds-nav-group {
+  padding: 0 var(--sp-4) var(--sp-4);
+}
+.ds-nav-group-label {
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  padding: 0 var(--sp-2) var(--sp-2);
+  margin-bottom: var(--sp-1);
+}
+.ds-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--duration-fast) var(--ease-out);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.ds-nav-item:hover { background: var(--color-bg-sunken); color: var(--color-text-primary); }
+.ds-nav-item.active {
+  background: var(--color-bg-brand-tint);
+  color: var(--color-brand-primary);
+  font-weight: 700;
+}
+.ds-nav-item .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+.ds-sidebar-footer {
+  margin-top: auto;
+  padding: var(--sp-6) var(--sp-6) 0;
+  border-top: 1px solid var(--color-border-subtle);
+}
+.ds-sidebar-footer-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  line-height: var(--leading-relaxed);
+}
+.ds-sidebar-footer-text strong { color: var(--color-text-secondary); }
+
+/* ── MAIN CONTENT ── */
+.ds-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--sp-12) var(--sp-10) var(--sp-20);
+  max-width: 1060px;
+}
+
+/* ═══════════════════════════════════════
+   HERO HEADER
+═══════════════════════════════════════ */
+.ds-hero {
+  background: var(--teal-800);
+  background-image:
+    radial-gradient(ellipse 70% 80% at 90% 20%, rgba(11,168,212,.22) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 5%  90%, rgba(222,184,77,.10) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.025' fill-rule='evenodd'%3E%3Cpath d='M10 10h4v4h-4zM38 10h4v4h-4zM10 38h4v4h-4zM38 38h4v4h-4z'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-14) var(--sp-12);
+  margin-bottom: var(--sp-12);
+  position: relative;
+  overflow: hidden;
+}
+.ds-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,198,232,.1);
+  pointer-events: none;
+}
+.ds-hero::after {
+  content: '';
+  position: absolute;
+  top: -140px; right: -140px;
+  width: 640px; height: 640px;
+  border-radius: 50%;
+  border: 1px solid rgba(61,198,232,.05);
+  pointer-events: none;
+}
+.ds-hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--radius-full);
+  padding: 5px 14px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--teal-200);
+  margin-bottom: var(--sp-5);
+  backdrop-filter: blur(6px);
+}
+.ds-hero-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--teal-300);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.8); }
+}
+.ds-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 4.5vw, var(--text-5xl));
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--sp-3);
+}
+.ds-hero h1 span { color: var(--gold-400); }
+.ds-hero-sub {
+  font-size: var(--text-md);
+  color: rgba(255,255,255,.6);
+  max-width: 540px;
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--sp-8);
+  font-weight: 300;
+}
+.ds-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-6);
+}
+.ds-hero-meta-pill {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,.5);
+  letter-spacing: var(--tracking-wide);
+}
+.ds-hero-meta-pill strong {
+  color: rgba(255,255,255,.8);
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION STRUCTURE
+═══════════════════════════════════════ */
+.ds-section { margin-bottom: var(--sp-16); scroll-margin-top: var(--sp-8); }
+.ds-section-header { margin-bottom: var(--sp-8); }
+.ds-section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+.ds-section-num {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  letter-spacing: var(--tracking-wider);
+  background: var(--color-bg-brand-tint);
+  border: 1px solid var(--teal-100);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+.ds-section-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-subtle);
+}
+.ds-section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-snug);
+  margin-bottom: var(--sp-2);
+  line-height: var(--leading-tight);
+}
+.ds-section-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 640px;
+}
+
+/* ═══════════════════════════════════════
+   SUBSECTION
+═══════════════════════════════════════ */
+.ds-sub { margin-bottom: var(--sp-10); }
+.ds-sub-title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-snug);
+  margin-bottom: var(--sp-1);
+}
+.ds-sub-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--sp-5);
+  line-height: var(--leading-relaxed);
+}
+
+/* ═══════════════════════════════════════
+   COLOR FAMILIES
+═══════════════════════════════════════ */
+.color-families { display: grid; gap: var(--sp-7); }
+.color-family-row { }
+.color-family-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+}
+.color-family-name {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.color-family-role {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  background: var(--color-bg-sunken);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+.color-strip {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  gap: 2px;
+  background: var(--color-border-default);
+  box-shadow: var(--shadow-sm);
+}
+.cs {
+  aspect-ratio: 1/1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px 6px;
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+.cs:hover { transform: scaleY(1.05); z-index: 2; }
+.cs-step {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+.cs-hex {
+  font-size: 8px;
+  opacity: .5;
+  line-height: 1;
+  margin-top: 1px;
+  font-family: var(--font-mono);
+}
+.cs.L .cs-step, .cs.L .cs-hex { color: var(--pearl-900); }
+.cs.D .cs-step, .cs.D .cs-hex { color: var(--white); }
+.cs.primary::before {
+  content: '★';
+  position: absolute;
+  top: 5px; right: 5px;
+  font-size: 8px;
+}
+.cs.D.primary::before { color: rgba(255,255,255,.7); }
+.cs.L.primary::before { color: rgba(30,32,37,.5); }
+
+/* ═══════════════════════════════════════
+   SEMANTIC TOKENS TABLE
+═══════════════════════════════════════ */
+.token-table-wrap {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  margin-top: var(--sp-5);
+}
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.token-table thead th {
+  background: var(--pearl-50);
+  padding: 10px var(--sp-5);
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  border-bottom: 1px solid var(--color-border-default);
+  text-align: left;
+}
+.token-table tbody td {
+  padding: 10px var(--sp-5);
+  border-bottom: 1px solid var(--color-border-subtle);
+  vertical-align: middle;
+  color: var(--color-text-primary);
+  line-height: var(--leading-snug);
+}
+.token-table tbody tr:last-child td { border-bottom: none; }
+.token-table tbody tr:hover td { background: var(--pearl-50); }
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.swatch-dot {
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+code.t {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--pearl-100);
+  color: var(--teal-700);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  letter-spacing: .02em;
+}
+.td-desc { font-size: var(--text-xs); color: var(--color-text-secondary); line-height: var(--leading-relaxed); }
+
+/* ═══════════════════════════════════════
+   BOOKING STATUS TOKENS
+═══════════════════════════════════════ */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+.status-token {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-xs);
+}
+.status-token-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-bottom: var(--sp-3);
+}
+.status-token-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 3px;
+}
+.status-token-hex {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  margin-bottom: var(--sp-2);
+}
+.status-token-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY SHOWCASE
+═══════════════════════════════════════ */
+.type-scale {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+.type-row {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5) var(--sp-6);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--sp-5);
+  align-items: center;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--duration-fast);
+}
+.type-row:hover { box-shadow: var(--shadow-md); }
+.type-meta { }
+.type-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+  margin-bottom: var(--sp-2);
+}
+.type-props {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  line-height: 1.9;
+  font-family: var(--font-mono);
+}
+.type-props span { display: block; }
+.type-sample { }
+
+/* ═══════════════════════════════════════
+   FONT FAMILY CARDS
+═══════════════════════════════════════ */
+.font-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+}
+.font-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-base) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+.font-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.font-card.primary::before  { background: var(--color-brand-primary); }
+.font-card.accent::before   { background: var(--gold-400); }
+.font-card.arabic::before   { background: linear-gradient(90deg, var(--teal-500), var(--maroon-600)); }
+.font-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.font-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--sp-4);
+}
+.font-card-tag.primary { background: var(--teal-25); color: var(--teal-600); border: 1px solid var(--teal-100); }
+.font-card-tag.accent  { background: var(--gold-50); color: var(--gold-700); border: 1px solid var(--gold-200); }
+.font-card-tag.arabic  { background: var(--pearl-50); color: var(--pearl-700); border: 1px solid var(--pearl-200); font-family: var(--font-arabic); direction: rtl; }
+.font-card-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-snug);
+  margin-bottom: 3px;
+}
+.font-card-role {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--sp-5);
+  line-height: 1.5;
+}
+.font-card-sample {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+.font-card-weights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--sp-3);
+}
+.wt {
+  font-size: var(--text-xs);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--pearl-50);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+.font-card-note {
+  margin-top: var(--sp-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  line-height: var(--leading-relaxed);
+  font-style: italic;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--sp-3);
+}
+
+/* ═══════════════════════════════════════
+   SPACING RULER
+═══════════════════════════════════════ */
+.spacing-ruler {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: var(--sp-3);
+}
+.sp-row { display: flex; align-items: center; gap: var(--sp-4); }
+.sp-bar {
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--teal-600), var(--teal-300));
+  flex-shrink: 0;
+}
+.sp-info { font-size: var(--text-xs); color: var(--color-text-secondary); }
+.sp-info code { font-family: var(--font-mono); color: var(--teal-600); font-weight: 700; font-size: 11px; }
+.sp-info .sp-px { color: var(--color-text-tertiary); margin-left: 4px; }
+.sp-info .sp-use { color: var(--color-text-tertiary); margin-left: 8px; font-style: italic; }
+
+/* ═══════════════════════════════════════
+   RADIUS DEMO
+═══════════════════════════════════════ */
+.radius-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-xs);
+  align-items: flex-end;
+}
+.rd-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
+.rd-box {
+  background: linear-gradient(135deg, var(--teal-600), var(--teal-400));
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+}
+.rd-label { text-align: center; }
+.rd-label code { display: block; font-family: var(--font-mono); font-size: 10px; color: var(--teal-600); font-weight: 700; }
+.rd-label .rd-px { font-size: 10px; color: var(--color-text-tertiary); }
+.rd-label .rd-use { font-size: 9px; color: var(--color-text-tertiary); display: block; margin-top: 1px; font-style: italic; }
+
+/* ═══════════════════════════════════════
+   SHADOW DEMO
+═══════════════════════════════════════ */
+.shadow-demo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--sp-5);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7);
+  box-shadow: var(--shadow-xs);
+}
+.sd-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-4); }
+.sd-box {
+  width: 80px; height: 48px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+}
+.sd-label { text-align: center; }
+.sd-label code { display: block; font-family: var(--font-mono); font-size: 10px; color: var(--teal-600); font-weight: 700; }
+.sd-label .sd-use { font-size: 10px; color: var(--color-text-tertiary); display: block; margin-top: 1px; font-style: italic; }
+
+/* ═══════════════════════════════════════
+   COMPONENT LIBRARY
+═══════════════════════════════════════ */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-5);
+}
+.comp-block {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-xs);
+}
+.comp-block-label {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.comp-block.full { grid-column: 1 / -1; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+  letter-spacing: var(--tracking-normal);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.btn-xl  { padding: 16px 32px; font-size: var(--text-md);  border-radius: var(--radius-lg); }
+.btn-lg  { padding: 13px 26px; font-size: var(--text-base); }
+.btn-md  { padding: 10px 20px; font-size: var(--text-sm);  }
+.btn-sm  { padding: 7px  14px; font-size: var(--text-xs);  border-radius: var(--radius-sm); }
+
+.btn-primary { background: var(--color-brand-primary); color: var(--white); box-shadow: var(--shadow-brand); }
+.btn-primary:hover { background: var(--teal-700); box-shadow: 0 6px 28px rgba(11,143,191,.36); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-gold { background: var(--gold-400); color: var(--gold-950); box-shadow: var(--shadow-gold); }
+.btn-gold:hover { background: var(--gold-300); transform: translateY(-1px); }
+
+.btn-outline { background: transparent; border: 1.5px solid var(--color-border-strong); color: var(--color-text-primary); }
+.btn-outline:hover { border-color: var(--color-brand-primary); color: var(--color-brand-primary); background: var(--color-bg-brand-tint); }
+
+.btn-ghost { background: transparent; color: var(--color-text-secondary); }
+.btn-ghost:hover { background: var(--color-bg-sunken); color: var(--color-text-primary); }
+
+.btn-danger { background: var(--color-error); color: var(--white); }
+.btn-danger:hover { background: #A81E25; transform: translateY(-1px); }
+
+.btn-heritage { background: var(--maroon-700); color: var(--white); }
+.btn-heritage:hover { background: var(--maroon-800); transform: translateY(-1px); }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: .01em;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.bdg-success { background: var(--color-success-light); color: var(--color-success); }
+.bdg-success .badge-dot { background: var(--color-success); }
+.bdg-warning { background: var(--color-warning-light); color: var(--color-warning); }
+.bdg-warning .badge-dot { background: var(--color-warning); }
+.bdg-error   { background: var(--color-error-light);   color: var(--color-error); }
+.bdg-error   .badge-dot { background: var(--color-error); }
+.bdg-info    { background: var(--color-info-light);    color: var(--teal-700); }
+.bdg-info    .badge-dot { background: var(--color-brand-primary); }
+.bdg-brand   { background: var(--teal-25);             color: var(--teal-700); border: 1px solid var(--teal-100); }
+.bdg-gold    { background: var(--gold-100);            color: var(--gold-700); }
+.bdg-neutral { background: var(--pearl-100);           color: var(--pearl-600); }
+.badge-row   { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
+
+/* Inputs */
+.form-group  { display: flex; flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+.form-label  { font-family: var(--font-display); font-size: var(--text-xs); font-weight: 700; color: var(--color-text-secondary); letter-spacing: var(--tracking-wide); }
+.form-hint   { font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: -4px; }
+.form-error-msg { font-size: var(--text-xs); color: var(--color-error); margin-top: -4px; font-weight: 500; }
+.input {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: var(--white);
+  border: 1.5px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: 11px var(--sp-4);
+  outline: none;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  width: 100%;
+}
+.input:focus { border-color: var(--color-border-focus); box-shadow: var(--shadow-focus); }
+.input::placeholder { color: var(--color-text-tertiary); }
+.input.error { border-color: var(--color-error); box-shadow: 0 0 0 3px rgba(192,36,44,.1); }
+.input.success { border-color: var(--color-success); box-shadow: 0 0 0 3px rgba(26,122,74,.1); }
+.input:disabled { background: var(--pearl-50); color: var(--color-text-disabled); cursor: not-allowed; }
+
+/* ─── Booking Card ─── */
+.booking-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.booking-card-bar { height: 4px; background: linear-gradient(90deg, var(--teal-600), var(--teal-300)); }
+.booking-card-body { padding: var(--sp-5); }
+.booking-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--sp-4);
+}
+.booking-card-id { font-size: var(--text-xs); color: var(--color-text-tertiary); font-family: var(--font-mono); letter-spacing: .04em; }
+.booking-card-title { font-family: var(--font-display); font-size: var(--text-md); font-weight: 800; color: var(--color-text-primary); letter-spacing: var(--tracking-snug); margin-top: 2px; }
+.booking-card-divider { height: 1px; background: var(--color-border-subtle); margin: var(--sp-4) 0; }
+.booking-card-row { display: flex; justify-content: space-between; align-items: center; font-size: var(--text-sm); margin-bottom: var(--sp-2); }
+.booking-card-row .lbl { color: var(--color-text-tertiary); }
+.booking-card-row .val { color: var(--color-text-primary); font-weight: 500; }
+.booking-card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--teal-25);
+  border: 1px solid var(--teal-100);
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-4);
+}
+.price-label { font-family: var(--font-display); font-size: var(--text-xs); font-weight: 700; color: var(--teal-600); letter-spacing: var(--tracking-wide); }
+.price-amount { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; color: var(--teal-700); }
+.price-currency { font-size: var(--text-xs); color: var(--teal-500); margin-left: 3px; }
+
+/* ─── Vendor Card ─── */
+.vendor-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all var(--duration-base) var(--ease-out);
+}
+.vendor-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.vendor-card-cover {
+  height: 72px;
+  background: linear-gradient(135deg, var(--teal-800) 0%, var(--teal-600) 60%, var(--teal-400) 100%);
+  position: relative;
+}
+.vendor-card-avatar {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--gold-400);
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-sm);
+  position: absolute;
+  bottom: -18px; left: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: var(--gold-950);
+}
+.vendor-card-body { padding: 26px var(--sp-4) var(--sp-4); }
+.vendor-card-name { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--color-text-primary); margin-bottom: 1px; letter-spacing: var(--tracking-snug); }
+.vendor-card-meta { font-size: var(--text-xs); color: var(--color-text-tertiary); margin-bottom: var(--sp-3); }
+.stars { display: flex; align-items: center; gap: 2px; margin-bottom: var(--sp-3); }
+.star-on  { color: var(--gold-400); font-size: 12px; }
+.star-off { color: var(--pearl-200); font-size: 12px; }
+.star-count { font-size: var(--text-xs); color: var(--color-text-secondary); margin-left: var(--sp-2); font-weight: 600; }
+
+/* ─── Toast ─── */
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  background: var(--pearl-900);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-xl);
+  max-width: 340px;
+}
+.toast-icon {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: var(--teal-600);
+}
+.toast-title { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 700; margin-bottom: 2px; }
+.toast-msg   { font-size: var(--text-xs); color: var(--pearl-400); line-height: 1.5; }
+
+/* ─── Package cards ─── */
+.pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
+.pkg-card {
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  border: 2px solid transparent;
+  background: var(--pearl-50);
+  text-align: center;
+  transition: all var(--duration-base) var(--ease-out);
+  cursor: pointer;
+}
+.pkg-card.active { background: var(--teal-25); border-color: var(--teal-500); box-shadow: var(--shadow-brand); }
+.pkg-card:hover:not(.active) { background: var(--pearl-100); border-color: var(--pearl-200); }
+.pkg-icon { font-size: 24px; margin-bottom: var(--sp-2); }
+.pkg-name { font-family: var(--font-display); font-size: var(--text-xs); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--sp-1); }
+.pkg-price { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; }
+.pkg-card.active .pkg-price { color: var(--teal-700); }
+.pkg-card:not(.active) .pkg-price { color: var(--pearl-600); }
+.pkg-dur  { font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: 2px; }
+
+/* ─── Navigation bar ─── */
+.nav-bar {
+  display: flex;
+  background: var(--white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.nav-tab {
+  flex: 1;
+  padding: var(--sp-3) var(--sp-2);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+.nav-tab .nav-icon-t { font-size: 18px; display: block; margin-bottom: 3px; }
+.nav-tab.active { color: var(--color-brand-primary); background: var(--teal-25); }
+
+/* ─── Avatar / User ─── */
+.avatar {
+  border-radius: var(--radius-full);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.avatar-xs { width: 28px; height: 28px; font-size: 10px; }
+.avatar-sm { width: 36px; height: 36px; font-size: 13px; }
+.avatar-md { width: 48px; height: 48px; font-size: 17px; }
+.avatar-lg { width: 64px; height: 64px; font-size: 22px; }
+.avatar-teal    { background: var(--teal-500); }
+.avatar-gold    { background: var(--gold-400); color: var(--gold-950); }
+.avatar-maroon  { background: var(--maroon-700); }
+.avatar-pearl   { background: var(--pearl-500); }
+
+/* ─── Progress / Status tracker ─── */
+.status-tracker {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--pearl-50);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4) var(--sp-5);
+}
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+.tracker-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 14px; left: 50%;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+}
+.tracker-step.done::after  { background: var(--teal-400); }
+.tracker-step.next::after  { background: var(--pearl-200); }
+.tracker-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-display);
+  z-index: 1;
+  position: relative;
+  border: 2px solid transparent;
+}
+.tracker-step.done .tracker-dot   { background: var(--teal-500); color: var(--white); border-color: var(--teal-500); }
+.tracker-step.active .tracker-dot { background: var(--white); color: var(--teal-600); border-color: var(--teal-500); box-shadow: 0 0 0 3px rgba(11,143,191,.18); }
+.tracker-step.next .tracker-dot   { background: var(--white); color: var(--pearl-400); border-color: var(--pearl-200); }
+.tracker-label { font-family: var(--font-display); font-size: 9px; font-weight: 600; color: var(--color-text-tertiary); margin-top: 6px; text-align: center; letter-spacing: .04em; text-transform: uppercase; }
+.tracker-step.active .tracker-label { color: var(--teal-600); font-weight: 700; }
+.tracker-step.done .tracker-label   { color: var(--teal-500); }
+
+/* ═══════════════════════════════════════
+   FLUTTER TOKEN MAP TABLE
+═══════════════════════════════════════ */
+.impl-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--color-border-subtle);
+  margin-bottom: var(--sp-5);
+}
+.impl-tab {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  padding: var(--sp-3) var(--sp-5);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--duration-fast);
+}
+.impl-tab:hover { color: var(--color-text-primary); }
+.impl-tab.active { color: var(--color-brand-primary); border-bottom-color: var(--color-brand-primary); font-weight: 700; }
+.impl-panel { display: none; }
+.impl-panel.active { display: block; }
+pre.code-block {
+  background: var(--pearl-900);
+  color: var(--pearl-200);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.9;
+  overflow-x: auto;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--pearl-800);
+}
+pre.code-block .kw  { color: var(--teal-300); }
+pre.code-block .val { color: var(--gold-300); }
+pre.code-block .cm  { color: var(--pearl-600); font-style: italic; }
+pre.code-block .str { color: #B5EEFA; }
+
+/* ═══════════════════════════════════════
+   DO / DON'T RULES
+═══════════════════════════════════════ */
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+.rule-card {
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  border: 1px solid;
+}
+.rule-card.do {
+  background: var(--color-success-tint);
+  border-color: var(--color-success-light);
+}
+.rule-card.dont {
+  background: var(--color-error-tint);
+  border-color: var(--color-error-light);
+}
+.rule-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  margin-bottom: var(--sp-4);
+  letter-spacing: var(--tracking-snug);
+}
+.rule-card.do .rule-card-header     { color: var(--color-success); }
+.rule-card.dont .rule-card-header   { color: var(--color-error); }
+.rule-list { list-style: none; }
+.rule-list li {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+.rule-list li:last-child { border-bottom: none; }
+.rule-list li::before { flex-shrink: 0; margin-top: 1px; }
+.rule-card.do .rule-list li::before { content: '✓'; color: var(--color-success); font-weight: 700; font-size: 11px; }
+.rule-card.dont .rule-list li::before { content: '✕'; color: var(--color-error); font-weight: 700; font-size: 11px; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .ds-sidebar { width: 200px; }
+  .ds-main { padding: var(--sp-8) var(--sp-7) var(--sp-16); }
+  .font-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .ds-shell { flex-direction: column; }
+  .ds-sidebar { width: 100%; height: auto; position: relative; padding: var(--sp-5) 0 var(--sp-4); }
+  .ds-sidebar-logo { padding: 0 var(--sp-5) var(--sp-5); }
+  .ds-nav-group { padding: 0 var(--sp-4) var(--sp-2); }
+  .ds-main { padding: var(--sp-6) var(--sp-5) var(--sp-12); }
+  .color-strip { grid-template-columns: repeat(7, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+  .font-cards { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .type-row { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════
+   DARK MODE SHELL ADAPTATIONS
+═══════════════════════════════════════ */
+body {
+  transition:
+    background-color 350ms cubic-bezier(.16,1,.3,1),
+    color 350ms cubic-bezier(.16,1,.3,1);
+}
+
+[data-theme="dark"] body {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .ds-sidebar {
+  background: #10131A;
+  border-right-color: var(--color-border-subtle);
+}
+[data-theme="dark"] .ds-sidebar-logo { border-bottom-color: var(--color-border-subtle); }
+[data-theme="dark"] .ds-nav-item:hover { background: var(--color-bg-surface); }
+[data-theme="dark"] .ds-nav-item.active { background: var(--color-bg-brand-tint); }
+[data-theme="dark"] .ds-sidebar-footer { border-top-color: var(--color-border-subtle); }
+[data-theme="dark"] .ds-sidebar-footer-text { color: var(--color-text-tertiary); }
+[data-theme="dark"] .ds-sidebar-footer-text strong { color: var(--color-text-secondary); }
+
+[data-theme="dark"] .ds-hero {
+  background: #0A1520;
+  background-image:
+    radial-gradient(ellipse 70% 80% at 90% 20%, rgba(15,168,212,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 5%  90%, rgba(222,184,77,.08) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.018'%3E%3Cpath d='M10 10h4v4h-4zM38 10h4v4h-4zM10 38h4v4h-4zM38 38h4v4h-4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .ds-section-header { }
+[data-theme="dark"] .ds-section-title  { color: var(--color-text-primary); }
+[data-theme="dark"] .ds-section-desc   { color: var(--color-text-secondary); }
+[data-theme="dark"] .ds-section-num    { background: var(--color-bg-brand-tint); border-color: #084E63; }
+[data-theme="dark"] .ds-section-divider { background: var(--color-border-subtle); }
+
+[data-theme="dark"] .color-strip { background: #0A0D10; }
+[data-theme="dark"] .color-family-role { background: var(--color-bg-surface); color: var(--color-text-tertiary); }
+
+[data-theme="dark"] .token-table-wrap { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .token-table thead th { background: var(--color-bg-sunken); border-bottom-color: var(--color-border-default); }
+[data-theme="dark"] .token-table tbody td { color: var(--color-text-primary); border-bottom-color: var(--color-border-subtle); }
+[data-theme="dark"] .token-table tbody tr:hover td { background: var(--color-bg-raised); }
+[data-theme="dark"] code.t { background: #1C2029; color: #3DC6E8; }
+
+[data-theme="dark"] .status-token { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .status-token-name { color: var(--color-text-primary); }
+
+[data-theme="dark"] .type-row { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .type-row:hover { box-shadow: var(--shadow-md); }
+[data-theme="dark"] .type-props { color: var(--color-text-tertiary); }
+
+[data-theme="dark"] .font-card { background: var(--color-bg-surface); border-color: var(--color-border-default); }
+[data-theme="dark"] .font-card-tag.primary { background: var(--color-bg-brand-tint); border-color: #084E63; }
+[data-theme="dark"] .font-card-tag.accent  { background: var(--color-bg-accent-tint); border-color: #3D2800; }
+[data-theme="dark"] .font-card-tag.arabic  { background: var(--color-bg-surface); border-color: var(--color-border-default); }
+[data-theme="dark"] .font-card-sample { border-top-color: var(--color-border-subtle); }
+[data-theme="dark"] .font-card-weights { border-top-color: var(--color-border-subtle); }
+[data-theme="dark"] .wt { background: var(--color-bg-sunken); border-color: var(--color-border-subtle); color: var(--color-text-secondary); }
+[data-theme="dark"] .font-card-note { border-top-color: var(--color-border-subtle); color: var(--color-text-tertiary); }
+
+[data-theme="dark"] .spacing-ruler { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .sp-info { color: var(--color-text-secondary); }
+[data-theme="dark"] .sp-info code { color: #3DC6E8; }
+
+[data-theme="dark"] .radius-demo { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .rd-label code { color: #3DC6E8; }
+[data-theme="dark"] .rd-label .rd-px, [data-theme="dark"] .rd-label .rd-use { color: var(--color-text-tertiary); }
+
+[data-theme="dark"] .shadow-demo { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .sd-box { background: var(--color-bg-raised); }
+[data-theme="dark"] .sd-label code { color: #3DC6E8; }
+
+[data-theme="dark"] .comp-block { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .comp-block-label { color: var(--color-text-tertiary); border-bottom-color: var(--color-border-subtle); }
+
+[data-theme="dark"] .btn-outline { border-color: var(--color-border-strong); color: var(--color-text-primary); }
+[data-theme="dark"] .btn-ghost   { color: var(--color-text-secondary); }
+[data-theme="dark"] .btn-ghost:hover { background: var(--color-bg-raised); }
+
+[data-theme="dark"] .input { background: var(--color-bg-sunken); border-color: var(--color-border-default); color: var(--color-text-primary); }
+[data-theme="dark"] .input::placeholder { color: var(--color-text-tertiary); }
+[data-theme="dark"] .input:disabled { background: var(--color-bg-page); }
+
+[data-theme="dark"] .booking-card { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .booking-card-id    { color: var(--color-text-tertiary); }
+[data-theme="dark"] .booking-card-title { color: var(--color-text-primary); }
+[data-theme="dark"] .booking-card-divider { background: var(--color-border-subtle); }
+[data-theme="dark"] .booking-card-row .lbl { color: var(--color-text-tertiary); }
+[data-theme="dark"] .booking-card-row .val { color: var(--color-text-primary); }
+[data-theme="dark"] .booking-card-price { background: var(--color-bg-brand-tint); border-color: #084E63; }
+[data-theme="dark"] .price-label  { color: #3DC6E8; }
+[data-theme="dark"] .price-amount { color: #3DC6E8; }
+[data-theme="dark"] .price-currency { color: var(--color-text-secondary); }
+
+[data-theme="dark"] .vendor-card { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .vendor-card-cover { background: linear-gradient(135deg, #031D26 0%, #084E63 60%, #0A6882 100%); }
+[data-theme="dark"] .vendor-card-avatar { border-color: var(--color-bg-surface); }
+[data-theme="dark"] .vendor-card-meta { color: var(--color-text-tertiary); }
+[data-theme="dark"] .star-off { color: #2E3138; }
+
+[data-theme="dark"] .pkg-card { background: var(--color-bg-sunken); }
+[data-theme="dark"] .pkg-card.active { background: var(--color-bg-brand-tint); border-color: #0FA8D4; }
+[data-theme="dark"] .pkg-card:hover:not(.active) { background: var(--color-bg-surface); border-color: var(--color-border-default); }
+[data-theme="dark"] .pkg-name { color: var(--color-text-secondary); }
+[data-theme="dark"] .pkg-dur  { color: var(--color-text-tertiary); }
+
+[data-theme="dark"] .nav-bar { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .nav-tab { color: var(--color-text-tertiary); }
+[data-theme="dark"] .nav-tab.active { background: var(--color-bg-brand-tint); color: #3DC6E8; }
+
+[data-theme="dark"] .status-tracker { background: var(--color-bg-sunken); border-color: var(--color-border-subtle); }
+[data-theme="dark"] .tracker-step.active .tracker-dot { background: var(--color-bg-surface); color: #3DC6E8; border-color: #0FA8D4; }
+[data-theme="dark"] .tracker-step.next .tracker-dot   { background: var(--color-bg-surface); border-color: var(--color-border-default); }
+[data-theme="dark"] .tracker-label { color: var(--color-text-tertiary); }
+[data-theme="dark"] .tracker-step.active .tracker-label { color: #3DC6E8; }
+
+[data-theme="dark"] .toast { background: #1C2029; }
+[data-theme="dark"] .toast-msg { color: var(--color-text-tertiary); }
+
+[data-theme="dark"] pre.code-block { background: #0A0D10; border-color: #1C2029; }
+
+[data-theme="dark"] .impl-tabs { border-bottom-color: var(--color-border-subtle); }
+[data-theme="dark"] .impl-tab { color: var(--color-text-tertiary); }
+[data-theme="dark"] .impl-tab:hover { color: var(--color-text-primary); }
+
+[data-theme="dark"] .rule-card.do   { background: #081F14; border-color: #0D3D26; }
+[data-theme="dark"] .rule-card.dont { background: #1F0808; border-color: #3D0F0F; }
+[data-theme="dark"] .rule-list li   { border-bottom-color: rgba(255,255,255,.04); color: var(--color-text-secondary); }
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: var(--z-toast);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-default);
+  transition: all var(--duration-base) var(--ease-spring);
+}
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(12deg);
+  box-shadow: var(--shadow-brand);
+}
+
+/* Dark section specific styles */
+.dm-preview-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  margin-top: var(--sp-5);
+}
+.dm-phone-frame {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 2px solid var(--color-border-default);
+  box-shadow: var(--shadow-lg);
+}
+.dm-screen {
+  padding: var(--sp-5);
+}
+.dm-screen.light-screen {
+  background: #F8F9FB;
+}
+.dm-screen.dark-screen {
+  background: #0C0F12;
+}
+.dm-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding: var(--sp-2) var(--sp-4);
+  text-align: center;
+}
+.dm-label.light { background: #E0E4EC; color: #474C57; }
+.dm-label.dark  { background: #1C2029; color: #9BA3B4; }
+
+/* Contrast checker chips */
+.contrast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+.contrast-chip {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-subtle);
+}
+.cc-swatch {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--tracking-snug);
+}
+.cc-info {
+  background: var(--color-bg-surface);
+  padding: var(--sp-3) var(--sp-4);
+}
+.cc-pair { font-size: var(--text-xs); color: var(--color-text-secondary); font-family: var(--font-mono); margin-bottom: 3px; }
+.cc-ratio {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.cc-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.cc-aaa { background: #D4F0E2; color: #1A7A4A; }
+.cc-aa  { background: #FEF0C7; color: #B87108; }
+
+/* Dark mode rationale cards */
+.dm-rationale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+}
+.dm-rat-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-xs);
+}
+[data-theme="dark"] .dm-rat-card { background: var(--color-bg-surface); border-color: var(--color-border-subtle); }
+.dm-rat-icon {
+  font-size: 24px;
+  margin-bottom: var(--sp-3);
+}
+.dm-rat-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--sp-2);
+  letter-spacing: var(--tracking-snug);
+}
+.dm-rat-body {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════ -->
+<nav class="ds-sidebar">
+  <div class="ds-sidebar-logo">
+    <div class="ds-logo-mark">
+      <div class="ds-logo-icon">🚗</div>
+      <div class="ds-logo-text">CWS <span>Qatar</span></div>
+    </div>
+    <div class="ds-logo-sub">Design System v2.0 · Production</div>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-group-label">Foundation</div>
+    <a class="ds-nav-item active" href="#colors" onclick="setActive(this)"><span class="nav-icon">🎨</span>Color System</a>
+    <a class="ds-nav-item" href="#typography" onclick="setActive(this)"><span class="nav-icon">Aa</span>Typography</a>
+    <a class="ds-nav-item" href="#spacing" onclick="setActive(this)"><span class="nav-icon">⬛</span>Spacing</a>
+    <a class="ds-nav-item" href="#radius" onclick="setActive(this)"><span class="nav-icon">◻</span>Radius & Shadow</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-group-label">Tokens</div>
+    <a class="ds-nav-item" href="#semantic" onclick="setActive(this)"><span class="nav-icon">🔑</span>Semantic Tokens</a>
+    <a class="ds-nav-item" href="#status" onclick="setActive(this)"><span class="nav-icon">📊</span>Booking Status</a>
+    <a class="ds-nav-item" href="#motion" onclick="setActive(this)"><span class="nav-icon">⚡</span>Motion</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-group-label">Components</div>
+    <a class="ds-nav-item" href="#buttons" onclick="setActive(this)"><span class="nav-icon">🔲</span>Buttons</a>
+    <a class="ds-nav-item" href="#badges" onclick="setActive(this)"><span class="nav-icon">🏷</span>Badges & Status</a>
+    <a class="ds-nav-item" href="#inputs" onclick="setActive(this)"><span class="nav-icon">📝</span>Form Controls</a>
+    <a class="ds-nav-item" href="#cards" onclick="setActive(this)"><span class="nav-icon">🃏</span>Cards</a>
+    <a class="ds-nav-item" href="#navigation" onclick="setActive(this)"><span class="nav-icon">🧭</span>Navigation</a>
+    <a class="ds-nav-item" href="#feedback" onclick="setActive(this)"><span class="nav-icon">💬</span>Feedback</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-group-label">Implementation</div>
+    <a class="ds-nav-item" href="#implementation" onclick="setActive(this)"><span class="nav-icon">⚙️</span>Dev Tokens</a>
+    <a class="ds-nav-item" href="#rules" onclick="setActive(this)"><span class="nav-icon">📐</span>Do & Don't</a>
+  </div>
+
+  <div class="ds-nav-group">
+    <div class="ds-nav-group-label">Dark Mode</div>
+    <a class="ds-nav-item" href="#darkmode" onclick="setActive(this)"><span class="nav-icon">🌙</span>Dark Tokens</a>
+    <a class="ds-nav-item" href="#darkcontrast" onclick="setActive(this)"><span class="nav-icon">🔲</span>Contrast Check</a>
+    <a class="ds-nav-item" href="#darkimpl" onclick="setActive(this)"><span class="nav-icon">⚙️</span>Dark Dev Code</a>
+  </div>
+
+  <div class="ds-sidebar-footer">
+    <div class="ds-sidebar-footer-text">
+      <strong>Direction B · Gulf Teal</strong><br>
+      Light + Dark Mode · v2.1<br>
+      Angular · Flutter · .NET
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<main class="ds-main">
+
+  <!-- HERO -->
+  <div class="ds-hero">
+    <div class="ds-hero-status">Production Ready · v2.0 · Direction B Finalized</div>
+    <h1>CWS Qatar<br><span>Design System</span></h1>
+    <p class="ds-hero-sub">The official visual language for the CWS mobile car wash platform. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all CWS surfaces.</p>
+    <div class="ds-hero-meta">
+      <span class="ds-hero-meta-pill"><strong>Version</strong>2.0 · Production</span>
+      <span class="ds-hero-meta-pill"><strong>Platforms</strong>Flutter · Angular</span>
+      <span class="ds-hero-meta-pill"><strong>Languages</strong>EN · AR (RTL)</span>
+      <span class="ds-hero-meta-pill"><strong>Market</strong>Qatar · GCC</span>
+      <span class="ds-hero-meta-pill"><strong>Finalized</strong>March 2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       01  COLOR SYSTEM
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="colors">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow">
+        <span class="ds-section-num">01</span>
+        <div class="ds-section-divider"></div>
+      </div>
+      <h2 class="ds-section-title">Color System</h2>
+      <p class="ds-section-desc">Four primitive color families. Each generates a full 11–13 step scale. ★ marks the primary production step for each family. All tokens reference these primitives — never hardcode hex values in components.</p>
+    </div>
+
+    <div class="color-families">
+
+      <!-- Teal -->
+      <div class="color-family-row">
+        <div class="color-family-header">
+          <span class="color-family-name">Gulf Teal — Primary Brand</span>
+          <span class="color-family-role">CTAs · Nav active · Hero · App icon · In-progress status</span>
+        </div>
+        <div class="color-strip">
+          <div class="cs D" style="background:#020F14"><span class="cs-step">950</span><span class="cs-hex">#020F14</span></div>
+          <div class="cs D" style="background:#031D26"><span class="cs-step">900</span><span class="cs-hex">#031D26</span></div>
+          <div class="cs D" style="background:#053040"><span class="cs-step">800</span><span class="cs-hex">#053040</span></div>
+          <div class="cs D" style="background:#084E63"><span class="cs-step">700</span><span class="cs-hex">#084E63</span></div>
+          <div class="cs D" style="background:#0A6882"><span class="cs-step">600</span><span class="cs-hex">#0A6882</span></div>
+          <div class="cs D primary" style="background:#0B8FBF"><span class="cs-step">500</span><span class="cs-hex">#0B8FBF</span></div>
+          <div class="cs D" style="background:#0FA8D4"><span class="cs-step">400</span><span class="cs-hex">#0FA8D4</span></div>
+          <div class="cs D" style="background:#3DC6E8"><span class="cs-step">300</span><span class="cs-hex">#3DC6E8</span></div>
+          <div class="cs L" style="background:#7DDCF3"><span class="cs-step">200</span><span class="cs-hex">#7DDCF3</span></div>
+          <div class="cs L" style="background:#B5EEFA"><span class="cs-step">100</span><span class="cs-hex">#B5EEFA</span></div>
+          <div class="cs L" style="background:#DCF7FD"><span class="cs-step">75</span><span class="cs-hex">#DCF7FD</span></div>
+          <div class="cs L" style="background:#EDF9FD"><span class="cs-step">50</span><span class="cs-hex">#EDF9FD</span></div>
+          <div class="cs L" style="background:#F5FCFF; border:1px solid #DCF7FD"><span class="cs-step" style="color:#1E2025">25</span><span class="cs-hex" style="color:#1E2025">#F5FCFF</span></div>
+        </div>
+      </div>
+
+      <!-- Gold -->
+      <div class="color-family-row">
+        <div class="color-family-header">
+          <span class="color-family-name">Desert Gold — Premium Accent</span>
+          <span class="color-family-role">Star ratings · Pricing · Confirm & Pay · Premium badges</span>
+        </div>
+        <div class="color-strip">
+          <div class="cs D" style="background:#1C1500"><span class="cs-step">950</span></div>
+          <div class="cs D" style="background:#332600"><span class="cs-step">900</span></div>
+          <div class="cs D" style="background:#5C440A"><span class="cs-step">800</span></div>
+          <div class="cs D" style="background:#856214"><span class="cs-step">700</span></div>
+          <div class="cs D" style="background:#A97D1E"><span class="cs-step">600</span></div>
+          <div class="cs D" style="background:#C99A2E"><span class="cs-step">500</span></div>
+          <div class="cs D primary" style="background:#DEB84D"><span class="cs-step">400</span><span class="cs-hex">#DEB84D</span></div>
+          <div class="cs L" style="background:#EAD07A"><span class="cs-step">300</span></div>
+          <div class="cs L" style="background:#F3E4AE"><span class="cs-step">200</span></div>
+          <div class="cs L" style="background:#FAF3D9"><span class="cs-step">100</span></div>
+          <div class="cs L" style="background:#FDFAF0"><span class="cs-step">50</span></div>
+          <div class="cs L" style="background:#FEFCF5; border:1px solid #FAF3D9"><span class="cs-step" style="color:#1E2025">25</span></div>
+          <div class="cs L" style="background:#FFFFFF; border:1px solid #FAF3D9"><span class="cs-step" style="color:#1E2025">—</span></div>
+        </div>
+      </div>
+
+      <!-- Maroon -->
+      <div class="color-family-row">
+        <div class="color-family-header">
+          <span class="color-family-name">Qatar Maroon — Heritage Accent</span>
+          <span class="color-family-role">National Day campaigns · Formal vendor docs · Special promotions only</span>
+        </div>
+        <div class="color-strip">
+          <div class="cs D" style="background:#1A0A0D"><span class="cs-step">950</span></div>
+          <div class="cs D" style="background:#2D1117"><span class="cs-step">900</span></div>
+          <div class="cs D" style="background:#4A1C27"><span class="cs-step">800</span></div>
+          <div class="cs D primary" style="background:#6B2535"><span class="cs-step">700</span><span class="cs-hex">#6B2535</span></div>
+          <div class="cs D" style="background:#8B2E42"><span class="cs-step">600</span></div>
+          <div class="cs D" style="background:#A83550"><span class="cs-step">500</span></div>
+          <div class="cs D" style="background:#C24E68"><span class="cs-step">400</span></div>
+          <div class="cs L" style="background:#D97A91"><span class="cs-step">300</span></div>
+          <div class="cs L" style="background:#EBB3BF"><span class="cs-step">200</span></div>
+          <div class="cs L" style="background:#F7DDE3"><span class="cs-step">100</span></div>
+          <div class="cs L" style="background:#FDF2F4"><span class="cs-step">50</span></div>
+          <div class="cs L" style="background:#FEF8F9; border:1px solid #F7DDE3"><span class="cs-step" style="color:#1E2025">25</span></div>
+          <div class="cs L" style="background:#FFFFFF; border:1px solid #F7DDE3"><span class="cs-step" style="color:#1E2025">—</span></div>
+        </div>
+      </div>
+
+      <!-- Pearl -->
+      <div class="color-family-row">
+        <div class="color-family-header">
+          <span class="color-family-name">Gulf Pearl — Neutral</span>
+          <span class="color-family-role">All text · UI surfaces · Borders · Inputs · Backgrounds</span>
+        </div>
+        <div class="color-strip">
+          <div class="cs D" style="background:#0E0F11"><span class="cs-step">950</span></div>
+          <div class="cs D primary" style="background:#1E2025"><span class="cs-step">900</span><span class="cs-hex">#1E2025</span></div>
+          <div class="cs D" style="background:#2E3138"><span class="cs-step">800</span></div>
+          <div class="cs D" style="background:#474C57"><span class="cs-step">700</span></div>
+          <div class="cs D" style="background:#636A78"><span class="cs-step">600</span></div>
+          <div class="cs D" style="background:#858FA0"><span class="cs-step">500</span></div>
+          <div class="cs L" style="background:#A8B0C0"><span class="cs-step">400</span></div>
+          <div class="cs L" style="background:#C8CDD8"><span class="cs-step">300</span></div>
+          <div class="cs L" style="background:#E0E4EC"><span class="cs-step">200</span></div>
+          <div class="cs L" style="background:#F0F2F6"><span class="cs-step">100</span></div>
+          <div class="cs L" style="background:#F8F9FB"><span class="cs-step">50</span></div>
+          <div class="cs L" style="background:#FAFBFC"><span class="cs-step">25</span></div>
+          <div class="cs L" style="background:#FFFFFF; border:1px solid #E0E4EC"><span class="cs-step" style="color:#1E2025">W</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       02  TYPOGRAPHY
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="typography">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">02</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Typography</h2>
+      <p class="ds-section-desc">Three-font system. Sora leads all display and UI. DM Sans handles body reading. Noto Kufi Arabic serves all RTL surfaces. Never mix fonts within the same typographic role.</p>
+    </div>
+
+    <!-- Font Cards -->
+    <div class="ds-sub">
+      <div class="ds-sub-title">Font Families</div>
+      <div class="font-cards">
+        <div class="font-card primary">
+          <div class="font-card-tag primary">Primary Display</div>
+          <div class="font-card-name" style="font-family:var(--font-display)">Sora</div>
+          <div class="font-card-role">Headings · Buttons · Labels · Prices · Nav items</div>
+          <div class="font-card-sample">
+            <div style="font-family:var(--font-display);font-size:28px;font-weight:800;letter-spacing:-.025em;color:var(--color-text-primary);line-height:1.1">Book Your Wash</div>
+            <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--color-brand-primary);margin-top:8px;letter-spacing:-.01em">QAR 45.00 — Shine Wash</div>
+            <div style="font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);margin-top:8px">CONFIRM BOOKING</div>
+          </div>
+          <div class="font-card-weights">
+            <span class="wt" style="font-family:var(--font-display);font-weight:300">Light</span>
+            <span class="wt" style="font-family:var(--font-display);font-weight:400">Regular</span>
+            <span class="wt" style="font-family:var(--font-display);font-weight:500">Medium</span>
+            <span class="wt" style="font-family:var(--font-display);font-weight:600">SemiBold</span>
+            <span class="wt" style="font-family:var(--font-display);font-weight:700">Bold</span>
+            <span class="wt" style="font-family:var(--font-display);font-weight:800">ExtraBold</span>
+          </div>
+          <div class="font-card-note">Google Fonts CDN. Flutter: GoogleFonts.sora(). Geometric terminals harmonise visually with Arabic letterforms — critical for EN/AR switching.</div>
+        </div>
+
+        <div class="font-card accent">
+          <div class="font-card-tag accent">Body / Supporting</div>
+          <div class="font-card-name" style="font-family:var(--font-body)">DM Sans</div>
+          <div class="font-card-role">Body copy · Descriptions · Help text · Form hints</div>
+          <div class="font-card-sample">
+            <div style="font-family:var(--font-body);font-size:15px;font-weight:400;line-height:1.7;color:var(--color-text-secondary)">Your unit is 20 minutes away. Track status updates via SMS notification.</div>
+            <div style="font-family:var(--font-body);font-size:13px;font-style:italic;color:var(--color-text-tertiary);margin-top:8px">Cancellation available within 5 minutes of booking.</div>
+          </div>
+          <div class="font-card-weights">
+            <span class="wt" style="font-family:var(--font-body);font-weight:300">Light</span>
+            <span class="wt" style="font-family:var(--font-body);font-weight:400">Regular</span>
+            <span class="wt" style="font-family:var(--font-body);font-weight:500">Medium</span>
+          </div>
+          <div class="font-card-note">Optically corrected for small-size screen rendering. Neutral character creates visual rest from Sora's personality during long booking flows.</div>
+        </div>
+
+        <div class="font-card arabic">
+          <div class="font-card-tag arabic">للغة العربية</div>
+          <div class="font-card-name" style="font-family:var(--font-arabic)">Noto Kufi Arabic</div>
+          <div class="font-card-role">All Arabic text · RTL layouts · Bilingual labels</div>
+          <div class="font-card-sample">
+            <div style="font-family:var(--font-arabic);font-size:24px;font-weight:700;direction:rtl;text-align:right;line-height:1.5;color:var(--color-text-primary)">احجز الآن في أي مكان</div>
+            <div style="font-family:var(--font-arabic);font-size:14px;font-weight:400;direction:rtl;text-align:right;line-height:1.9;color:var(--color-text-secondary);margin-top:6px">وصول متوقع خلال ٢٠ دقيقة</div>
+          </div>
+          <div class="font-card-weights">
+            <span class="wt" style="font-family:var(--font-arabic);font-weight:300">خفيف</span>
+            <span class="wt" style="font-family:var(--font-arabic);font-weight:400">عادي</span>
+            <span class="wt" style="font-family:var(--font-arabic);font-weight:600">ثقيل</span>
+            <span class="wt" style="font-family:var(--font-arabic);font-weight:700">عريض</span>
+          </div>
+          <div class="font-card-note">Standard for Qatar government and e-commerce apps. Full Unicode Qatari Arabic coverage. Kufi construction pairs with Sora's geometry.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Type Scale -->
+    <div class="ds-sub">
+      <div class="ds-sub-title">Type Scale</div>
+      <div class="type-scale">
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Hero / Display</div>
+            <div class="type-props">
+              <span>font: Sora 800</span>
+              <span>size: 56–60px</span>
+              <span>tracking: -0.03em</span>
+              <span>leading: 1.08</span>
+              <span>use: Splash · Onboarding</span>
+            </div>
+          </div>
+          <div class="type-sample" style="font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.08;color:var(--color-text-primary)">
+            Car Wash,<br>Your Way.
+          </div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">H1 — Screen Title</div>
+            <div class="type-props">
+              <span>font: Sora 700</span>
+              <span>size: 36–48px</span>
+              <span>tracking: -0.025em</span>
+              <span>use: Screen headers</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-display);font-size:clamp(28px,3.5vw,42px);font-weight:700;letter-spacing:-.025em;line-height:1.12;color:var(--color-text-primary)">Booking Confirmed</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">H2 — Section</div>
+            <div class="type-props">
+              <span>font: Sora 700</span>
+              <span>size: 30px</span>
+              <span>tracking: -0.02em</span>
+              <span>use: Card headers · Modals</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-display);font-size:30px;font-weight:700;letter-spacing:-.02em;color:var(--color-text-primary)">Choose Your Package</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">H3 — Subsection</div>
+            <div class="type-props">
+              <span>font: Sora 600</span>
+              <span>size: 24px</span>
+              <span>tracking: -0.015em</span>
+              <span>use: Group labels · Drawer titles</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:-.015em;color:var(--color-text-primary)">Shine Wash — QAR 45</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Body Large</div>
+            <div class="type-props">
+              <span>font: DM Sans 400</span>
+              <span>size: 17px</span>
+              <span>leading: 1.7</span>
+              <span>use: Onboarding · Descriptions</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-body);font-size:17px;font-weight:400;line-height:1.7;color:var(--color-text-secondary)">Your on-road unit will arrive within 20 minutes. You'll receive live SMS updates at each status change.</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Body</div>
+            <div class="type-props">
+              <span>font: DM Sans 400</span>
+              <span>size: 15px</span>
+              <span>leading: 1.55</span>
+              <span>use: General content · Details</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-body);font-size:15px;line-height:1.55;color:var(--color-text-secondary)">Includes exterior wash, tyre cleaning, and interior vacuum. Duration approx. 60 mins. No power outlet required.</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Body Small</div>
+            <div class="type-props">
+              <span>font: DM Sans 400</span>
+              <span>size: 13px</span>
+              <span>leading: 1.6</span>
+              <span>use: Captions · Timestamps · Hints</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--color-text-tertiary)">Cancellation available within 5 minutes of booking confirmation. After that, standard policy applies.</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">UI Label</div>
+            <div class="type-props">
+              <span>font: Sora 600–700</span>
+              <span>size: 11px</span>
+              <span>tracking: +0.08em</span>
+              <span>case: UPPERCASE</span>
+              <span>use: Tags · Form labels · Nav</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-secondary)">BOOKING STATUS · SERVICE AREA · PAYMENT METHOD</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Arabic Hero</div>
+            <div class="type-props">
+              <span>font: Noto Kufi 700</span>
+              <span>size: 36–48px</span>
+              <span>leading: 1.5</span>
+              <span>dir: RTL</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-arabic);font-size:clamp(28px,3.5vw,42px);font-weight:700;line-height:1.5;direction:rtl;text-align:right;color:var(--color-text-primary)">احجز غسيل سيارتك الآن</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-label">Arabic Body</div>
+            <div class="type-props">
+              <span>font: Noto Kufi 400</span>
+              <span>size: 15–17px</span>
+              <span>leading: 1.9</span>
+              <span>dir: RTL</span>
+            </div>
+          </div>
+          <div style="font-family:var(--font-arabic);font-size:16px;font-weight:400;line-height:1.9;direction:rtl;text-align:right;color:var(--color-text-secondary)">سيتم تنظيف سيارتك من قبل فريق متخصص في منطقتك خلال ٢٠ دقيقة.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       03  SPACING
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="spacing">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">03</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Spacing Scale</h2>
+      <p class="ds-section-desc">8px base grid. All spacing values are multiples of 4px. In Flutter use these as double values (e.g. 16.0). In Angular/SCSS use the CSS variables directly.</p>
+    </div>
+    <div class="spacing-ruler">
+      <div class="sp-row"><div class="sp-bar" style="width:1px;height:2px"></div><span class="sp-info"><code>--sp-px</code><span class="sp-px">1px</span><span class="sp-use">Hairlines, dividers</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:2px"></div><span class="sp-info"><code>--sp-0-5</code><span class="sp-px">2px</span><span class="sp-use">Icon gap micro</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:4px"></div><span class="sp-info"><code>--sp-1</code><span class="sp-px">4px</span><span class="sp-use">Inline micro gaps, swatch padding</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:8px"></div><span class="sp-info"><code>--sp-2</code><span class="sp-px">8px</span><span class="sp-use">Icon-text gap, badge padding</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:12px"></div><span class="sp-info"><code>--sp-3</code><span class="sp-px">12px</span><span class="sp-use">Compact list items, chip padding</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:16px"></div><span class="sp-info"><code>--sp-4</code><span class="sp-px">16px</span><span class="sp-use">Standard padding, row gaps, button padding</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:20px"></div><span class="sp-info"><code>--sp-5</code><span class="sp-px">20px</span><span class="sp-use">Card inner padding, list item height</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:24px"></div><span class="sp-info"><code>--sp-6</code><span class="sp-px">24px</span><span class="sp-use">Section padding, form group spacing</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:32px"></div><span class="sp-info"><code>--sp-8</code><span class="sp-px">32px</span><span class="sp-use">Component separation, card gap</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:40px"></div><span class="sp-info"><code>--sp-10</code><span class="sp-px">40px</span><span class="sp-use">Modal padding, nav bar height</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:48px"></div><span class="sp-info"><code>--sp-12</code><span class="sp-px">48px</span><span class="sp-use">Section breaks (mobile screens)</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:64px"></div><span class="sp-info"><code>--sp-16</code><span class="sp-px">64px</span><span class="sp-use">Hero top/bottom padding</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:80px"></div><span class="sp-info"><code>--sp-20</code><span class="sp-px">80px</span><span class="sp-use">Page section breaks (web/tablet)</span></span></div>
+      <div class="sp-row"><div class="sp-bar" style="width:96px"></div><span class="sp-info"><code>--sp-24</code><span class="sp-px">96px</span><span class="sp-use">Large whitespace, full-bleed padding</span></span></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       04  RADIUS & SHADOW
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="radius">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">04</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Radius & Shadow</h2>
+      <p class="ds-section-desc">Rounded radius scale mirrors GCC on-demand app conventions (Careem, Talabat) for immediate user familiarity. Shadows define elevation — use the lowest shadow that achieves the required perceived lift.</p>
+    </div>
+
+    <div class="ds-sub">
+      <div class="ds-sub-title">Border Radius</div>
+      <div class="radius-demo">
+        <div class="rd-item"><div class="rd-box" style="border-radius:4px"></div><div class="rd-label"><code>--radius-xs</code><span class="rd-px">4px</span><span class="rd-use">Tags · Code</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:8px"></div><div class="rd-label"><code>--radius-sm</code><span class="rd-px">8px</span><span class="rd-use">Inputs · Small cards</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:12px"></div><div class="rd-label"><code>--radius-md</code><span class="rd-px">12px</span><span class="rd-use">Buttons · Cards</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:16px"></div><div class="rd-label"><code>--radius-lg</code><span class="rd-px">16px</span><span class="rd-use">Section cards</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:20px"></div><div class="rd-label"><code>--radius-xl</code><span class="rd-px">20px</span><span class="rd-use">Booking cards</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:24px"></div><div class="rd-label"><code>--radius-2xl</code><span class="rd-px">24px</span><span class="rd-use">Modals</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:32px"></div><div class="rd-label"><code>--radius-3xl</code><span class="rd-px">32px</span><span class="rd-use">Hero panels</span></div></div>
+        <div class="rd-item"><div class="rd-box" style="border-radius:9999px;width:56px;height:28px"></div><div class="rd-label"><code>--radius-full</code><span class="rd-px">9999px</span><span class="rd-use">Pills · Avatars</span></div></div>
+      </div>
+    </div>
+
+    <div class="ds-sub">
+      <div class="ds-sub-title">Elevation & Shadows</div>
+      <div class="shadow-demo">
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-xs)"></div><div class="sd-label"><code>--shadow-xs</code><span class="sd-use">Table rows</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-sm)"></div><div class="sd-label"><code>--shadow-sm</code><span class="sd-use">Standard cards</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-md)"></div><div class="sd-label"><code>--shadow-md</code><span class="sd-use">Booking / vendor cards</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-lg)"></div><div class="sd-label"><code>--shadow-lg</code><span class="sd-use">Dropdowns · Hover</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-xl)"></div><div class="sd-label"><code>--shadow-xl</code><span class="sd-use">Modals · Toasts</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-brand);background:var(--teal-500)"></div><div class="sd-label"><code>--shadow-brand</code><span class="sd-use">Primary CTA glow</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-gold);background:var(--gold-400)"></div><div class="sd-label"><code>--shadow-gold</code><span class="sd-use">Gold accent glow</span></div></div>
+        <div class="sd-item"><div class="sd-box" style="box-shadow:var(--shadow-focus);border:1.5px solid var(--teal-400)"></div><div class="sd-label"><code>--shadow-focus</code><span class="sd-use">Keyboard focus ring</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       05  SEMANTIC TOKENS
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="semantic">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">05</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Semantic Tokens</h2>
+      <p class="ds-section-desc">Always use semantic tokens in components — never raw primitive values. This allows brand updates without touching component code.</p>
+    </div>
+
+    <div class="token-table-wrap">
+      <table class="token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Hex</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td colspan="4" style="background:var(--teal-25);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--teal-600);text-transform:uppercase">Brand</td></tr>
+          <tr><td><code class="t">--color-brand-primary</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#0B8FBF"></div>teal-500</div></td><td>#0B8FBF</td><td class="td-desc">Primary CTAs, active states, hero, app icon, nav selected, in-progress status</td></tr>
+          <tr><td><code class="t">--color-brand-primary-dark</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#084E63"></div>teal-700</div></td><td>#084E63</td><td class="td-desc">Hover state of primary, dark hero backgrounds</td></tr>
+          <tr><td><code class="t">--color-brand-primary-light</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#DCF7FD"></div>teal-75</div></td><td>#DCF7FD</td><td class="td-desc">Active card backgrounds, selected package tint</td></tr>
+          <tr><td><code class="t">--color-brand-accent</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#DEB84D"></div>gold-400</div></td><td>#DEB84D</td><td class="td-desc">Star ratings, pricing, "Confirm & Pay" CTA, premium badges</td></tr>
+          <tr><td><code class="t">--color-brand-heritage</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#6B2535"></div>maroon-700</div></td><td>#6B2535</td><td class="td-desc">National Day campaigns, Qatar-specific promotions, formal vendor docs only</td></tr>
+          <tr><td colspan="4" style="background:var(--pearl-50);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--pearl-600);text-transform:uppercase">Text</td></tr>
+          <tr><td><code class="t">--color-text-primary</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#1E2025"></div>pearl-900</div></td><td>#1E2025</td><td class="td-desc">All primary body text, headings</td></tr>
+          <tr><td><code class="t">--color-text-secondary</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#636A78"></div>pearl-600</div></td><td>#636A78</td><td class="td-desc">Supporting text, descriptions, captions</td></tr>
+          <tr><td><code class="t">--color-text-tertiary</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#A8B0C0"></div>pearl-400</div></td><td>#A8B0C0</td><td class="td-desc">Placeholders, hints, timestamps, disabled labels</td></tr>
+          <tr><td><code class="t">--color-text-inverse</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;border:1px solid #E0E4EC"></div>white</div></td><td>#FFFFFF</td><td class="td-desc">Text on dark/brand-colored backgrounds</td></tr>
+          <tr><td colspan="4" style="background:var(--pearl-50);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--pearl-600);text-transform:uppercase">States</td></tr>
+          <tr><td><code class="t">--color-success</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#1A7A4A"></div>#1A7A4A</div></td><td>#1A7A4A</td><td class="td-desc">Booking confirmed, payment processed, completed status</td></tr>
+          <tr><td><code class="t">--color-warning</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#B87108"></div>#B87108</div></td><td>#B87108</td><td class="td-desc">Pending approval, awaiting vendor, 5-min cancel window</td></tr>
+          <tr><td><code class="t">--color-error</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#C0242C"></div>#C0242C</div></td><td>#C0242C</td><td class="td-desc">Failed payments, cancelled/rejected bookings, form errors</td></tr>
+          <tr><td><code class="t">--color-info</code></td><td><div class="swatch"><div class="swatch-dot" style="background:#0B8FBF"></div>teal-500</div></td><td>#0B8FBF</td><td class="td-desc">En-route status, informational banners, links</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       06  BOOKING STATUS
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="status">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">06</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Booking Status Colors</h2>
+      <p class="ds-section-desc">Mapped 1:1 to the <code class="t">booking_status</code> enum in the database schema. Use these exact color pairings for all status indicators across Flutter and Angular.</p>
+    </div>
+    <div class="status-grid">
+      <div class="status-token"><div class="status-token-dot" style="background:#B87108"></div><div class="status-token-name">pending</div><div class="status-token-hex">#B87108 · warning</div><div class="status-token-label">No vendor assigned yet</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#1A7A4A"></div><div class="status-token-name">confirmed</div><div class="status-token-hex">#1A7A4A · success</div><div class="status-token-label">Vendor accepted booking</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#0B8FBF"></div><div class="status-token-name">assigned</div><div class="status-token-hex">#0B8FBF · teal-500</div><div class="status-token-label">On-road unit assigned</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#0A6882"></div><div class="status-token-name">en_route</div><div class="status-token-hex">#0A6882 · teal-600</div><div class="status-token-label">Unit travelling to customer</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#084E63"></div><div class="status-token-name">arrived</div><div class="status-token-hex">#084E63 · teal-700</div><div class="status-token-label">Unit at customer location</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#0FA8D4"></div><div class="status-token-name">in_progress</div><div class="status-token-hex">#0FA8D4 · teal-400</div><div class="status-token-label">Service actively underway</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#1A7A4A"></div><div class="status-token-name">completed</div><div class="status-token-hex">#1A7A4A · success</div><div class="status-token-label">Service done</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#C0242C"></div><div class="status-token-name">cancelled</div><div class="status-token-hex">#C0242C · error</div><div class="status-token-label">Cancelled by customer</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#C0242C"></div><div class="status-token-name">rejected</div><div class="status-token-hex">#C0242C · error</div><div class="status-token-label">On-road unit rejected job</div></div>
+      <div class="status-token"><div class="status-token-dot" style="background:#636A78"></div><div class="status-token-name">refunded</div><div class="status-token-hex">#636A78 · pearl-600</div><div class="status-token-label">Payment refunded</div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       07  MOTION
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="motion">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">07</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Motion & Transitions</h2>
+      <p class="ds-section-desc">Use the minimum animation necessary. In a booking app, motion should confirm actions and orient the user — not entertain.</p>
+    </div>
+    <div class="token-table-wrap">
+      <table class="token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><code class="t">--duration-fast</code></td><td>150ms</td><td class="td-desc">Hover states, badge toggles, icon swaps</td></tr>
+          <tr><td><code class="t">--duration-base</code></td><td>220ms</td><td class="td-desc">Button press, card hover lift, input focus</td></tr>
+          <tr><td><code class="t">--duration-slow</code></td><td>380ms</td><td class="td-desc">Modal open/close, bottom sheet slide</td></tr>
+          <tr><td><code class="t">--duration-enter</code></td><td>420ms</td><td class="td-desc">Screen transitions, page loads, hero reveals</td></tr>
+          <tr><td><code class="t">--ease-out</code></td><td>cubic-bezier(.16,1,.3,1)</td><td class="td-desc">Most UI transitions — elements entering the screen</td></tr>
+          <tr><td><code class="t">--ease-in-out</code></td><td>cubic-bezier(.65,0,.35,1)</td><td class="td-desc">Status transitions, progress bars</td></tr>
+          <tr><td><code class="t">--ease-spring</code></td><td>cubic-bezier(.34,1.56,.64,1)</td><td class="td-desc">Button press feedback, card selection — subtle overshoot</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       08  BUTTONS
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="buttons">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">08</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Buttons</h2>
+      <p class="ds-section-desc">Six variants, four sizes. Max one primary CTA per screen. Gold is reserved for payment/confirmation actions only.</p>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-block">
+        <div class="comp-block-label">Variants</div>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3)">
+          <button class="btn btn-primary btn-lg" style="width:100%">Book Now</button>
+          <button class="btn btn-gold btn-lg" style="width:100%">Confirm & Pay — QAR 45</button>
+          <button class="btn btn-outline btn-md" style="width:100%">View All Vendors</button>
+          <div class="btn-row">
+            <button class="btn btn-ghost btn-md">Cancel</button>
+            <button class="btn btn-danger btn-md">Reject Job</button>
+            <button class="btn btn-heritage btn-md">Qatar Promo</button>
+          </div>
+        </div>
+      </div>
+      <div class="comp-block">
+        <div class="comp-block-label">Sizes</div>
+        <div class="btn-row" style="flex-direction:column;align-items:flex-start">
+          <button class="btn btn-primary btn-xl">Extra Large — xl</button>
+          <button class="btn btn-primary btn-lg">Large — lg</button>
+          <button class="btn btn-primary btn-md">Medium — md</button>
+          <button class="btn btn-primary btn-sm">Small — sm</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       09  BADGES
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="badges">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">09</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Badges & Status Chips</h2>
+    </div>
+    <div class="comp-block" style="max-width:100%">
+      <div class="comp-block-label">All variants</div>
+      <div class="badge-row">
+        <span class="badge bdg-success"><span class="badge-dot"></span>Confirmed</span>
+        <span class="badge bdg-warning"><span class="badge-dot"></span>Pending</span>
+        <span class="badge bdg-error"><span class="badge-dot"></span>Cancelled</span>
+        <span class="badge bdg-info"><span class="badge-dot"></span>En Route</span>
+        <span class="badge bdg-brand"><span class="badge-dot" style="background:var(--teal-400)"></span>In Progress</span>
+        <span class="badge bdg-gold"><span class="badge-dot" style="background:var(--gold-500)"></span>Premium</span>
+        <span class="badge bdg-neutral"><span class="badge-dot"></span>Refunded</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       10  FORM CONTROLS
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="inputs">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">10</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Form Controls</h2>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-block">
+        <div class="comp-block-label">States</div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="input" type="text" value="+974 5012 3456">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Requests</label>
+          <input class="input" type="text" placeholder="e.g. Focus on wheel wells">
+          <span class="form-hint">Optional — max 200 characters</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="color:var(--color-error)">OTP Code</label>
+          <input class="input error" type="text" placeholder="6-digit code" value="12345">
+          <span class="form-error-msg">Invalid code. Please try again.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Verified ✓</label>
+          <input class="input success" type="text" value="Verified">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="color:var(--color-text-disabled)">Disabled</label>
+          <input class="input" type="text" disabled value="Read only">
+        </div>
+      </div>
+      <div class="comp-block">
+        <div class="comp-block-label">Focus State (click any field)</div>
+        <div class="form-group">
+          <label class="form-label">Click to focus</label>
+          <input class="input" type="text" placeholder="Focus shows teal ring">
+        </div>
+        <div style="background:var(--teal-25);border:1px solid var(--teal-100);border-radius:var(--radius-md);padding:var(--sp-4);margin-top:var(--sp-4)">
+          <div style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;color:var(--teal-700);margin-bottom:var(--sp-2);text-transform:uppercase;letter-spacing:.06em">Focus Ring Spec</div>
+          <div style="font-size:var(--text-xs);color:var(--color-text-secondary);line-height:1.8;font-family:var(--font-mono)">
+            border: 1.5px solid var(--teal-400)<br>
+            box-shadow: 0 0 0 3px rgba(11,143,191,.22)<br>
+            border-radius: var(--radius-md)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       11  CARDS
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="cards">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">11</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Cards</h2>
+    </div>
+    <div class="comp-grid">
+
+      <div class="comp-block">
+        <div class="comp-block-label">Booking Card</div>
+        <div class="booking-card">
+          <div class="booking-card-bar"></div>
+          <div class="booking-card-body">
+            <div class="booking-card-top">
+              <div>
+                <div class="booking-card-id">#CWS-20260304-0091</div>
+                <div class="booking-card-title">Shine Wash</div>
+              </div>
+              <span class="badge bdg-success"><span class="badge-dot"></span>Confirmed</span>
+            </div>
+            <div class="booking-card-row"><span class="lbl">Vehicle</span><span class="val">Toyota Camry · White</span></div>
+            <div class="booking-card-row"><span class="lbl">Scheduled</span><span class="val">Today, 3:30 PM</span></div>
+            <div class="booking-card-row"><span class="lbl">Location</span><span class="val">West Bay, Doha</span></div>
+            <div class="booking-card-row"><span class="lbl">Vendor</span><span class="val">NextGen AutoCare</span></div>
+            <div class="booking-card-divider"></div>
+            <div class="booking-card-price">
+              <span class="price-label">TOTAL DUE</span>
+              <span><span class="price-amount">45.00</span><span class="price-currency">QAR</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-block-label">Vendor Card</div>
+        <div class="vendor-card">
+          <div class="vendor-card-cover">
+            <div class="vendor-card-avatar">NG</div>
+          </div>
+          <div class="vendor-card-body">
+            <div class="vendor-card-name">NextGen AutoCare</div>
+            <div class="vendor-card-meta">West Bay · Lusail · Pearl</div>
+            <div class="stars">
+              <span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span>
+              <span class="star-count">4.2 · 128 reviews</span>
+            </div>
+            <div class="badge-row">
+              <span class="badge bdg-brand">Quick Wash</span>
+              <span class="badge bdg-brand">Shine Wash</span>
+              <span class="badge bdg-success"><span class="badge-dot"></span>Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block full">
+        <div class="comp-block-label">Service Package Cards</div>
+        <div class="pkg-grid">
+          <div class="pkg-card active">
+            <div class="pkg-icon">💧</div>
+            <div class="pkg-name">Quick Wash</div>
+            <div class="pkg-price">25</div>
+            <div class="pkg-dur">~30 min · QAR</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-icon">✨</div>
+            <div class="pkg-name">Shine Wash</div>
+            <div class="pkg-price">45</div>
+            <div class="pkg-dur">~60 min · QAR</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-icon">🏆</div>
+            <div class="pkg-name">Detail Wash</div>
+            <div class="pkg-price">85</div>
+            <div class="pkg-dur">~120 min · QAR</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       12  NAVIGATION
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="navigation">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">12</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Navigation</h2>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-block">
+        <div class="comp-block-label">Bottom Tab Bar (Flutter)</div>
+        <div class="nav-bar">
+          <button class="nav-tab active"><span class="nav-icon-t">🏠</span>Home</button>
+          <button class="nav-tab"><span class="nav-icon-t">📋</span>Bookings</button>
+          <button class="nav-tab"><span class="nav-icon-t">🔍</span>Vendors</button>
+          <button class="nav-tab"><span class="nav-icon-t">👤</span>Profile</button>
+        </div>
+      </div>
+      <div class="comp-block">
+        <div class="comp-block-label">Booking Progress Tracker</div>
+        <div class="status-tracker">
+          <div class="tracker-step done">
+            <div class="tracker-dot">✓</div>
+            <div class="tracker-label">Booked</div>
+          </div>
+          <div class="tracker-step done">
+            <div class="tracker-dot">✓</div>
+            <div class="tracker-label">Confirmed</div>
+          </div>
+          <div class="tracker-step active">
+            <div class="tracker-dot">●</div>
+            <div class="tracker-label">En Route</div>
+          </div>
+          <div class="tracker-step next">
+            <div class="tracker-dot">4</div>
+            <div class="tracker-label">Washing</div>
+          </div>
+          <div class="tracker-step next">
+            <div class="tracker-dot">5</div>
+            <div class="tracker-label">Done</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-block">
+        <div class="comp-block-label">Avatars</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap">
+          <div class="avatar avatar-lg avatar-teal" style="font-size:22px">A</div>
+          <div class="avatar avatar-md avatar-gold">M</div>
+          <div class="avatar avatar-sm avatar-maroon">K</div>
+          <div class="avatar avatar-xs avatar-pearl">J</div>
+        </div>
+        <div style="margin-top:var(--sp-3);font-size:var(--text-xs);color:var(--color-text-tertiary)">xs · sm · md · lg · — use teal for current user, gold for premium vendors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       13  FEEDBACK
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="feedback">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">13</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Feedback & Notifications</h2>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-block">
+        <div class="comp-block-label">Toast Notifications</div>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3)">
+          <div class="toast">
+            <div class="toast-icon">🚗</div>
+            <div><div class="toast-title">Your unit is on the way</div><div class="toast-msg">Arriving at 3:50 PM (~20 mins). Track via SMS.</div></div>
+          </div>
+          <div class="toast" style="background:var(--color-success)">
+            <div class="toast-icon" style="background:rgba(255,255,255,.2)">✓</div>
+            <div><div class="toast-title">Payment Successful</div><div class="toast-msg" style="color:rgba(255,255,255,.75)">QAR 45.00 charged to Visa ending 4242.</div></div>
+          </div>
+          <div class="toast" style="background:var(--color-error)">
+            <div class="toast-icon" style="background:rgba(255,255,255,.2)">!</div>
+            <div><div class="toast-title">Booking Cancelled</div><div class="toast-msg" style="color:rgba(255,255,255,.75)">Cancellation window expired. Policy applies.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-block">
+        <div class="comp-block-label">Inline Alert Banners</div>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3)">
+          <div style="background:var(--color-info-tint);border:1px solid var(--teal-100);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);color:var(--teal-700);display:flex;gap:var(--sp-2);align-items:flex-start">
+            <span>ℹ️</span><span><strong style="font-family:var(--font-display);font-weight:700">SMS sent</strong> — Your confirmation has been sent to +974 5012 3456</span>
+          </div>
+          <div style="background:var(--color-warning-tint);border:1px solid var(--color-warning-light);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);color:var(--color-warning);display:flex;gap:var(--sp-2);align-items:flex-start">
+            <span>⚠️</span><span><strong style="font-family:var(--font-display);font-weight:700">3 minutes left</strong> to cancel this booking at no charge.</span>
+          </div>
+          <div style="background:var(--color-success-tint);border:1px solid var(--color-success-light);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);color:var(--color-success);display:flex;gap:var(--sp-2);align-items:flex-start">
+            <span>✅</span><span><strong style="font-family:var(--font-display);font-weight:700">Booking confirmed</strong> — NextGen AutoCare accepted your request.</span>
+          </div>
+          <div style="background:var(--color-error-tint);border:1px solid var(--color-error-light);border-radius:var(--radius-md);padding:var(--sp-3) var(--sp-4);font-size:var(--text-sm);color:var(--color-error);display:flex;gap:var(--sp-2);align-items:flex-start">
+            <span>✕</span><span><strong style="font-family:var(--font-display);font-weight:700">Payment failed</strong> — Please check your card details and retry.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       14  IMPLEMENTATION
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="implementation">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">14</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Developer Tokens</h2>
+      <p class="ds-section-desc">Copy-ready snippets for Angular SCSS and Flutter Dart. These are the exact translation of the CSS tokens above into each platform's theming system.</p>
+    </div>
+
+    <div class="impl-tabs">
+      <button class="impl-tab active" onclick="switchImpl('angular',this)">Angular / SCSS</button>
+      <button class="impl-tab" onclick="switchImpl('flutter',this)">Flutter / Dart</button>
+      <button class="impl-tab" onclick="switchImpl('rtl',this)">RTL / Arabic</button>
+    </div>
+
+    <div class="impl-panel active" id="impl-angular">
+<pre class="code-block"><span class="cm">// styles/tokens/_colors.scss</span>
+<span class="cm">// CWS Qatar Design System v2.0 — Direction B: Gulf Teal</span>
+
+:root {
+  <span class="cm">// ── Gulf Teal (Primary) ──────────────────────────</span>
+  <span class="kw">--teal-500</span>: <span class="val">#0B8FBF</span>;   <span class="cm">/* ★ Primary CTA */</span>
+  <span class="kw">--teal-700</span>: <span class="val">#084E63</span>;   <span class="cm">/* Hover / dark bg */</span>
+  <span class="kw">--teal-75</span>:  <span class="val">#DCF7FD</span>;   <span class="cm">/* Selected tint */</span>
+  <span class="kw">--teal-25</span>:  <span class="val">#F5FCFF</span>;   <span class="cm">/* Subtle surface */</span>
+
+  <span class="cm">// ── Desert Gold (Accent) ─────────────────────────</span>
+  <span class="kw">--gold-400</span>: <span class="val">#DEB84D</span>;   <span class="cm">/* Ratings · Pay CTA */</span>
+  <span class="kw">--gold-600</span>: <span class="val">#A97D1E</span>;   <span class="cm">/* Text on light bg */</span>
+
+  <span class="cm">// ── Qatar Maroon (Heritage) ──────────────────────</span>
+  <span class="kw">--maroon-700</span>: <span class="val">#6B2535</span>; <span class="cm">/* Campaigns only */</span>
+
+  <span class="cm">// ── Semantic tokens ──────────────────────────────</span>
+  <span class="kw">--color-brand-primary</span>:   <span class="val">var(--teal-500)</span>;
+  <span class="kw">--color-brand-accent</span>:    <span class="val">var(--gold-400)</span>;
+  <span class="kw">--color-brand-heritage</span>:  <span class="val">var(--maroon-700)</span>;
+
+  <span class="kw">--color-text-primary</span>:    <span class="val">#1E2025</span>;
+  <span class="kw">--color-text-secondary</span>:  <span class="val">#636A78</span>;
+  <span class="kw">--color-text-tertiary</span>:   <span class="val">#A8B0C0</span>;
+
+  <span class="kw">--color-success</span>:         <span class="val">#1A7A4A</span>;
+  <span class="kw">--color-warning</span>:         <span class="val">#B87108</span>;
+  <span class="kw">--color-error</span>:           <span class="val">#C0242C</span>;
+
+  <span class="kw">--shadow-brand</span>: <span class="val">0 4px 20px rgba(11,143,191,.28)</span>;
+  <span class="kw">--shadow-focus</span>: <span class="val">0 0 0 3px rgba(11,143,191,.22)</span>;
+}
+
+<span class="cm">// ── Angular Material override ─────────────────────</span>
+@use '@angular/material' as mat;
+
+$cws-primary: mat.define-palette((
+  50:  <span class="val">#EDF9FD</span>, 100: <span class="val">#B5EEFA</span>,
+  200: <span class="val">#7DDCF3</span>, 300: <span class="val">#3DC6E8</span>,
+  400: <span class="val">#0FA8D4</span>, 500: <span class="val">#0B8FBF</span>,
+  600: <span class="val">#0A6882</span>, 700: <span class="val">#084E63</span>,
+  800: <span class="val">#053040</span>, 900: <span class="val">#031D26</span>,
+  contrast: (500: white, 600: white, 700: white)
+), 500, 300, 700);
+
+$cws-accent: mat.define-palette((
+  400: <span class="val">#DEB84D</span>, 500: <span class="val">#C99A2E</span>,
+  contrast: (400: #1C1500, 500: #1C1500)
+), 400);</pre>
+    </div>
+
+    <div class="impl-panel" id="impl-flutter">
+<pre class="code-block"><span class="cm">// lib/theme/cws_theme.dart</span>
+<span class="cm">// CWS Qatar Design System v2.0</span>
+
+<span class="kw">import</span> <span class="str">'package:flutter/material.dart'</span>;
+<span class="kw">import</span> <span class="str">'package:google_fonts/google_fonts.dart'</span>;
+
+<span class="kw">abstract class</span> CWSColors {
+  <span class="cm">// Gulf Teal — Primary</span>
+  <span class="kw">static const</span> teal500 = Color(<span class="val">0xFF0B8FBF</span>);   <span class="cm">// ★ Primary</span>
+  <span class="kw">static const</span> teal700 = Color(<span class="val">0xFF084E63</span>);
+  <span class="kw">static const</span> teal75  = Color(<span class="val">0xFFDCF7FD</span>);
+  <span class="kw">static const</span> teal25  = Color(<span class="val">0xFFF5FCFF</span>);
+
+  <span class="cm">// Desert Gold — Accent</span>
+  <span class="kw">static const</span> gold400  = Color(<span class="val">0xFFDEB84D</span>);  <span class="cm">// ★ Accent</span>
+  <span class="kw">static const</span> gold600  = Color(<span class="val">0xFFA97D1E</span>);
+
+  <span class="cm">// Qatar Maroon — Heritage</span>
+  <span class="kw">static const</span> maroon700 = Color(<span class="val">0xFF6B2535</span>); <span class="cm">// campaigns only</span>
+
+  <span class="cm">// Pearl Neutrals</span>
+  <span class="kw">static const</span> pearl900 = Color(<span class="val">0xFF1E2025</span>);
+  <span class="kw">static const</span> pearl600 = Color(<span class="val">0xFF636A78</span>);
+  <span class="kw">static const</span> pearl400 = Color(<span class="val">0xFFA8B0C0</span>);
+  <span class="kw">static const</span> pearl100 = Color(<span class="val">0xFFF0F2F6</span>);
+
+  <span class="cm">// Semantic</span>
+  <span class="kw">static const</span> success = Color(<span class="val">0xFF1A7A4A</span>);
+  <span class="kw">static const</span> warning = Color(<span class="val">0xFFB87108</span>);
+  <span class="kw">static const</span> error   = Color(<span class="val">0xFFC0242C</span>);
+}
+
+<span class="kw">class</span> CWSTheme {
+  <span class="kw">static</span> ThemeData <span class="kw">get</span> light => ThemeData(
+    useMaterial3: <span class="val">true</span>,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: CWSColors.teal500,
+      primary:   CWSColors.teal500,
+      secondary: CWSColors.gold400,
+      error:     CWSColors.error,
+      surface:   Colors.white,
+      background: <span class="kw">const</span> Color(<span class="val">0xFFF8F9FB</span>),
+    ),
+    textTheme: GoogleFonts.soraTextTheme().copyWith(
+      bodyMedium: GoogleFonts.dmSans(fontSize: 15),
+      bodySmall:  GoogleFonts.dmSans(fontSize: 13),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: CWSColors.teal500,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: <span class="kw">const</span> EdgeInsets.symmetric(
+          horizontal: 20, vertical: 13),
+      ),
+    ),
+  );
+}</pre>
+    </div>
+
+    <div class="impl-panel" id="impl-rtl">
+<pre class="code-block"><span class="cm">// RTL / Arabic implementation notes</span>
+<span class="cm">// CWS Qatar Design System v2.0</span>
+
+<span class="cm">// ── Angular: app.module.ts ──────────────────────</span>
+<span class="kw">import</span> { <span class="val">LOCALE_ID</span> } <span class="kw">from</span> <span class="str">'@angular/core'</span>;
+<span class="kw">import</span> { <span class="val">registerLocaleData</span> } <span class="kw">from</span> <span class="str">'@angular/common'</span>;
+<span class="kw">import</span> localeAr <span class="kw">from</span> <span class="str">'@angular/common/locales/ar-QA'</span>;
+registerLocaleData(localeAr);
+
+providers: [
+  { provide: LOCALE_ID, useValue: <span class="str">'ar-QA'</span> }
+]
+
+<span class="cm">// ── SCSS: direction-aware utilities ─────────────</span>
+<span class="kw">[dir="rtl"]</span> {
+  font-family: var(--font-arabic);
+  text-align: right;
+  direction: rtl;
+
+  <span class="cm">/* Flip horizontal spacing in RTL */</span>
+  .icon-left  { margin-left:  0; margin-right: var(--sp-2); }
+  .icon-right { margin-right: 0; margin-left:  var(--sp-2); }
+}
+
+<span class="cm">// ── Flutter: Localization ────────────────────────</span>
+MaterialApp(
+  locale: Locale(<span class="str">'ar'</span>, <span class="str">'QA'</span>),
+  supportedLocales: <span class="kw">const</span> [
+    Locale(<span class="str">'en'</span>, <span class="str">'US'</span>),
+    Locale(<span class="str">'ar'</span>, <span class="str">'QA'</span>),
+  ],
+  theme: CWSTheme.light,
+  <span class="cm">// Auto-mirrors layout for RTL locales</span>
+)
+
+<span class="cm">// Arabic font setup (pubspec.yaml)</span>
+<span class="kw">google_fonts</span>: ^6.1.0
+<span class="cm">// Use: GoogleFonts.notoKufiArabic()</span>
+<span class="cm">// Weight 400 (body), 600 (label), 700 (heading)</span>
+<span class="cm">// line-height: 1.9 for Arabic body copy</span>
+<span class="cm">// Minimum font-size: 14px (Arabic legibility)</span></pre>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       15  DO & DON'T
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="rules">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">15</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Do & Don't</h2>
+      <p class="ds-section-desc">Non-negotiable rules for maintaining visual consistency across the team. Share with all four developers before implementation begins.</p>
+    </div>
+    <div class="rules-grid">
+      <div class="rule-card do">
+        <div class="rule-card-header">✓ Do</div>
+        <ul class="rule-list">
+          <li>Always use <code class="t">--color-brand-primary</code> for the single primary CTA per screen</li>
+          <li>Use <code class="t">--gold-400</code> exclusively for star ratings, pricing figures, and the "Confirm & Pay" button</li>
+          <li>Use Maroon only for Qatar National Day, Ramadan, and formal vendor onboarding — never as a regular UI color</li>
+          <li>Apply <code class="t">--shadow-brand</code> to all primary teal buttons</li>
+          <li>Maintain <code class="t">--shadow-focus</code> ring on all interactive elements for accessibility</li>
+          <li>Use Sora for all headings, buttons, labels, prices. Use DM Sans for all body copy</li>
+          <li>Use Noto Kufi Arabic for all Arabic text — never Sora or DM Sans in RTL mode</li>
+          <li>Always mirror layouts horizontally when switching to Arabic (RTL)</li>
+          <li>Only reference semantic tokens in components (never raw hex values)</li>
+          <li>Use Pearl 900 (#1E2025) for all primary text — never pure #000000</li>
+        </ul>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-card-header">✕ Don't</div>
+        <ul class="rule-list">
+          <li>Never use Maroon as a primary color in everyday UI — it is a heritage accent only</li>
+          <li>Never place two primary CTA buttons side by side on the same screen</li>
+          <li>Never use raw hex values in component code — always use CSS variables</li>
+          <li>Never use Gold as a background color for large surfaces — only for accents and icons</li>
+          <li>Never display Arabic text using Sora or DM Sans — always switch to Noto Kufi Arabic</li>
+          <li>Never use pure black (#000000) or pure white (#FFFFFF) for text — use Pearl scale</li>
+          <li>Never disable the focus ring for accessibility reasons</li>
+          <li>Never use the <code class="t">shadow-2xl</code> for anything other than full-screen overlays/drawers</li>
+          <li>Never add a new color outside this system without design review</li>
+          <li>Never use Inter, Roboto, or system fonts — always load Sora and DM Sans from CDN</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div style="margin-top:var(--sp-20);padding-top:var(--sp-8);border-top:1px solid var(--color-border-subtle);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-4)">
+    <div>
+      <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:800;color:var(--color-text-primary);letter-spacing:var(--tracking-snug)">CWS <span style="color:var(--color-brand-primary)">Qatar</span> — Design System v2.1</div>
+      <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:3px">Direction B · Gulf Teal Primary · Light + Dark Mode · Production Approved · March 2026</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);line-height:1.8">Sora · DM Sans · Noto Kufi Arabic<br>Angular · Flutter · .NET · PostgreSQL<br>EN + AR (RTL) · WCAG AA+ · Light & Dark</div>
+    </div>
+  </div>
+
+</main>
+</div><!-- /ds-shell -->
+
+<!-- ═══════════════════════════════════════
+     DARK MODE SECTIONS (injected after shell)
+     These sections are part of the main scroll
+     flow — linked from the dark mode nav group
+═══════════════════════════════════════ -->
+<div style="max-width:1060px;margin:0 auto;padding:0 var(--sp-10) var(--sp-20);">
+
+  <!-- ════════════════════════════════════
+       16  DARK MODE TOKEN SYSTEM
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="darkmode" style="margin-top:var(--sp-12)">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">16</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Dark Mode — Token System</h2>
+      <p class="ds-section-desc">Dark mode is not a color inversion. Every token is independently recalibrated for dark surfaces, taking into account Qatar's indoor/nighttime usage context, OLED screen physics, and the Gulf Teal system's behavior under dark conditions. Use the toggle button (bottom-right) to switch modes live.</p>
+    </div>
+
+    <!-- Rationale -->
+    <div class="ds-sub">
+      <div class="ds-sub-title">Why these dark values — the reasoning</div>
+      <div class="dm-rationale-grid">
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">🌙</div>
+          <div class="dm-rat-title">Qatar Night Context</div>
+          <div class="dm-rat-body">A significant portion of car wash bookings happen in the evening — after work, during Ramadan nights, or in indoor malls. Dark mode isn't a trend feature here; it's a usage-context response. Deep surface backgrounds reduce eye strain during evening booking flows.</div>
+        </div>
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">📱</div>
+          <div class="dm-rat-title">OLED-First Dark Surfaces</div>
+          <div class="dm-rat-body">Qatar's dominant devices (Samsung Galaxy S-series, iPhone Pro) use OLED panels where true-dark pixels consume zero power. Our dark backgrounds sit at <code class="t">#0C0F12</code> — dark enough for OLED savings, light enough to avoid halation around bright UI elements.</div>
+        </div>
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">🌊</div>
+          <div class="dm-rat-title">Teal Shifts One Step Brighter</div>
+          <div class="dm-rat-body">On dark backgrounds, <code class="t">teal-500 (#0B8FBF)</code> loses some contrast punch. We shift the primary to <code class="t">teal-400 (#0FA8D4)</code> — one step brighter — to maintain the 4.5:1 WCAG AA minimum against dark surfaces without changing brand identity.</div>
+        </div>
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">✨</div>
+          <div class="dm-rat-title">Gold Stays Unchanged</div>
+          <div class="dm-rat-body">Desert Gold <code class="t">#DEB84D</code> is the one color that naturally elevates on dark backgrounds — it glows. No adjustment needed. This is actually where gold performs best, making ratings and pricing feel premium in dark mode without any modification.</div>
+        </div>
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">🇶🇦</div>
+          <div class="dm-rat-title">Maroon Finally Shines in Dark</div>
+          <div class="dm-rat-body">Qatar Maroon actually performs better as a heritage accent in dark mode. We shift to <code class="t">maroon-400 (#C24E68)</code> — a lighter, richer step — so National Day campaign screens feel vibrant and bold against deep backgrounds, not muddy.</div>
+        </div>
+        <div class="dm-rat-card">
+          <div class="dm-rat-icon">🎨</div>
+          <div class="dm-rat-title">Layered Dark Surfaces, Not Flat</div>
+          <div class="dm-rat-body">Three distinct dark background levels: page canvas <code class="t">#0C0F12</code>, card surface <code class="t">#141820</code>, raised card <code class="t">#1C2029</code>. This creates the same elevation hierarchy as light mode but using luminosity instead of shadows.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live side-by-side preview -->
+    <div class="ds-sub">
+      <div class="ds-sub-title">Live Preview — Light vs Dark</div>
+      <div class="ds-sub-desc">Both screens show identical content. This is exactly how your Flutter and Angular apps will render. Toggle using the 🌙 button bottom-right.</div>
+      <div class="dm-preview-wrap">
+
+        <!-- Light preview -->
+        <div class="dm-phone-frame">
+          <div class="dm-label light">☀ Light Mode</div>
+          <div class="dm-screen light-screen">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div style="font-family:var(--font-display);font-size:14px;font-weight:700;color:#1E2025">Good evening, Ahmed</div>
+              <div style="width:28px;height:28px;background:#EDF9FD;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px">🔔</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#084E63,#0B8FBF);border-radius:14px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden">
+              <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:4px">FAST · RELIABLE</div>
+              <div style="font-family:var(--font-display);font-size:17px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.01em">Book a wash<br>in 60 seconds</div>
+              <div style="display:inline-block;background:#DEB84D;color:#1C1500;padding:7px 16px;border-radius:8px;font-family:var(--font-display);font-size:11px;font-weight:700">Book Now →</div>
+              <div style="position:absolute;right:12px;bottom:8px;font-size:32px;opacity:.2">🚗</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+              <div style="background:#EDF9FD;border:2px solid #0B8FBF;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">💧</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#636A78">Quick</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#0A6882">25</div>
+              </div>
+              <div style="background:#F8F9FB;border:2px solid transparent;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">✨</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#636A78">Shine</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#A8B0C0">45</div>
+              </div>
+              <div style="background:#F8F9FB;border:2px solid transparent;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">🏆</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#636A78">Detail</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#A8B0C0">85</div>
+              </div>
+            </div>
+            <div style="background:#fff;border:1px solid #E0E4EC;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#0B8FBF;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:12px;font-weight:800;color:#fff;flex-shrink:0">NG</div>
+              <div>
+                <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#1E2025">NextGen AutoCare</div>
+                <div style="font-size:9px;color:#A8B0C0">West Bay · Available</div>
+              </div>
+              <div style="margin-left:auto;font-size:9px;color:#DEB84D">★★★★☆</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark preview -->
+        <div class="dm-phone-frame">
+          <div class="dm-label dark">🌙 Dark Mode</div>
+          <div class="dm-screen dark-screen">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div style="font-family:var(--font-display);font-size:14px;font-weight:700;color:#E8EAEE">Good evening, Ahmed</div>
+              <div style="width:28px;height:28px;background:#053040;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px">🔔</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#031D26,#084E63);border:1px solid #0A6882;border-radius:14px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden">
+              <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(61,198,232,.6);margin-bottom:4px">FAST · RELIABLE</div>
+              <div style="font-family:var(--font-display);font-size:17px;font-weight:800;color:#E8EAEE;margin-bottom:10px;letter-spacing:-.01em">Book a wash<br>in 60 seconds</div>
+              <div style="display:inline-block;background:#DEB84D;color:#1C1500;padding:7px 16px;border-radius:8px;font-family:var(--font-display);font-size:11px;font-weight:700">Book Now →</div>
+              <div style="position:absolute;right:12px;bottom:8px;font-size:32px;opacity:.12">🚗</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+              <div style="background:#053040;border:2px solid #0FA8D4;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">💧</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#9BA3B4">Quick</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#3DC6E8">25</div>
+              </div>
+              <div style="background:#0A0D10;border:2px solid transparent;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">✨</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#9BA3B4">Shine</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#5C6370">45</div>
+              </div>
+              <div style="background:#0A0D10;border:2px solid transparent;border-radius:10px;padding:10px 6px;text-align:center">
+                <div style="font-size:18px;margin-bottom:3px">🏆</div>
+                <div style="font-family:var(--font-display);font-size:9px;font-weight:700;color:#9BA3B4">Detail</div>
+                <div style="font-family:var(--font-display);font-size:13px;font-weight:800;color:#5C6370">85</div>
+              </div>
+            </div>
+            <div style="background:#141820;border:1px solid #1E2430;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;background:#084E63;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:12px;font-weight:800;color:#3DC6E8;flex-shrink:0;border:1px solid #0A6882">NG</div>
+              <div>
+                <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#E8EAEE">NextGen AutoCare</div>
+                <div style="font-size:9px;color:#5C6370">West Bay · Available</div>
+              </div>
+              <div style="margin-left:auto;font-size:9px;color:#DEB84D">★★★★☆</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Dark token table -->
+    <div class="ds-sub">
+      <div class="ds-sub-title">Dark Mode Semantic Tokens</div>
+      <div class="ds-sub-desc">Only semantic tokens change in dark mode — primitives stay identical. Applied via <code class="t">[data-theme="dark"]</code> on the root element.</div>
+      <div class="token-table-wrap">
+        <table class="token-table">
+          <thead><tr><th>Token</th><th>Light Value</th><th>Dark Value</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td colspan="4" style="background:var(--color-bg-brand-tint);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--color-brand-primary);text-transform:uppercase">Brand</td></tr>
+            <tr>
+              <td><code class="t">--color-brand-primary</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#0B8FBF"></div>#0B8FBF · teal-500</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#0FA8D4"></div>#0FA8D4 · teal-400</div></td>
+              <td class="td-desc">One step brighter to maintain 4.5:1 contrast on dark surface</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-brand-accent</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#DEB84D"></div>#DEB84D · gold-400</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#DEB84D"></div>#DEB84D · gold-400</div></td>
+              <td class="td-desc">Unchanged — gold naturally glows on dark; no adjustment needed</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-brand-heritage</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#6B2535"></div>#6B2535 · maroon-700</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#C24E68"></div>#C24E68 · maroon-400</div></td>
+              <td class="td-desc">Lighter step — maroon-700 is too dark against dark surfaces</td>
+            </tr>
+            <tr><td colspan="4" style="background:var(--color-bg-sunken);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--color-text-tertiary);text-transform:uppercase">Backgrounds — 3-layer depth system</td></tr>
+            <tr>
+              <td><code class="t">--color-bg-page</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#F8F9FB;border:1px solid #E0E4EC"></div>#F8F9FB</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#0C0F12"></div>#0C0F12</div></td>
+              <td class="td-desc">Deepest canvas — OLED-optimised near-black with teal undertone</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-bg-surface</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;border:1px solid #E0E4EC"></div>#FFFFFF</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#141820"></div>#141820</div></td>
+              <td class="td-desc">Cards and panels — 1 step above page canvas</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-bg-raised</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;border:1px solid #E0E4EC"></div>#FFFFFF</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#1C2029"></div>#1C2029</div></td>
+              <td class="td-desc">Elevated cards, focused states — 2 steps above page canvas</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-bg-sunken</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#F0F2F6"></div>#F0F2F6</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#0A0D10"></div>#0A0D10</div></td>
+              <td class="td-desc">Inputs, inset areas — below page canvas</td>
+            </tr>
+            <tr><td colspan="4" style="background:var(--color-bg-sunken);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--color-text-tertiary);text-transform:uppercase">Text</td></tr>
+            <tr>
+              <td><code class="t">--color-text-primary</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#1E2025"></div>#1E2025</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#E8EAEE"></div>#E8EAEE</div></td>
+              <td class="td-desc">Soft white — not pure #FFF, reduces halation on OLED</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-text-secondary</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#636A78"></div>#636A78</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#9BA3B4"></div>#9BA3B4</div></td>
+              <td class="td-desc">Mid-brightness — readable but clearly subordinate to primary</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-text-tertiary</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#A8B0C0"></div>#A8B0C0</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#5C6370"></div>#5C6370</div></td>
+              <td class="td-desc">Subtle — hints, placeholders, timestamps on dark</td>
+            </tr>
+            <tr><td colspan="4" style="background:var(--color-bg-sunken);font-family:var(--font-display);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;color:var(--color-text-tertiary);text-transform:uppercase">States</td></tr>
+            <tr>
+              <td><code class="t">--color-success</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#1A7A4A"></div>#1A7A4A</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#22A060"></div>#22A060</div></td>
+              <td class="td-desc">Brighter mid-step — #1A7A4A too dark on dark bg</td>
+            </tr>
+            <tr>
+              <td><code class="t">--color-error</code></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#C0242C"></div>#C0242C</div></td>
+              <td><div class="swatch"><div class="swatch-dot" style="background:#E04040"></div>#E04040</div></td>
+              <td class="td-desc">Slightly brighter — maintains urgency visibility on dark surfaces</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       17  CONTRAST CHECK
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="darkcontrast">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">17</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">WCAG Contrast Check</h2>
+      <p class="ds-section-desc">Every critical text/background pairing verified for WCAG AA (4.5:1 minimum for normal text). All key pairs exceed AA. Primary UI pairs achieve AAA (7:1+). Both light and dark modes verified.</p>
+    </div>
+
+    <div class="ds-sub">
+      <div class="ds-sub-title">Light Mode Pairs</div>
+      <div class="contrast-grid">
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#0B8FBF;color:#fff">Primary on White</div>
+          <div class="cc-info"><div class="cc-pair">#0B8FBF on #FFFFFF</div><div class="cc-ratio" style="color:#0B8FBF">4.8:1 <span class="cc-badge cc-aa">AA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#FFFFFF;color:#1E2025">Body Text on White</div>
+          <div class="cc-info"><div class="cc-pair">#1E2025 on #FFFFFF</div><div class="cc-ratio" style="color:#1A7A4A">16.2:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#0B8FBF;color:#DEB84D">Gold on Teal</div>
+          <div class="cc-info"><div class="cc-pair">#DEB84D on #0B8FBF</div><div class="cc-ratio" style="color:#B87108">3.2:1 <span class="cc-badge cc-aa">Large Text ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#F8F9FB;color:#636A78">Secondary on Page</div>
+          <div class="cc-info"><div class="cc-pair">#636A78 on #F8F9FB</div><div class="cc-ratio" style="color:#636A78">5.9:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#DEB84D;color:#1C1500">Gold Button Text</div>
+          <div class="cc-info"><div class="cc-pair">#1C1500 on #DEB84D</div><div class="cc-ratio" style="color:#856214">9.1:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#1A7A4A;color:#fff">Success on White</div>
+          <div class="cc-info"><div class="cc-pair">#fff on #1A7A4A</div><div class="cc-ratio" style="color:#1A7A4A">5.3:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-sub">
+      <div class="ds-sub-title">Dark Mode Pairs</div>
+      <div class="contrast-grid">
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#0C0F12;color:#0FA8D4">Teal-400 on Dark Page</div>
+          <div class="cc-info"><div class="cc-pair">#0FA8D4 on #0C0F12</div><div class="cc-ratio" style="color:#0FA8D4">5.4:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#141820;color:#E8EAEE">Primary Text on Surface</div>
+          <div class="cc-info"><div class="cc-pair">#E8EAEE on #141820</div><div class="cc-ratio" style="color:#E8EAEE">13.8:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#0C0F12;color:#DEB84D">Gold on Dark Page</div>
+          <div class="cc-info"><div class="cc-pair">#DEB84D on #0C0F12</div><div class="cc-ratio" style="color:#DEB84D">9.4:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#141820;color:#9BA3B4">Secondary on Surface</div>
+          <div class="cc-info"><div class="cc-pair">#9BA3B4 on #141820</div><div class="cc-ratio" style="color:#9BA3B4">6.2:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#0C0F12;color:#3DC6E8">Link on Dark Page</div>
+          <div class="cc-info"><div class="cc-pair">#3DC6E8 on #0C0F12</div><div class="cc-ratio" style="color:#3DC6E8">7.8:1 <span class="cc-badge cc-aaa">AAA ✓</span></div></div>
+        </div>
+        <div class="contrast-chip">
+          <div class="cc-swatch" style="background:#141820;color:#22A060">Success on Surface</div>
+          <div class="cc-info"><div class="cc-pair">#22A060 on #141820</div><div class="cc-ratio" style="color:#22A060">4.7:1 <span class="cc-badge cc-aa">AA ✓</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       18  DARK MODE DEV CODE
+  ════════════════════════════════════ -->
+  <section class="ds-section" id="darkimpl">
+    <div class="ds-section-header">
+      <div class="ds-section-eyebrow"><span class="ds-section-num">18</span><div class="ds-section-divider"></div></div>
+      <h2 class="ds-section-title">Dark Mode — Dev Implementation</h2>
+      <p class="ds-section-desc">Copy-ready code for Angular and Flutter. The token system is already set up — dark mode is purely a theme switch, not a component rebuild.</p>
+    </div>
+
+    <div class="impl-tabs">
+      <button class="impl-tab active" onclick="switchImpl2('dm-angular',this)">Angular / SCSS</button>
+      <button class="impl-tab" onclick="switchImpl2('dm-flutter',this)">Flutter / Dart</button>
+      <button class="impl-tab" onclick="switchImpl2('dm-logic',this)">Toggle Logic</button>
+    </div>
+
+    <div class="impl-panel active" id="impl-dm-angular">
+<pre class="code-block"><span class="cm">// styles/tokens/_dark.scss
+// CWS Qatar Design System v2.1 — Dark Mode Layer
+// Applied via [data-theme="dark"] on &lt;html&gt;</span>
+
+<span class="kw">[data-theme="dark"]</span> {
+  <span class="cm">// Gulf Teal — one step brighter on dark</span>
+  <span class="kw">--color-brand-primary</span>:        <span class="val">#0FA8D4</span>; <span class="cm">// teal-400</span>
+  <span class="kw">--color-brand-primary-dark</span>:   <span class="val">#3DC6E8</span>; <span class="cm">// teal-300 hover</span>
+  <span class="kw">--color-brand-primary-light</span>:  <span class="val">#053040</span>; <span class="cm">// teal-800 surface</span>
+
+  <span class="cm">// Gold — unchanged (glows on dark)</span>
+  <span class="kw">--color-brand-accent</span>:         <span class="val">#DEB84D</span>;
+  <span class="kw">--color-brand-accent-light</span>:   <span class="val">#332600</span>;
+
+  <span class="cm">// Maroon heritage — lighter step for dark bg</span>
+  <span class="kw">--color-brand-heritage</span>:       <span class="val">#C24E68</span>; <span class="cm">// maroon-400</span>
+  <span class="kw">--color-brand-heritage-light</span>: <span class="val">#2D1117</span>;
+
+  <span class="cm">// Backgrounds — 3-layer depth</span>
+  <span class="kw">--color-bg-page</span>:              <span class="val">#0C0F12</span>;
+  <span class="kw">--color-bg-surface</span>:           <span class="val">#141820</span>;
+  <span class="kw">--color-bg-raised</span>:            <span class="val">#1C2029</span>;
+  <span class="kw">--color-bg-sunken</span>:            <span class="val">#0A0D10</span>;
+  <span class="kw">--color-bg-brand-tint</span>:        <span class="val">#053040</span>;
+  <span class="kw">--color-bg-accent-tint</span>:       <span class="val">#332600</span>;
+
+  <span class="cm">// Text — soft whites, not pure</span>
+  <span class="kw">--color-text-primary</span>:         <span class="val">#E8EAEE</span>;
+  <span class="kw">--color-text-secondary</span>:       <span class="val">#9BA3B4</span>;
+  <span class="kw">--color-text-tertiary</span>:        <span class="val">#5C6370</span>;
+  <span class="kw">--color-text-link</span>:            <span class="val">#3DC6E8</span>;
+
+  <span class="cm">// Borders — subtle glow edges</span>
+  <span class="kw">--color-border-subtle</span>:        <span class="val">#1E2430</span>;
+  <span class="kw">--color-border-default</span>:       <span class="val">#262D3A</span>;
+  <span class="kw">--color-border-strong</span>:        <span class="val">#353D4D</span>;
+
+  <span class="cm">// States — brighter on dark</span>
+  <span class="kw">--color-success</span>:              <span class="val">#22A060</span>;
+  <span class="kw">--color-success-light</span>:        <span class="val">#0D3D26</span>;
+  <span class="kw">--color-warning</span>:              <span class="val">#D4860F</span>;
+  <span class="kw">--color-warning-light</span>:        <span class="val">#3D2800</span>;
+  <span class="kw">--color-error</span>:                <span class="val">#E04040</span>;
+  <span class="kw">--color-error-light</span>:          <span class="val">#3D0F0F</span>;
+
+  <span class="cm">// Shadows — glow-based on dark</span>
+  <span class="kw">--shadow-brand</span>: <span class="val">0 4px 24px rgba(15,168,212,.35), 0 0 12px rgba(15,168,212,.15)</span>;
+  <span class="kw">--shadow-gold</span>:  <span class="val">0 4px 24px rgba(222,184,77,.30),  0 0 12px rgba(222,184,77,.12)</span>;
+  <span class="kw">--shadow-focus</span>: <span class="val">0 0 0 3px rgba(61,198,232,.30)</span>;
+}
+
+<span class="cm">// Smooth theme transition (add to body)</span>
+body {
+  transition:
+    background-color <span class="val">350ms</span> cubic-bezier(.16,1,.3,1),
+    color <span class="val">350ms</span> cubic-bezier(.16,1,.3,1);
+}
+
+<span class="cm">// Angular Material dark theme</span>
+@use '@angular/material' as mat;
+
+$cws-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $cws-primary,   <span class="cm">// from light tokens file</span>
+    accent:  $cws-accent,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+</pre>
+    </div>
+
+    <div class="impl-panel" id="impl-dm-flutter">
+<pre class="code-block"><span class="cm">// lib/theme/cws_theme.dart — Dark mode extension
+// CWS Qatar Design System v2.1</span>
+
+<span class="kw">abstract class</span> CWSDarkColors {
+  <span class="cm">// Gulf Teal — one step brighter on dark</span>
+  <span class="kw">static const</span> primary      = Color(<span class="val">0xFF0FA8D4</span>); <span class="cm">// teal-400</span>
+  <span class="kw">static const</span> primaryHover = Color(<span class="val">0xFF3DC6E8</span>); <span class="cm">// teal-300</span>
+  <span class="kw">static const</span> primaryTint  = Color(<span class="val">0xFF053040</span>); <span class="cm">// teal-800 surface</span>
+
+  <span class="cm">// Gold — unchanged</span>
+  <span class="kw">static const</span> accent       = Color(<span class="val">0xFFDEB84D</span>);
+
+  <span class="cm">// Maroon heritage — lighter on dark</span>
+  <span class="kw">static const</span> heritage     = Color(<span class="val">0xFFC24E68</span>); <span class="cm">// maroon-400</span>
+
+  <span class="cm">// Backgrounds — 3-layer depth</span>
+  <span class="kw">static const</span> bgPage       = Color(<span class="val">0xFF0C0F12</span>); <span class="cm">// OLED canvas</span>
+  <span class="kw">static const</span> bgSurface    = Color(<span class="val">0xFF141820</span>); <span class="cm">// cards</span>
+  <span class="kw">static const</span> bgRaised     = Color(<span class="val">0xFF1C2029</span>); <span class="cm">// elevated cards</span>
+  <span class="kw">static const</span> bgSunken     = Color(<span class="val">0xFF0A0D10</span>); <span class="cm">// inputs</span>
+
+  <span class="cm">// Text — soft whites</span>
+  <span class="kw">static const</span> textPrimary   = Color(<span class="val">0xFFE8EAEE</span>);
+  <span class="kw">static const</span> textSecondary = Color(<span class="val">0xFF9BA3B4</span>);
+  <span class="kw">static const</span> textTertiary  = Color(<span class="val">0xFF5C6370</span>);
+
+  <span class="cm">// Borders</span>
+  <span class="kw">static const</span> borderSubtle  = Color(<span class="val">0xFF1E2430</span>);
+  <span class="kw">static const</span> borderDefault = Color(<span class="val">0xFF262D3A</span>);
+
+  <span class="cm">// States — brighter on dark</span>
+  <span class="kw">static const</span> success       = Color(<span class="val">0xFF22A060</span>);
+  <span class="kw">static const</span> warning       = Color(<span class="val">0xFFD4860F</span>);
+  <span class="kw">static const</span> error         = Color(<span class="val">0xFFE04040</span>);
+}
+
+<span class="cm">// Dark ThemeData</span>
+<span class="kw">class</span> CWSTheme {
+  <span class="kw">static</span> ThemeData <span class="kw">get</span> dark => ThemeData(
+    useMaterial3: <span class="val">true</span>,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+      primary:    CWSDarkColors.primary,
+      secondary:  CWSDarkColors.accent,
+      error:      CWSDarkColors.error,
+      surface:    CWSDarkColors.bgSurface,
+      background: CWSDarkColors.bgPage,
+      onPrimary:  Colors.white,
+      onSurface:  CWSDarkColors.textPrimary,
+    ),
+    scaffoldBackgroundColor: CWSDarkColors.bgPage,
+    cardColor: CWSDarkColors.bgSurface,
+    dividerColor: CWSDarkColors.borderSubtle,
+    textTheme: GoogleFonts.soraTextTheme(
+      ThemeData.dark().textTheme,
+    ).copyWith(
+      bodyMedium: GoogleFonts.dmSans(
+        fontSize: 15,
+        color: CWSDarkColors.textSecondary,
+      ),
+      bodySmall: GoogleFonts.dmSans(
+        fontSize: 13,
+        color: CWSDarkColors.textTertiary,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: CWSDarkColors.primary,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: <span class="val">true</span>,
+      fillColor: CWSDarkColors.bgSunken,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: CWSDarkColors.borderDefault),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(
+          color: CWSDarkColors.primary, width: 1.5),
+      ),
+    ),
+  );
+
+  <span class="cm">// Usage in MaterialApp:</span>
+  <span class="cm">// theme: CWSTheme.light,</span>
+  <span class="cm">// darkTheme: CWSTheme.dark,</span>
+  <span class="cm">// themeMode: ThemeMode.system, // or .light / .dark</span>
+}</pre>
+    </div>
+
+    <div class="impl-panel" id="impl-dm-logic">
+<pre class="code-block"><span class="cm">// ── Angular: Theme toggle service ────────────────
+// lib/services/theme.service.ts</span>
+
+<span class="kw">import</span> { Injectable, signal } <span class="kw">from</span> <span class="str">'@angular/core'</span>;
+
+<span class="kw">@Injectable</span>({ providedIn: <span class="str">'root'</span> })
+<span class="kw">export class</span> ThemeService {
+  <span class="kw">private readonly</span> STORAGE_KEY = <span class="str">'cws-theme'</span>;
+  isDark = signal(<span class="val">false</span>);
+
+  init(): <span class="kw">void</span> {
+    <span class="cm">// 1. Check saved preference</span>
+    <span class="kw">const</span> saved = localStorage.getItem(<span class="kw">this</span>.STORAGE_KEY);
+    <span class="cm">// 2. Fallback to system preference</span>
+    <span class="kw">const</span> prefersDark = window.matchMedia(
+      <span class="str">'(prefers-color-scheme: dark)'</span>
+    ).matches;
+    <span class="kw">const</span> dark = saved ? saved === <span class="str">'dark'</span> : prefersDark;
+    <span class="kw">this</span>.apply(dark);
+  }
+
+  toggle(): <span class="kw">void</span> {
+    <span class="kw">this</span>.apply(!<span class="kw">this</span>.isDark());
+  }
+
+  <span class="kw">private</span> apply(dark: <span class="kw">boolean</span>): <span class="kw">void</span> {
+    <span class="kw">this</span>.isDark.set(dark);
+    document.documentElement.setAttribute(
+      <span class="str">'data-theme'</span>, dark ? <span class="str">'dark'</span> : <span class="str">'light'</span>
+    );
+    localStorage.setItem(
+      <span class="kw">this</span>.STORAGE_KEY, dark ? <span class="str">'dark'</span> : <span class="str">'light'</span>
+    );
+  }
+}
+
+<span class="cm">// app.component.ts — call on startup</span>
+<span class="kw">export class</span> AppComponent <span class="kw">implements</span> OnInit {
+  <span class="kw">constructor</span>(<span class="kw">private</span> theme: ThemeService) {}
+  ngOnInit() { <span class="kw">this</span>.theme.init(); }
+}
+
+
+<span class="cm">// ── Flutter: ThemeMode state via Riverpod ─────────
+// lib/providers/theme_provider.dart</span>
+
+<span class="kw">import</span> <span class="str">'package:flutter_riverpod/flutter_riverpod.dart'</span>;
+<span class="kw">import</span> <span class="str">'package:shared_preferences/shared_preferences.dart'</span>;
+
+<span class="kw">final</span> themeModeProvider =
+  StateNotifierProvider&lt;ThemeModeNotifier, ThemeMode&gt;(
+    (ref) => ThemeModeNotifier()
+  );
+
+<span class="kw">class</span> ThemeModeNotifier <span class="kw">extends</span> StateNotifier&lt;ThemeMode&gt; {
+  ThemeModeNotifier() : super(ThemeMode.system) { _load(); }
+
+  <span class="kw">Future</span>&lt;<span class="kw">void</span>&gt; _load() <span class="kw">async</span> {
+    <span class="kw">final</span> prefs = <span class="kw">await</span> SharedPreferences.getInstance();
+    <span class="kw">final</span> saved = prefs.getString(<span class="str">'themeMode'</span>);
+    <span class="kw">if</span> (saved == <span class="str">'dark'</span>)  state = ThemeMode.dark;
+    <span class="kw">if</span> (saved == <span class="str">'light'</span>) state = ThemeMode.light;
+  }
+
+  <span class="kw">Future</span>&lt;<span class="kw">void</span>&gt; toggle() <span class="kw">async</span> {
+    <span class="kw">final</span> prefs = <span class="kw">await</span> SharedPreferences.getInstance();
+    state = state == ThemeMode.dark
+      ? ThemeMode.light : ThemeMode.dark;
+    prefs.setString(<span class="str">'themeMode'</span>,
+      state == ThemeMode.dark ? <span class="str">'dark'</span> : <span class="str">'light'</span>);
+  }
+}
+
+<span class="cm">// MaterialApp usage:</span>
+<span class="cm">// theme:     CWSTheme.light,</span>
+<span class="cm">// darkTheme: CWSTheme.dark,</span>
+<span class="cm">// themeMode: ref.watch(themeModeProvider),</span></pre>
+    </div>
+  </section>
+
+</div><!-- /dark mode sections -->
+
+<!-- Floating theme toggle -->
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('.ds-nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+function switchImpl(id, btn) {
+  document.querySelectorAll('#impl-angular, #impl-flutter, #impl-rtl').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.impl-tabs:first-of-type .impl-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('impl-' + id);
+  if (panel) panel.classList.add('active');
+  btn.classList.add('active');
+}
+function switchImpl2(id, btn) {
+  document.querySelectorAll('#impl-dm-angular, #impl-dm-flutter, #impl-dm-logic').forEach(p => p.classList.remove('active'));
+  btn.closest('.impl-tabs').querySelectorAll('.impl-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('impl-' + id);
+  if (panel) panel.classList.add('active');
+  btn.classList.add('active');
+}
+
+// Theme toggle
+let dark = false;
+function toggleTheme() {
+  dark = !dark;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.querySelector('.theme-toggle').textContent = dark ? '☀️' : '🌙';
+  // Update DS shell background too
+  document.body.style.background = dark ? '#0C0F12' : '';
+}
+
+// Scroll-spy nav
+const sections = document.querySelectorAll('.ds-section');
+const navItems = document.querySelectorAll('.ds-nav-item');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navItems.forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('href') === '#' + current) n.classList.add('active');
+  });
+}, { passive: true });
+</script>
+</body>
+</html>

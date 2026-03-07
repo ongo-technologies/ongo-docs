@@ -1,3 +1,9 @@
+---
+title: Terms & Conditions
+description: Terms and conditions for the CarWash Qatar platform
+icon: material/file-document-outline
+---
+
 # Terms & Conditions
 
 These terms and conditions apply to the CWS app (hereby referred to as "Application") for mobile devices that was created by (hereby referred to as "Service Provider") as a Free service.

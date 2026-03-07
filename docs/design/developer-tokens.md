@@ -1,6 +1,6 @@
 ---
 title: Developer Tokens
-description: Copy-ready SCSS, Flutter Dart, and RTL implementation tokens for CWS Qatar Design System v2.0
+description: Copy-ready SCSS, Flutter Dart, and RTL implementation tokens for CWS Qatar Design System v2.1, including full dark mode blocks
 icon: material/code-tags
 ---
 
@@ -14,7 +14,8 @@ Copy-ready snippets for Angular SCSS and Flutter Dart. These are the exact trans
 
 ```scss
 // styles/tokens/_colors.scss
-// CWS Qatar Design System v2.0 — Direction B: Gulf Teal
+// CWS Qatar Design System v2.1 — Direction B: Gulf Teal
+// Light mode (:root) + Dark mode ([data-theme="dark"])
 
 :root {
   // ── Gulf Teal (Primary) ──────────────────────────
@@ -39,12 +40,63 @@ Copy-ready snippets for Angular SCSS and Flutter Dart. These are the exact trans
   --color-text-secondary:  #636A78;
   --color-text-tertiary:   #A8B0C0;
 
+  --color-bg-page:         #F8F9FB;
+  --color-bg-surface:      #FFFFFF;
+  --color-bg-raised:       #FFFFFF;
+  --color-bg-sunken:       #F0F2F6;
+
+  --color-border-subtle:   #F0F2F6;
+  --color-border-default:  #E0E4EC;
+
   --color-success:         #1A7A4A;
   --color-warning:         #B87108;
   --color-error:           #C0242C;
 
   --shadow-brand: 0 4px 20px rgba(11,143,191,.28);
   --shadow-focus: 0 0 0 3px rgba(11,143,191,.22);
+}
+
+// ── Dark mode token overrides ─────────────────────
+// Apply [data-theme="dark"] on <html> or <body>.
+// Primitives are unchanged — only semantic tokens shift.
+[data-theme="dark"] {
+  --color-brand-primary:        #0FA8D4;   /* teal-400 — brighter for WCAG AA on dark */
+  --color-brand-primary-dark:   #3DC6E8;   /* teal-300 — hover on dark */
+  --color-brand-primary-light:  #053040;   /* teal-800 — tinted surface */
+  --color-brand-accent:         #DEB84D;   /* gold-400 — unchanged, glows on dark */
+  --color-brand-accent-dark:    #EAD07A;   /* gold-300 — hover on dark */
+  --color-brand-accent-light:   #332600;   /* gold-900 — tinted surface */
+  --color-brand-heritage:       #C24E68;   /* maroon-400 — readable on dark bg */
+
+  --color-text-primary:         #E8EAEE;   /* soft white — not pure white */
+  --color-text-secondary:       #9BA3B4;
+  --color-text-tertiary:        #5C6370;
+  --color-text-link:            #3DC6E8;   /* teal-300 — visible on dark */
+  --color-text-link-hover:      #7DDCF3;   /* teal-200 */
+
+  --color-bg-page:              #0C0F12;   /* deepest — page canvas */
+  --color-bg-surface:           #141820;   /* cards, panels */
+  --color-bg-raised:            #1C2029;   /* elevated cards */
+  --color-bg-sunken:            #0A0D10;   /* inputs, inset areas */
+  --color-bg-brand-tint:        #053040;   /* teal-800 */
+  --color-bg-accent-tint:       #332600;   /* gold-900 */
+
+  --color-border-subtle:        #1E2430;
+  --color-border-default:       #262D3A;
+  --color-border-strong:        #353D4D;
+  --color-border-focus:         #3DC6E8;
+
+  --color-success:              #22A060;
+  --color-success-light:        #0D3D26;
+  --color-warning:              #D4860F;
+  --color-warning-light:        #3D2800;
+  --color-error:                #E04040;
+  --color-error-light:          #3D0F0F;
+
+  /* Luminous glows — not drop shadows (OLED physics) */
+  --shadow-brand: 0 4px 24px rgba(15,168,212,.35), 0 0 12px rgba(15,168,212,.15);
+  --shadow-gold:  0 4px 24px rgba(222,184,77,.30),  0 0 12px rgba(222,184,77,.12);
+  --shadow-focus: 0 0 0 3px rgba(61,198,232,.30);
 }
 
 // ── Angular Material override ─────────────────────
@@ -134,7 +186,56 @@ class CWSTheme {
       ),
     ),
   );
+
+  // ── Dark theme ────────────────────────────────────────────────────────────
+  // Surfaces use layered depth — not flat black.
+  // Teal shifts to teal-400 for WCAG AA contrast on dark backgrounds.
+  // Shadows become luminous glows (OLED physics).
+  static ThemeData get dark => ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+      primary:    const Color(0xFF0FA8D4),  // teal-400
+      secondary:  CWSColors.gold400,        // gold-400 — unchanged
+      error:      const Color(0xFFE04040),  // brighter red on dark
+      surface:    const Color(0xFF141820),  // --color-bg-surface
+      background: const Color(0xFF0C0F12),  // --color-bg-page
+      onPrimary:  const Color(0xFF111418),
+      onSurface:  const Color(0xFFE8EAEE),  // soft white text
+    ),
+    scaffoldBackgroundColor: const Color(0xFF0C0F12),
+    cardColor: const Color(0xFF141820),
+    dividerColor: const Color(0xFF262D3A),
+    textTheme: GoogleFonts.soraTextTheme(ThemeData.dark().textTheme).copyWith(
+      bodyMedium: GoogleFonts.dmSans(
+        fontSize: 15, color: const Color(0xFFE8EAEE)),
+      bodySmall: GoogleFonts.dmSans(
+        fontSize: 13, color: const Color(0xFF9BA3B4)),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF0FA8D4),  // teal-400 on dark
+        foregroundColor: const Color(0xFF111418),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20, vertical: 13),
+      ),
+    ),
+  );
 }
+```
+
+To wire both themes in `main.dart`:
+
+```dart
+MaterialApp(
+  theme:      CWSTheme.light,
+  darkTheme:  CWSTheme.dark,
+  themeMode:  ThemeMode.system,  // or ThemeMode.dark / ThemeMode.light
+  // ...
+)
 ```
 
 ---

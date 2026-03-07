@@ -1,4 +1,4 @@
-# CarWash Qatar - Documentation
+# CarWash Qatar — Documentation
 
 Product documentation for Qatar's car wash aggregator platform.
 
@@ -8,41 +8,54 @@ Product documentation for Qatar's car wash aggregator platform.
 # Install dependencies
 pip install -r requirements.txt
 
-# Serve locally
-mkdocs serve
+# Serve locally (http://127.0.0.1:8000)
+zensical serve
 
-# Build
-mkdocs build
+# Build static site
+zensical build
 ```
-
-View at http://127.0.0.1:8000
 
 ## Structure
 
 ```
 docs/
-├── index.md              # Home page
+├── index.md
 ├── product/
-│   ├── overview.md       # Product vision & objectives
-│   ├── architecture.md   # Tech stack & system design
-│   └── roadmap.md        # Development milestones
+│   ├── overview.md
+│   ├── architecture.md
+│   └── roadmap.md
 ├── development/
-│   ├── requirements.md   # Functional & non-functional specs
-│   └── user-stories.md   # Epics & user stories
-├── style-guide.md        # Documentation standards
-└── contributing.md       # How to contribute
+│   ├── requirements.md
+│   ├── user-stories.md
+│   └── database-schema.md
+├── design/
+│   ├── index.md
+│   ├── colors.md
+│   ├── typography.md
+│   ├── spacing.md
+│   ├── motion.md
+│   ├── buttons.md
+│   ├── forms.md
+│   ├── cards.md
+│   ├── navigation.md
+│   └── developer-tokens.md
+├── legal/
+│   ├── privacy-policy.md
+│   └── terms-and-conditions.md
+├── style-guide.md
+└── contributing.md
 ```
 
 ## Tech Stack
 
-- **MkDocs** with Material theme
+- **Zensical** static site generator
 - **GitHub Pages** for hosting
 - **GitHub Actions** for deployment
 
-## Contributing
+## Docker
 
-1. Edit files in `docs/`
-2. Preview with `mkdocs serve`
-3. Submit a pull request
+```bash
+docker compose up
+```
 
-See [Contributing Guide](docs/contributing.md) for details.
+Serves at http://localhost:3000

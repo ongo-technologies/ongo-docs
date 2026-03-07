@@ -22,6 +22,7 @@ nav = [
     { "Development" = "development/index.md" },
     { "Requirements" = "development/requirements.md" },
     { "Database Schema" = "development/database-schema.md" },
+    { "API Endpoints" = "development/api-endpoints.md" },
   ]},
   { "Design" = [
     { "Design" = "design/index.md" },

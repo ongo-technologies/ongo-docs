@@ -206,3 +206,107 @@ Mapped 1:1 to the `booking_status` enum in the database schema. Use these exact 
 | `cancelled` | <div style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C0242C;vertical-align:middle"></div> error | `#C0242C` | Cancelled by customer |
 | `rejected` | <div style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C0242C;vertical-align:middle"></div> error | `#C0242C` | On-road unit rejected job |
 | `refunded` | <div style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#636A78;vertical-align:middle"></div> pearl-600 | `#636A78` | Payment refunded |
+
+---
+
+## Dark Mode
+
+v2.1 adds a full `[data-theme="dark"]` semantic token layer. Applied on `<html>` or `<body>` — no component code changes are needed.
+
+**Design rationale:** Night driving context, OLED battery saving, and Gulf preference for deep surfaces in evening and indoor settings. Surfaces use layered depth — not flat black — to feel intentional.
+
+!!! info "Primitives are unchanged"
+    The four primitive color scales (Gulf Teal, Desert Gold, Qatar Maroon, Gulf Pearl) are **identical** in both modes. Only the semantic tokens that reference them change.
+
+### Brand (Dark)
+
+Teal shifts one step brighter to maintain WCAG AA contrast on dark backgrounds.
+
+| Token | Light value | Dark value | Hex (dark) | Reason |
+|-------|------------|------------|------------|--------|
+| `--color-brand-primary` | teal-500 | teal-400 | `#0FA8D4` | Brighter on dark bg for contrast |
+| `--color-brand-primary-dark` | teal-700 | teal-300 | `#3DC6E8` | Hover state on dark |
+| `--color-brand-primary-light` | teal-75 | teal-800 | `#053040` | Tinted surface on dark |
+| `--color-brand-accent` | gold-400 | gold-400 | `#DEB84D` | Unchanged — glows on dark |
+| `--color-brand-accent-dark` | gold-600 | gold-300 | `#EAD07A` | Hover on dark |
+| `--color-brand-accent-light` | gold-100 | gold-900 | `#332600` | Tinted surface on dark |
+| `--color-brand-heritage` | maroon-700 | maroon-400 | `#C24E68` | Readable on dark background |
+| `--color-brand-heritage-light` | maroon-50 | maroon-900 | `#2D1117` | Dark heritage surface |
+
+### Text (Dark)
+
+Not pure white — reduces eye strain in Qatar's night and indoor usage contexts.
+
+| Token | Light value | Dark value | Hex (dark) |
+|-------|------------|------------|------------|
+| `--color-text-primary` | pearl-900 `#1E2025` | soft white | `#E8EAEE` |
+| `--color-text-secondary` | pearl-600 `#636A78` | mid-grey | `#9BA3B4` |
+| `--color-text-tertiary` | pearl-400 `#A8B0C0` | muted | `#5C6370` |
+| `--color-text-disabled` | pearl-300 `#C8CDD8` | very muted | `#3A3F4A` |
+| `--color-text-inverse` | white `#FFFFFF` | near-black | `#111418` |
+| `--color-text-brand` | teal-500 `#0B8FBF` | teal-400 | `#0FA8D4` |
+| `--color-text-accent` | gold-600 `#A97D1E` | gold-400 | `#DEB84D` |
+| `--color-text-link` | teal-500 `#0B8FBF` | teal-300 | `#3DC6E8` |
+| `--color-text-link-hover` | teal-700 `#084E63` | teal-200 | `#7DDCF3` |
+
+### Backgrounds (Dark)
+
+Layered depth system — Gulf night sky gradient. Deep teal-black surfaces feel intentional, not just dark.
+
+| Token | Light value | Dark value | Notes |
+|-------|------------|------------|-------|
+| `--color-bg-page` | pearl-50 | `#0C0F12` | Deepest — page canvas |
+| `--color-bg-surface` | white | `#141820` | Cards, panels |
+| `--color-bg-raised` | white | `#1C2029` | Elevated cards |
+| `--color-bg-sunken` | pearl-100 | `#0A0D10` | Inputs, inset areas |
+| `--color-bg-overlay` | rgba(30,32,37,.48) | rgba(0,0,0,.72) | Modals, drawers |
+| `--color-bg-brand-tint` | teal-25 | teal-800 `#053040` | Selected/active bg |
+| `--color-bg-accent-tint` | gold-50 | gold-900 `#332600` | Gold-tinted surface |
+| `--color-bg-heritage-tint` | maroon-50 | maroon-900 `#2D1117` | Heritage surface |
+
+### Borders (Dark)
+
+Subtle glow edges instead of hard lines.
+
+| Token | Light value | Dark value |
+|-------|------------|------------|
+| `--color-border-subtle` | pearl-100 `#F0F2F6` | `#1E2430` |
+| `--color-border-default` | pearl-200 `#E0E4EC` | `#262D3A` |
+| `--color-border-strong` | pearl-300 `#C8CDD8` | `#353D4D` |
+| `--color-border-brand` | teal-500 `#0B8FBF` | `#0FA8D4` |
+| `--color-border-accent` | gold-400 `#DEB84D` | `#DEB84D` |
+| `--color-border-focus` | teal-400 `#0FA8D4` | teal-300 `#3DC6E8` |
+
+### State Colors (Dark)
+
+Mid-step values used — lighter states are readable on dark surfaces.
+
+| Token | Light value | Dark value | Notes |
+|-------|------------|------------|-------|
+| `--color-success` | `#1A7A4A` | `#22A060` | Mid-step — readable on dark |
+| `--color-success-light` | `#D4F0E2` | `#0D3D26` | |
+| `--color-success-tint` | `#F0FAF5` | `#081F14` | |
+| `--color-warning` | `#B87108` | `#D4860F` | Brighter step |
+| `--color-warning-light` | `#FEF0C7` | `#3D2800` | |
+| `--color-warning-tint` | `#FFFBEB` | `#1F1400` | |
+| `--color-error` | `#C0242C` | `#E04040` | Brighter red — visible on dark |
+| `--color-error-light` | `#FEE2E2` | `#3D0F0F` | |
+| `--color-error-tint` | `#FFF5F5` | `#1F0808` | |
+| `--color-info` | teal-500 `#0B8FBF` | teal-400 `#0FA8D4` | |
+| `--color-info-light` | teal-75 `#DCF7FD` | teal-800 `#053040` | |
+| `--color-info-tint` | teal-25 `#F5FCFF` | teal-900 `#031D26` | |
+
+### Shadows (Dark)
+
+Dark mode uses luminous glows instead of drop shadows — consistent with OLED display physics.
+
+| Token | Light value | Dark value |
+|-------|------------|------------|
+| `--shadow-xs` | `0 1px 2px rgba(28,32,40,.06)` | `0 1px 2px rgba(0,0,0,.4)` |
+| `--shadow-sm` | `0 2px 6px rgba(28,32,40,.08)` | `0 2px 8px rgba(0,0,0,.5)` |
+| `--shadow-md` | `0 4px 16px rgba(28,32,40,.10)` | `0 4px 20px rgba(0,0,0,.55)` |
+| `--shadow-lg` | `0 8px 32px rgba(28,32,40,.12)` | `0 8px 36px rgba(0,0,0,.6)` |
+| `--shadow-xl` | `0 16px 48px rgba(28,32,40,.14)` | `0 16px 56px rgba(0,0,0,.7)` |
+| `--shadow-brand` | `0 4px 20px rgba(11,143,191,.28)` | `0 4px 24px rgba(15,168,212,.35), 0 0 12px rgba(15,168,212,.15)` — teal glow |
+| `--shadow-gold` | `0 4px 20px rgba(222,184,77,.32)` | `0 4px 24px rgba(222,184,77,.30), 0 0 12px rgba(222,184,77,.12)` — gold glow |
+| `--shadow-focus` | `0 0 0 3px rgba(11,143,191,.22)` | `0 0 0 3px rgba(61,198,232,.30)` |

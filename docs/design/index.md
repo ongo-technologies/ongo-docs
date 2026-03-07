@@ -1,19 +1,20 @@
 ---
 title: Design System
-description: CWS Qatar Design System v2.0 — the official visual language for all CWS platforms
+description: CWS Qatar Design System v2.1 — the official visual language for all CWS platforms, with full light and dark mode token system
 icon: material/palette-outline
 ---
 
 # Design System
 
 <div class="hero">
-  <h1>CWS Qatar — Design System v2.0</h1>
+  <h1>CWS Qatar — Design System v2.1</h1>
   <p>The official visual language for the CWS mobile car wash platform. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all CWS surfaces.</p>
   <div class="hero-badges">
-    <span class="hero-badge primary">v2.0 · Production</span>
+    <span class="hero-badge primary">v2.1 · Production</span>
     <span class="hero-badge success">Direction B Finalized</span>
     <span class="hero-badge">Flutter · Angular</span>
     <span class="hero-badge">EN · AR (RTL)</span>
+    <span class="hero-badge">Light + Dark Mode</span>
   </div>
 </div>
 
@@ -40,6 +41,11 @@ icon: material/palette-outline
     <h3>RTL / Arabic</h3>
     <p>Full bilingual support — Noto Kufi Arabic, RTL layout mirroring, and Qatar-specific locale implementation</p>
   </div>
+  <div class="card">
+    <div class="card-icon">🌙</div>
+    <h3>Dark Mode</h3>
+    <p>Full `[data-theme="dark"]` token layer — OLED-optimised surfaces, brighter teal for WCAG contrast, and Gulf night-context rationale built in</p>
+  </div>
 </div>
 
 ## Design Principles
@@ -51,6 +57,7 @@ icon: material/palette-outline
 | **Bilingual by default** | EN and AR (RTL) are first-class — layout, typography, and spacing are designed for both directions from the start. |
 | **Motion with purpose** | Animation confirms actions and orients the user. Never animate for entertainment — use the minimum needed. |
 | **One primary CTA** | Maximum one `--color-brand-primary` button per screen. Gold is reserved exclusively for payment/confirmation. |
+| **Dark mode by token** | Dark mode never touches components — only the `[data-theme="dark"]` semantic token layer changes. Primitives are identical in both modes. Surfaces use layered depth (not flat black) to reflect Gulf night and indoor usage contexts. |
 
 ---
 
@@ -68,6 +75,8 @@ icon: material/palette-outline
     - Always mirror layouts horizontally when switching to Arabic (RTL)
     - Only reference semantic tokens in components (never raw hex values)
     - Use Pearl 900 `#1E2025` for all primary text — never pure `#000000`
+    - In dark mode, use `--color-bg-surface` (`#141820`) for cards — never flat black
+    - In dark mode, use `--shadow-brand` glow variant — luminous glows, not drop shadows
 
 !!! danger "Don't"
 
@@ -81,14 +90,16 @@ icon: material/palette-outline
     - Never use `shadow-2xl` for anything other than full-screen overlays/drawers
     - Never add a new color outside this system without design review
     - Never use Inter, Roboto, or system fonts — always load Sora and DM Sans from CDN
+    - Never use flat `#000000` as a dark mode background — use the layered surface system
+    - Never hardcode dark mode colors — toggle only via `[data-theme="dark"]` on `<html>` or `<body>`
 
 ---
 
 ## Quick Reference
 
-| Platform | Token file | Font setup |
-|----------|-----------|------------|
-| Angular | `styles/tokens/_colors.scss` | Google Fonts CDN in `index.html` |
-| Flutter | `lib/theme/cws_theme.dart` | `google_fonts: ^6.1.0` in pubspec |
+| Platform | Light token file | Dark mode |
+|----------|-----------------|-----------|
+| Angular | `styles/tokens/_colors.scss` — `:root {}` | `[data-theme="dark"]` block in same file |
+| Flutter | `lib/theme/cws_theme.dart` — `CWSTheme.light` | `CWSTheme.dark` in same file |
 
-See [Developer Tokens](developer-tokens.md) for copy-ready implementation snippets.
+See [Developer Tokens](developer-tokens.md) for copy-ready implementation snippets including the full dark mode blocks.
