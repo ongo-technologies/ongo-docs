@@ -37,6 +37,7 @@ nav = [
   ]},
   { "Reference" = [
     { "Reference" = "reference/index.md" },
+    { "MyFatoorah Payment Gateway" = "reference/myfatoorah-payment-gateway.md" },
     { "Contributing" = "contributing.md" },
   ]},
   { "Legal" = [

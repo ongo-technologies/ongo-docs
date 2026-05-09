@@ -1,3 +1,9 @@
+---
+title: MyFatoorah Payment Gateway
+description: Integration reference for the MyFatoorah payment gateway — Qatar production setup, hosted flow, API endpoints, webhooks, and implementation gotchas
+icon: material/credit-card-outline
+---
+
 # MyFatoorah Payment Gateway — Integration Reference
 
 > Source: Issue #87 research by @JCortez132 | Completed: 2026-04-19 | Reviewed: 2026-04-22
