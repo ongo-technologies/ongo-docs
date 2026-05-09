@@ -1,6 +1,6 @@
 ---
 title: Buttons & Badges
-description: CWS Qatar button variants, sizes, badge and status chip system
+description: Ongo button variants, sizes, badge and status chip system
 icon: material/cursor-default-click-outline
 ---
 

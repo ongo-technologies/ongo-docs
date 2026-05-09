@@ -1,14 +1,14 @@
 ---
 title: Design System
-description: CWS Qatar Design System v2.1 — the official visual language for all CWS platforms, with full light and dark mode token system
+description: Ongo Design System v2.1 — the official visual language for all Ongo platforms, with full light and dark mode token system
 icon: material/palette-outline
 ---
 
 # Design System
 
 <div class="hero">
-  <h1>CWS Qatar — Design System v2.1</h1>
-  <p>The official visual language for the CWS mobile car wash platform. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all CWS surfaces.</p>
+  <h1>Ongo — Design System v2.1</h1>
+  <p>The official visual language for all Ongo platforms. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all Ongo surfaces.</p>
   <div class="hero-badges">
     <span class="hero-badge primary">v2.1 · Production</span>
     <span class="hero-badge success">Direction B Finalized</span>

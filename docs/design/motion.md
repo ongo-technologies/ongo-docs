@@ -1,6 +1,6 @@
 ---
 title: Motion
-description: CWS Qatar motion tokens — durations and easing curves for Flutter and Angular
+description: Ongo motion tokens — durations and easing curves for Flutter and Angular
 icon: material/motion-outline
 ---
 

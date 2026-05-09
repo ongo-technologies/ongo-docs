@@ -1,6 +1,6 @@
 ---
 title: Typography
-description: CWS Qatar three-font system — Sora, DM Sans, and Noto Kufi Arabic
+description: Ongo three-font system — Sora, DM Sans, and Noto Kufi Arabic
 icon: material/format-font
 ---
 

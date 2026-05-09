@@ -1,6 +1,6 @@
 ---
 title: Colors
-description: CWS Qatar color system — four primitive families, semantic tokens, and booking status palette
+description: Ongo color system — four primitive families, semantic tokens, and booking status palette
 icon: material/palette-swatch-outline
 ---
 

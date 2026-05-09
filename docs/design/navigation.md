@@ -1,6 +1,6 @@
 ---
 title: Navigation & Feedback
-description: CWS Qatar navigation patterns, booking tracker, avatars, toasts, and alert banners
+description: Ongo navigation patterns, booking tracker, avatars, toasts, and alert banners
 icon: material/compass-outline
 ---
 
