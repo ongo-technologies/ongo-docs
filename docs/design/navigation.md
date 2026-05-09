@@ -47,7 +47,7 @@ The primary navigation for the Customer App. Four tabs: Home, Bookings, Vendors,
 
 ```dart
 BottomNavigationBar(
-  selectedItemColor:   CWSColors.teal500,
+  selectedItemColor:   OngoColors.teal500,
   unselectedItemColor: const Color(0xFFA8B0C0),  // --pearl-400
   selectedLabelStyle:  GoogleFonts.sora(
     fontSize: 11,

@@ -61,14 +61,14 @@ box-shadow:    var(--shadow-gold);
 // Primary button
 ElevatedButton(
   style: ElevatedButton.styleFrom(
-    backgroundColor: CWSColors.teal500,
+    backgroundColor: OngoColors.teal500,
     foregroundColor: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
     ),
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
     elevation: 4,
-    shadowColor: CWSColors.teal500.withOpacity(0.28),
+    shadowColor: OngoColors.teal500.withOpacity(0.28),
   ),
   onPressed: () {},
   child: const Text('Book Now'),
@@ -77,7 +77,7 @@ ElevatedButton(
 // Gold/Pay button
 ElevatedButton(
   style: ElevatedButton.styleFrom(
-    backgroundColor: CWSColors.gold400,
+    backgroundColor: OngoColors.gold400,
     foregroundColor: const Color(0xFF1C1500),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
@@ -136,7 +136,7 @@ letter-spacing: 0.02em;
 Container(
   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
   decoration: BoxDecoration(
-    color: CWSColors.successTint,
+    color: OngoColors.successTint,
     borderRadius: BorderRadius.circular(9999),
   ),
   child: Row(
@@ -145,7 +145,7 @@ Container(
       Container(
         width: 6, height: 6,
         decoration: const BoxDecoration(
-          color: CWSColors.success,
+          color: OngoColors.success,
           shape: BoxShape.circle,
         ),
       ),
@@ -155,7 +155,7 @@ Container(
         style: GoogleFonts.sora(
           fontSize: 11,
           fontWeight: FontWeight.w600,
-          color: CWSColors.success,
+          color: OngoColors.success,
         ),
       ),
     ],
