@@ -51,6 +51,7 @@ nav = [
 # ----------------------------------------------------------------------------
 [project.theme]
 language = "en"
+logo = "assets/ongo-icon.svg"
 custom_dir = "docs/overrides"
 features = [
     "navigation.instant",
@@ -72,7 +73,6 @@ text = "Inter"
 code = "JetBrains Mono"
 
 [project.theme.icon]
-logo = "assets/ongo-icon.svg"
 repo = "fontawesome/brands/github"
 
 [[project.theme.palette]]
