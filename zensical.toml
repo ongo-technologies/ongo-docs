@@ -1,12 +1,12 @@
 [project]
-site_name = "CarWash Qatar"
-site_description = "Product documentation for Qatar's car wash aggregator platform"
-site_author = "CarWash Qatar Team"
+site_name = "Ongo"
+site_description = "Product documentation for Ongo — Qatar's on-demand car wash platform"
+site_author = "Ongo Team"
 site_url = "https://yourusername.github.io/cws-docs/"
 repo_name = "cws-docs"
 repo_url = "https://github.com/yourusername/cws-docs"
 edit_uri = "edit/main/docs/"
-copyright = "&copy; 2025 CarWash Qatar"
+copyright = "&copy; 2025 Ongo"
 
 extra_css = ["stylesheets/extra.css"]
 
@@ -72,7 +72,7 @@ text = "Inter"
 code = "JetBrains Mono"
 
 [project.theme.icon]
-logo = "material/car-wash"
+logo = "assets/ongo-icon.svg"
 repo = "fontawesome/brands/github"
 
 [[project.theme.palette]]
