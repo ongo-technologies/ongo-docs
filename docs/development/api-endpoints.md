@@ -1,6 +1,6 @@
 ---
 title: API Endpoints
-description: Screen-derived REST API endpoint map for the CWS Qatar Mobile App and Web Admin Panel — 35 endpoints across 10 feature areas
+description: Screen-derived REST API endpoint map for the Ongo Mobile App and Web Admin Panel — 35 endpoints across 10 feature areas
 icon: material/api
 ---
 

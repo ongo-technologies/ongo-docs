@@ -1,12 +1,12 @@
 ---
 title: Database Schema
-description: Entity relationship model and table definitions for CarWash Qatar
+description: Entity relationship model and table definitions for Ongo
 icon: material/database-outline
 ---
 
 # Database Schema
 
-Entity relationship diagram for the CarWash Qatar platform database.
+Entity relationship diagram for the Ongo platform database.
 
 <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
   <iframe src='https://dbdiagram.io/e/6998fd29bd82f5fce259a137/6998fd9dbd82f5fce259a50e'
@@ -15,4 +15,4 @@ Entity relationship diagram for the CarWash Qatar platform database.
   </iframe>
 </div>
 
-> Open the [full diagram in dbdiagram.io](https://dbdiagram.io/d/CWS-6998fd29bd82f5fce259a137){ target="_blank" } for a larger view and table filtering.
+> Open the [full diagram in dbdiagram.io](https://dbdiagram.io/d/Ongo-6998fd29bd82f5fce259a137){ target="_blank" } for a larger view and table filtering.

@@ -1,12 +1,12 @@
 ---
 title: Development
-description: Development requirements and database schemas for CarWash Qatar
+description: Development requirements and database schemas for Ongo
 icon: material/code-braces
 ---
 
 # Development
 
-Technical requirements and database schema that drive the CarWash Qatar platform.
+Technical requirements and database schema that drive the Ongo platform.
 
 <div class="card-grid" markdown>
 

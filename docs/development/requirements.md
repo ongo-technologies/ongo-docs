@@ -1,14 +1,14 @@
 ---
 title: Requirements
-description: MVP feature requirements for CarWash Qatar — organized by platform
+description: MVP feature requirements for Ongo — organized by platform
 icon: material/clipboard-list-outline
 ---
 
 # Requirements
 
 !!! info "Document Info"
-    Based on **CWS Feature List MVP v4\_S** — last revised February 8, 2025, Doha, Qatar.
-    This document reflects the finalized MVP scope for all four CWS platforms.
+    Based on **Ongo Feature List MVP v4\_S** — last revised February 8, 2025, Doha, Qatar.
+    This document reflects the finalized MVP scope for all four Ongo platforms.
 
 ---
 
