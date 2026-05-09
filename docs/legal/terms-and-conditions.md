@@ -1,12 +1,12 @@
 ---
 title: Terms & Conditions
-description: Terms and conditions for the CarWash Qatar platform
+description: Terms and conditions for the Ongo platform
 icon: material/file-document-outline
 ---
 
 # Terms & Conditions
 
-These terms and conditions apply to the CWS app (hereby referred to as "Application") for mobile devices that was created by (hereby referred to as "Service Provider") as a Free service.
+These terms and conditions apply to the Ongo app (hereby referred to as "Application") for mobile devices that was created by (hereby referred to as "Service Provider") as a Free service.
 
 Upon downloading or utilizing the Application, you are automatically agreeing to the following terms. It is strongly advised that you thoroughly read and understand these terms prior to using the Application.
 

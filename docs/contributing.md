@@ -1,23 +1,23 @@
 ---
 title: Contributing
-description: Internal guide for updating and maintaining CWS Qatar documentation
+description: Internal guide for updating and maintaining Ongo documentation
 icon: material/hand-heart-outline
 ---
 
-# Contributing to CWS Docs
+# Contributing to Ongo Docs
 
-This guide covers how the internal team can update and maintain the CarWash Qatar documentation site.
+This guide covers how the internal team can update and maintain the Ongo documentation site.
 
 ## Prerequisites
 
 - Python 3.10+
-- Git access to the `cws-docs` repository
+- Git access to the `ongo-docs` repository
 
 ## Local Development
 
 ```bash
 # Clone the repo
-git clone <repo-url> && cd cws-docs
+git clone <repo-url> && cd ongo-docs
 
 # Install dependencies
 pip install -r requirements.txt

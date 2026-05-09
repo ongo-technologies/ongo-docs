@@ -1,12 +1,12 @@
 ---
 title: Legal
-description: Legal documents and policies for CarWash Qatar
+description: Legal documents and policies for Ongo
 icon: material/scale-balance
 ---
 
 # Legal
 
-Legal documentation, privacy policies, and terms of service for the CarWash Qatar platform.
+Legal documentation, privacy policies, and terms of service for the Ongo platform.
 
 <div class="card-grid" markdown>
 

@@ -1,12 +1,12 @@
 ---
 title: Reference
-description: Contribution guidelines for CarWash Qatar
+description: Contribution guidelines for Ongo
 icon: material/bookshelf
 ---
 
 # Reference
 
-Contribution guidelines for the CarWash Qatar documentation and codebase.
+Contribution guidelines for the Ongo documentation and codebase.
 
 <div class="card-grid" markdown>
 
