@@ -1,6 +1,6 @@
-# CarWash Qatar — Documentation
+# Ongo — Documentation
 
-Product documentation for Qatar's car wash aggregator platform.
+Product documentation for Ongo — Qatar's on-demand car wash platform.
 
 ## Quick Start
 
