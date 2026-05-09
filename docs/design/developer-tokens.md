@@ -1,6 +1,6 @@
 ---
 title: Developer Tokens
-description: Copy-ready SCSS, Flutter Dart, and RTL implementation tokens for CWS Qatar Design System v2.1, including full dark mode blocks
+description: Copy-ready SCSS, Flutter Dart, and RTL implementation tokens for Ongo Design System v2.1, including full dark mode blocks
 icon: material/code-tags
 ---
 
@@ -14,7 +14,7 @@ Copy-ready snippets for Angular SCSS and Flutter Dart. These are the exact trans
 
 ```scss
 // styles/tokens/_colors.scss
-// CWS Qatar Design System v2.1 — Direction B: Gulf Teal
+// Ongo Design System v2.1 — Direction B: Gulf Teal
 // Light mode (:root) + Dark mode ([data-theme="dark"])
 
 :root {
@@ -102,7 +102,7 @@ Copy-ready snippets for Angular SCSS and Flutter Dart. These are the exact trans
 // ── Angular Material override ─────────────────────
 @use '@angular/material' as mat;
 
-$cws-primary: mat.define-palette((
+$ongo-primary: mat.define-palette((
   50:  #EDF9FD, 100: #B5EEFA,
   200: #7DDCF3, 300: #3DC6E8,
   400: #0FA8D4, 500: #0B8FBF,
@@ -111,7 +111,7 @@ $cws-primary: mat.define-palette((
   contrast: (500: white, 600: white, 700: white)
 ), 500, 300, 700);
 
-$cws-accent: mat.define-palette((
+$ongo-accent: mat.define-palette((
   400: #DEB84D, 500: #C99A2E,
   contrast: (400: #1C1500, 500: #1C1500)
 ), 400);
@@ -122,13 +122,13 @@ $cws-accent: mat.define-palette((
 ## Flutter / Dart
 
 ```dart
-// lib/theme/cws_theme.dart
-// CWS Qatar Design System v2.0
+// lib/theme/ongo_theme.dart
+// Ongo Design System v2.0
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-abstract class CWSColors {
+abstract class OngoColors {
   // Gulf Teal — Primary
   static const teal500 = Color(0xFF0B8FBF);   // ★ Primary
   static const teal700 = Color(0xFF084E63);
@@ -159,14 +159,14 @@ abstract class CWSColors {
   static const errorTint   = Color(0xFFFFF5F5);
 }
 
-class CWSTheme {
+class OngoTheme {
   static ThemeData get light => ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: CWSColors.teal500,
-      primary:   CWSColors.teal500,
-      secondary: CWSColors.gold400,
-      error:     CWSColors.error,
+      seedColor: OngoColors.teal500,
+      primary:   OngoColors.teal500,
+      secondary: OngoColors.gold400,
+      error:     OngoColors.error,
       surface:   Colors.white,
       background: const Color(0xFFF8F9FB),  // --pearl-50
     ),
@@ -176,7 +176,7 @@ class CWSTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: CWSColors.teal500,
+        backgroundColor: OngoColors.teal500,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),  // --radius-md
@@ -196,7 +196,7 @@ class CWSTheme {
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
       primary:    const Color(0xFF0FA8D4),  // teal-400
-      secondary:  CWSColors.gold400,        // gold-400 — unchanged
+      secondary:  OngoColors.gold400,        // gold-400 — unchanged
       error:      const Color(0xFFE04040),  // brighter red on dark
       surface:    const Color(0xFF141820),  // --color-bg-surface
       background: const Color(0xFF0C0F12),  // --color-bg-page
@@ -231,8 +231,8 @@ To wire both themes in `main.dart`:
 
 ```dart
 MaterialApp(
-  theme:      CWSTheme.light,
-  darkTheme:  CWSTheme.dark,
+  theme:      OngoTheme.light,
+  darkTheme:  OngoTheme.dark,
   themeMode:  ThemeMode.system,  // or ThemeMode.dark / ThemeMode.light
   // ...
 )
@@ -250,7 +250,7 @@ MaterialApp(
     Locale('en', 'US'),
     Locale('ar', 'QA'),
   ],
-  theme: CWSTheme.light,
+  theme: OngoTheme.light,
   // Auto-mirrors layout for RTL locales
 )
 
@@ -295,17 +295,17 @@ Direct mapping from `booking_status` DB enum to design token:
 // Flutter
 Color statusColor(String status) {
   switch (status) {
-    case 'pending':     return CWSColors.warning;       // #B87108
-    case 'confirmed':   return CWSColors.success;       // #1A7A4A
-    case 'assigned':    return CWSColors.teal500;       // #0B8FBF
+    case 'pending':     return OngoColors.warning;       // #B87108
+    case 'confirmed':   return OngoColors.success;       // #1A7A4A
+    case 'assigned':    return OngoColors.teal500;       // #0B8FBF
     case 'en_route':    return const Color(0xFF0A6882); // teal-600
-    case 'arrived':     return CWSColors.teal700;       // #084E63
+    case 'arrived':     return OngoColors.teal700;       // #084E63
     case 'in_progress': return const Color(0xFF0FA8D4); // teal-400
-    case 'completed':   return CWSColors.success;       // #1A7A4A
-    case 'cancelled':   return CWSColors.error;         // #C0242C
-    case 'rejected':    return CWSColors.error;         // #C0242C
-    case 'refunded':    return CWSColors.pearl600;      // #636A78
-    default:            return CWSColors.pearl400;
+    case 'completed':   return OngoColors.success;       // #1A7A4A
+    case 'cancelled':   return OngoColors.error;         // #C0242C
+    case 'rejected':    return OngoColors.error;         // #C0242C
+    case 'refunded':    return OngoColors.pearl600;      // #636A78
+    default:            return OngoColors.pearl400;
   }
 }
 ```
