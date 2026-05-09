@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Vision, objectives, and value propositions for CarWash Qatar
+description: Vision, objectives, and value propositions for Ongo
 icon: material/lightbulb-outline
 ---
 
@@ -8,7 +8,7 @@ icon: material/lightbulb-outline
 
 ## Vision
 
-Qatar's leading car wash service aggregator—connecting customers with professional vendors through convenient on-location vehicle cleaning services.
+Qatar's on-demand car wash platform — connecting customers with professional vendors through fast, convenient vehicle cleaning at their location.
 
 ## Platform Ecosystem
 

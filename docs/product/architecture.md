@@ -1,6 +1,6 @@
 ---
 title: Architecture
-description: Technology stack and system design for CarWash Qatar
+description: Technology stack and system design for Ongo
 icon: material/layers-outline
 ---
 

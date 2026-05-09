@@ -1,12 +1,12 @@
 ---
 title: Product
-description: Product vision, architecture, and roadmap for CarWash Qatar
+description: Product vision, architecture, and roadmap for Ongo
 icon: material/package-variant-closed
 ---
 
 # Product
 
-Core product documentation for the CarWash Qatar platform — covering the vision, technical architecture, and development roadmap.
+Core product documentation for the Ongo platform — covering the vision, technical architecture, and development roadmap.
 
 <div class="card-grid" markdown>
 
