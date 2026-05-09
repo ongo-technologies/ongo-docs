@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CWS Qatar — Design System v2.1 · Production</title>
+<title>Ongo — Design System v2.1 · Production</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
 /* ═══════════════════════════════════════════════════════════════
-   CWS QATAR — DESIGN SYSTEM v2.1  (PRODUCTION · DIRECTION B)
+   ONGO — DESIGN SYSTEM v2.1  (PRODUCTION · DIRECTION B)
    Gulf Teal Primary · Desert Gold Accent · Maroon Heritage
    Light Mode + Dark Mode Token System
    Sora · DM Sans · Noto Kufi Arabic
@@ -266,7 +266,7 @@
 /* ═══════════════════════════════════════════════════════════════
    DARK MODE TOKEN LAYER
    Applied via [data-theme="dark"] on <html> or <body>
-   Flutter: ThemeMode.dark → CWSTheme.dark
+   Flutter: ThemeMode.dark → OngoTheme.dark
    All primitives stay identical — only semantic tokens change.
    Design rationale: Night driving context, OLED battery saving,
    Gulf preference for deep surfaces in evening/indoor settings.
@@ -1728,7 +1728,7 @@ body {
   <div class="ds-sidebar-logo">
     <div class="ds-logo-mark">
       <div class="ds-logo-icon">🚗</div>
-      <div class="ds-logo-text">CWS <span>Qatar</span></div>
+      <div class="ds-logo-text">Ongo</div>
     </div>
     <div class="ds-logo-sub">Design System v2.0 · Production</div>
   </div>
@@ -1789,8 +1789,8 @@ body {
   <!-- HERO -->
   <div class="ds-hero">
     <div class="ds-hero-status">Production Ready · v2.0 · Direction B Finalized</div>
-    <h1>CWS Qatar<br><span>Design System</span></h1>
-    <p class="ds-hero-sub">The official visual language for the CWS mobile car wash platform. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all CWS surfaces.</p>
+    <h1>Ongo<br><span>Design System</span></h1>
+    <p class="ds-hero-sub">The official visual language for the Ongo mobile car wash platform. Gulf Teal primary, Desert Gold accent, Qatar Maroon as cultural heritage. Single source of truth for Flutter, Angular, and all Ongo surfaces.</p>
     <div class="ds-hero-meta">
       <span class="ds-hero-meta-pill"><strong>Version</strong>2.0 · Production</span>
       <span class="ds-hero-meta-pill"><strong>Platforms</strong>Flutter · Angular</span>
@@ -2397,7 +2397,7 @@ body {
           <div class="booking-card-body">
             <div class="booking-card-top">
               <div>
-                <div class="booking-card-id">#CWS-20260304-0091</div>
+                <div class="booking-card-id">#ONGO-20260304-0091</div>
                 <div class="booking-card-title">Shine Wash</div>
               </div>
               <span class="badge bdg-success"><span class="badge-dot"></span>Confirmed</span>
@@ -2584,7 +2584,7 @@ body {
 
     <div class="impl-panel active" id="impl-angular">
 <pre class="code-block"><span class="cm">// styles/tokens/_colors.scss</span>
-<span class="cm">// CWS Qatar Design System v2.0 — Direction B: Gulf Teal</span>
+<span class="cm">// Ongo Design System v2.0 — Direction B: Gulf Teal</span>
 
 :root {
   <span class="cm">// ── Gulf Teal (Primary) ──────────────────────────</span>
@@ -2620,7 +2620,7 @@ body {
 <span class="cm">// ── Angular Material override ─────────────────────</span>
 @use '@angular/material' as mat;
 
-$cws-primary: mat.define-palette((
+$ongo-primary: mat.define-palette((
   50:  <span class="val">#EDF9FD</span>, 100: <span class="val">#B5EEFA</span>,
   200: <span class="val">#7DDCF3</span>, 300: <span class="val">#3DC6E8</span>,
   400: <span class="val">#0FA8D4</span>, 500: <span class="val">#0B8FBF</span>,
@@ -2629,20 +2629,20 @@ $cws-primary: mat.define-palette((
   contrast: (500: white, 600: white, 700: white)
 ), 500, 300, 700);
 
-$cws-accent: mat.define-palette((
+$ongo-accent: mat.define-palette((
   400: <span class="val">#DEB84D</span>, 500: <span class="val">#C99A2E</span>,
   contrast: (400: #1C1500, 500: #1C1500)
 ), 400);</pre>
     </div>
 
     <div class="impl-panel" id="impl-flutter">
-<pre class="code-block"><span class="cm">// lib/theme/cws_theme.dart</span>
-<span class="cm">// CWS Qatar Design System v2.0</span>
+<pre class="code-block"><span class="cm">// lib/theme/ongo_theme.dart</span>
+<span class="cm">// Ongo Design System v2.0</span>
 
 <span class="kw">import</span> <span class="str">'package:flutter/material.dart'</span>;
 <span class="kw">import</span> <span class="str">'package:google_fonts/google_fonts.dart'</span>;
 
-<span class="kw">abstract class</span> CWSColors {
+<span class="kw">abstract class</span> OngoColors {
   <span class="cm">// Gulf Teal — Primary</span>
   <span class="kw">static const</span> teal500 = Color(<span class="val">0xFF0B8FBF</span>);   <span class="cm">// ★ Primary</span>
   <span class="kw">static const</span> teal700 = Color(<span class="val">0xFF084E63</span>);
@@ -2668,14 +2668,14 @@ $cws-accent: mat.define-palette((
   <span class="kw">static const</span> error   = Color(<span class="val">0xFFC0242C</span>);
 }
 
-<span class="kw">class</span> CWSTheme {
+<span class="kw">class</span> OngoTheme {
   <span class="kw">static</span> ThemeData <span class="kw">get</span> light => ThemeData(
     useMaterial3: <span class="val">true</span>,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: CWSColors.teal500,
-      primary:   CWSColors.teal500,
-      secondary: CWSColors.gold400,
-      error:     CWSColors.error,
+      seedColor: OngoColors.teal500,
+      primary:   OngoColors.teal500,
+      secondary: OngoColors.gold400,
+      error:     OngoColors.error,
       surface:   Colors.white,
       background: <span class="kw">const</span> Color(<span class="val">0xFFF8F9FB</span>),
     ),
@@ -2685,7 +2685,7 @@ $cws-accent: mat.define-palette((
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: CWSColors.teal500,
+        backgroundColor: OngoColors.teal500,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -2700,7 +2700,7 @@ $cws-accent: mat.define-palette((
 
     <div class="impl-panel" id="impl-rtl">
 <pre class="code-block"><span class="cm">// RTL / Arabic implementation notes</span>
-<span class="cm">// CWS Qatar Design System v2.0</span>
+<span class="cm">// Ongo Design System v2.0</span>
 
 <span class="cm">// ── Angular: app.module.ts ──────────────────────</span>
 <span class="kw">import</span> { <span class="val">LOCALE_ID</span> } <span class="kw">from</span> <span class="str">'@angular/core'</span>;
@@ -2730,7 +2730,7 @@ MaterialApp(
     Locale(<span class="str">'en'</span>, <span class="str">'US'</span>),
     Locale(<span class="str">'ar'</span>, <span class="str">'QA'</span>),
   ],
-  theme: CWSTheme.light,
+  theme: OngoTheme.light,
   <span class="cm">// Auto-mirrors layout for RTL locales</span>
 )
 
@@ -2789,7 +2789,7 @@ MaterialApp(
   <!-- FOOTER -->
   <div style="margin-top:var(--sp-20);padding-top:var(--sp-8);border-top:1px solid var(--color-border-subtle);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-4)">
     <div>
-      <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:800;color:var(--color-text-primary);letter-spacing:var(--tracking-snug)">CWS <span style="color:var(--color-brand-primary)">Qatar</span> — Design System v2.1</div>
+      <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:800;color:var(--color-text-primary);letter-spacing:var(--tracking-snug)">Ongo — Design System v2.1</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:3px">Direction B · Gulf Teal Primary · Light + Dark Mode · Production Approved · March 2026</div>
     </div>
     <div style="text-align:right">
@@ -3126,7 +3126,7 @@ MaterialApp(
 
     <div class="impl-panel active" id="impl-dm-angular">
 <pre class="code-block"><span class="cm">// styles/tokens/_dark.scss
-// CWS Qatar Design System v2.1 — Dark Mode Layer
+// Ongo Design System v2.1 — Dark Mode Layer
 // Applied via [data-theme="dark"] on &lt;html&gt;</span>
 
 <span class="kw">[data-theme="dark"]</span> {
@@ -3186,10 +3186,10 @@ body {
 <span class="cm">// Angular Material dark theme</span>
 @use '@angular/material' as mat;
 
-$cws-dark-theme: mat.define-dark-theme((
+$ongo-dark-theme: mat.define-dark-theme((
   color: (
-    primary: $cws-primary,   <span class="cm">// from light tokens file</span>
-    accent:  $cws-accent,
+    primary: $ongo-primary,   <span class="cm">// from light tokens file</span>
+    accent:  $ongo-accent,
   ),
   typography: mat.define-typography-config(),
   density: 0,
@@ -3198,10 +3198,10 @@ $cws-dark-theme: mat.define-dark-theme((
     </div>
 
     <div class="impl-panel" id="impl-dm-flutter">
-<pre class="code-block"><span class="cm">// lib/theme/cws_theme.dart — Dark mode extension
-// CWS Qatar Design System v2.1</span>
+<pre class="code-block"><span class="cm">// lib/theme/ongo_theme.dart — Dark mode extension
+// Ongo Design System v2.1</span>
 
-<span class="kw">abstract class</span> CWSDarkColors {
+<span class="kw">abstract class</span> OngoDarkColors {
   <span class="cm">// Gulf Teal — one step brighter on dark</span>
   <span class="kw">static const</span> primary      = Color(<span class="val">0xFF0FA8D4</span>); <span class="cm">// teal-400</span>
   <span class="kw">static const</span> primaryHover = Color(<span class="val">0xFF3DC6E8</span>); <span class="cm">// teal-300</span>
@@ -3235,37 +3235,37 @@ $cws-dark-theme: mat.define-dark-theme((
 }
 
 <span class="cm">// Dark ThemeData</span>
-<span class="kw">class</span> CWSTheme {
+<span class="kw">class</span> OngoTheme {
   <span class="kw">static</span> ThemeData <span class="kw">get</span> dark => ThemeData(
     useMaterial3: <span class="val">true</span>,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary:    CWSDarkColors.primary,
-      secondary:  CWSDarkColors.accent,
-      error:      CWSDarkColors.error,
-      surface:    CWSDarkColors.bgSurface,
-      background: CWSDarkColors.bgPage,
+      primary:    OngoDarkColors.primary,
+      secondary:  OngoDarkColors.accent,
+      error:      OngoDarkColors.error,
+      surface:    OngoDarkColors.bgSurface,
+      background: OngoDarkColors.bgPage,
       onPrimary:  Colors.white,
-      onSurface:  CWSDarkColors.textPrimary,
+      onSurface:  OngoDarkColors.textPrimary,
     ),
-    scaffoldBackgroundColor: CWSDarkColors.bgPage,
-    cardColor: CWSDarkColors.bgSurface,
-    dividerColor: CWSDarkColors.borderSubtle,
+    scaffoldBackgroundColor: OngoDarkColors.bgPage,
+    cardColor: OngoDarkColors.bgSurface,
+    dividerColor: OngoDarkColors.borderSubtle,
     textTheme: GoogleFonts.soraTextTheme(
       ThemeData.dark().textTheme,
     ).copyWith(
       bodyMedium: GoogleFonts.dmSans(
         fontSize: 15,
-        color: CWSDarkColors.textSecondary,
+        color: OngoDarkColors.textSecondary,
       ),
       bodySmall: GoogleFonts.dmSans(
         fontSize: 13,
-        color: CWSDarkColors.textTertiary,
+        color: OngoDarkColors.textTertiary,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: CWSDarkColors.primary,
+        backgroundColor: OngoDarkColors.primary,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -3274,22 +3274,22 @@ $cws-dark-theme: mat.define-dark-theme((
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: <span class="val">true</span>,
-      fillColor: CWSDarkColors.bgSunken,
+      fillColor: OngoDarkColors.bgSunken,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: CWSDarkColors.borderDefault),
+        borderSide: BorderSide(color: OngoDarkColors.borderDefault),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
-          color: CWSDarkColors.primary, width: 1.5),
+          color: OngoDarkColors.primary, width: 1.5),
       ),
     ),
   );
 
   <span class="cm">// Usage in MaterialApp:</span>
-  <span class="cm">// theme: CWSTheme.light,</span>
-  <span class="cm">// darkTheme: CWSTheme.dark,</span>
+  <span class="cm">// theme: OngoTheme.light,</span>
+  <span class="cm">// darkTheme: OngoTheme.dark,</span>
   <span class="cm">// themeMode: ThemeMode.system, // or .light / .dark</span>
 }</pre>
     </div>
@@ -3302,7 +3302,7 @@ $cws-dark-theme: mat.define-dark-theme((
 
 <span class="kw">@Injectable</span>({ providedIn: <span class="str">'root'</span> })
 <span class="kw">export class</span> ThemeService {
-  <span class="kw">private readonly</span> STORAGE_KEY = <span class="str">'cws-theme'</span>;
+  <span class="kw">private readonly</span> STORAGE_KEY = <span class="str">'ongo-theme'</span>;
   isDark = signal(<span class="val">false</span>);
 
   init(): <span class="kw">void</span> {
@@ -3369,8 +3369,8 @@ $cws-dark-theme: mat.define-dark-theme((
 }
 
 <span class="cm">// MaterialApp usage:</span>
-<span class="cm">// theme:     CWSTheme.light,</span>
-<span class="cm">// darkTheme: CWSTheme.dark,</span>
+<span class="cm">// theme:     OngoTheme.light,</span>
+<span class="cm">// darkTheme: OngoTheme.dark,</span>
 <span class="cm">// themeMode: ref.watch(themeModeProvider),</span></pre>
     </div>
   </section>
