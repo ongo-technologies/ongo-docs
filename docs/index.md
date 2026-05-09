@@ -1,12 +1,12 @@
 ---
 title: Home
-description: Qatar's premier car wash aggregator platform
+description: Qatar's on-demand car wash platform
 icon: material/home-outline
 ---
 
 <div class="hero">
-  <h1>CarWash Qatar</h1>
-  <p>Connecting customers with professional car wash services across Qatar</p>
+  <h1>Ongo</h1>
+  <p>On-demand car wash, anywhere in Qatar</p>
   <div class="hero-badges">
     <span class="hero-badge primary">Version 2.0</span>
     <span class="hero-badge success">Ready for Development</span>
