@@ -37,52 +37,66 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 
 ### Milestone 2: API Integration & UI Redesign
 **Period**: March – April 2026 (Q1–Q2 2026)
-**Status**: 🔄 In Progress
+**Status**: ✅ Completed
 
 **Goal**: Connect all platforms through core booking API endpoints and refresh the user experience
 
-**Deliverables**:
+**Delivered**:
 
 - API endpoints covering the core booking feature (customer, admin, vendor, service unit)
-- CI/CD pipeline extended to deploy mobile app to Apple App Store
-- UI/UX redesign for mobile app (customer app + service unit app)
-- UI/UX redesign for web apps (vendor portal + admin dashboard)
-- WhatsApp OTP integration for customer authentication and verification
 - MyFatoorah payment gateway integration (sandbox configuration and API setup)
 - Initial development of the on-road service unit mobile application
 - Initial implementation of the end-to-end booking flow with live API integration across all platforms
 
-**Success Criteria**:
+!!! warning "Carried over to Milestone 3"
+    The following items were not completed within the milestone window and are carried forward:
 
-- Booking flow functional end-to-end across all platforms
-- iOS deployment pipeline operational
-- Redesigned interfaces approved by stakeholders
-- WhatsApp OTP verification flow operational in staging
-- MyFatoorah sandbox transactions processing successfully
-- Service unit app running with core screens and navigation
-- Booking flow connected to live API and functional across customer, vendor, and admin platforms
+    - CI/CD pipeline extended to deploy mobile app to Apple App Store
+    - UI/UX redesign for mobile app (customer app + service unit app)
+    - UI/UX redesign for web apps (vendor portal + admin dashboard)
+    - WhatsApp OTP integration for customer authentication and verification
 
 ---
 
 ### Milestone 3: Cultural Integration & Core Features
-**Target**: Q2 2026
+**Period**: May – July 2026 (Q2 2026)
+**Status**: 🔄 In Progress
 
-**Goal**: Deliver a polished, Qatar-ready experience with full cultural adaptations and feature completeness
+**Goal**: Deliver a polished, Qatar-ready experience with full cultural adaptations, feature completeness, and official product launch readiness
 
 **Deliverables**:
 
+*Carried over from Milestone 2:*
+
+- CI/CD pipeline extended to deploy mobile app to Apple App Store
+- UI/UX redesign for mobile app (customer app + service unit app)
+- UI/UX redesign for web apps (vendor portal + admin dashboard)
+- WhatsApp OTP integration for customer authentication and verification
+
+*New:*
+
 - Arabic RTL support across all platforms
-- WhatsApp OTP verification flow
 - Standard service packages (Quick Wash, Shine Wash, Detail Wash)
 - Custom vendor packages with individual pricing
 - Status-based service tracking with estimated arrival times
 - In-app ratings and reviews (star rating + pre-set options)
 - SMS notifications for all booking events
+- Google Maps integration (service location pinning, vendor proximity, arrival tracking)
+- Vendor onboarding flow (registration, document submission, profile setup)
+- Landing page for public-facing onboarding (customer and vendor acquisition)
+- Product migration to official brand name across all platforms (Ongo)
 
 **Success Criteria**:
 
 - Arabic interface fully functional with no critical layout issues
 - Complete booking flow with vendor assignment working end-to-end
+- iOS deployment pipeline operational
+- Redesigned interfaces approved by stakeholders
+- WhatsApp OTP verification flow operational in staging
+- Google Maps integrated with live location on all relevant screens
+- Vendor onboarding flow end-to-end in staging
+- Landing page live and accessible
+- All platform surfaces reflect the Ongo brand
 - Internal satisfaction score >4.0/5.0
 
 ---
@@ -137,10 +151,10 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 | Milestone | Period | Status |
 |-----------|--------|--------|
 | Foundation & Initial Deployment | Dec 2025 – Feb 2026 | ✅ Completed |
-| API Integration & UI Redesign | Mar – Apr 2026 | 🔄 In Progress |
-| Cultural Integration & Core Features | Q2 2026 | Planned |
-| Payments & Vendor Operations | Q2–Q3 2026 | Planned |
-| Beta Launch | Q3 2026 | Planned |
+| API Integration & UI Redesign | Mar – Apr 2026 | ✅ Completed |
+| Cultural Integration & Core Features | May – Jul 2026 | 🔄 In Progress |
+| Payments & Vendor Operations | Q3 2026 | Planned |
+| Beta Launch | Q3–Q4 2026 | Planned |
 
 ## Key Risks
 
