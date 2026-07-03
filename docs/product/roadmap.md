@@ -60,44 +60,42 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 
 ### Milestone 3: Cultural Integration & Core Features
 **Period**: May – July 2026 (Q2 2026)
-**Status**: 🔄 In Progress
+**Status**: ✅ Completed
 
 **Goal**: Deliver a polished, Qatar-ready experience with full cultural adaptations, feature completeness, and official product launch readiness
 
-**Deliverables**:
+**Delivered**:
 
-*Carried over from Milestone 2:*
+- Customers can now book from standard wash packages (Quick Wash, Shine Wash, Detail Wash) or a vendor's own custom packages with their own pricing
+- Vendors can apply to join Ongo through a public sign-up form, submit their documents, and get reviewed and approved by the Ongo team — the full vendor sign-up journey works end to end
+- Customers verify their phone number and log in using WhatsApp, replacing the previous verification method
+- Customers can pin their exact location with Google Maps, save multiple saved addresses, and see their assigned service unit tracked in real time once a booking is confirmed
+- The customer mobile app received a refreshed visual design as the first phase of the app-wide redesign
+- The on-road service unit (field worker) app was renamed and rebuilt under the official Ongo brand
+- Behind the scenes, the booking system, login security, and cloud infrastructure were all made more stable and reliable ahead of launch
 
-- CI/CD pipeline extended to deploy mobile app to Apple App Store
-- UI/UX redesign for mobile app (customer app + service unit app)
-- UI/UX redesign for web apps (vendor portal + admin dashboard)
-- WhatsApp OTP integration for customer authentication and verification
+!!! warning "Carried over to Milestone 4"
+    The following items were not completed within the milestone window and are carried forward:
 
-*New:*
-
-- Arabic RTL support across all platforms
-- Standard service packages (Quick Wash, Shine Wash, Detail Wash)
-- Custom vendor packages with individual pricing
-- Status-based service tracking with estimated arrival times
-- In-app ratings and reviews (star rating + pre-set options)
-- SMS notifications for all booking events
-- Google Maps integration (service location pinning, vendor proximity, arrival tracking)
-- Vendor onboarding flow (registration, document submission, profile setup)
-- Landing page for public-facing onboarding (customer and vendor acquisition)
-- Product migration to official brand name across all platforms (Ongo)
+    - Publishing the customer app to Apple's App Store (already live on Google Play)
+    - Visual redesign for the field worker app and for both web dashboards (vendor portal and admin dashboard) — only the customer mobile app redesign is finished
+    - Letting customers actually submit a rating and review after a completed service (the screen exists, but it doesn't save the rating yet)
+    - Automatic SMS updates for booking events (e.g. "your service unit is on the way") — WhatsApp verification is live, but general SMS updates are not yet turned on
+    - Renaming the backend systems and the two web dashboards from the old "CWS" name to "Ongo" — both mobile apps have already been renamed; this is the remaining piece
+    - Arabic language support — not started yet and needs to be scheduled
 
 **Success Criteria**:
 
-- Arabic interface fully functional with no critical layout issues
-- Complete booking flow with vendor assignment working end-to-end
-- iOS deployment pipeline operational
-- Redesigned interfaces approved by stakeholders
-- WhatsApp OTP verification flow operational in staging
-- Google Maps integrated with live location on all relevant screens
-- Vendor onboarding flow end-to-end in staging
-- Landing page live and accessible
-- All platform surfaces reflect the Ongo brand
-- Internal satisfaction score >4.0/5.0
+- Arabic interface fully functional with no critical layout issues — ⚠️ not started, rescheduled
+- Complete booking flow with vendor assignment working end-to-end — ✅ met
+- iOS deployment pipeline operational — ⚠️ pending, carried to Milestone 4
+- Redesigned interfaces approved by stakeholders — ⚠️ partially met (customer mobile app only)
+- WhatsApp OTP verification flow operational in staging — ✅ met
+- Google Maps integrated with live location on all relevant screens — ✅ met
+- Vendor onboarding flow end-to-end in staging — ✅ met
+- Landing page live and accessible — ✅ met
+- All platform surfaces reflect the Ongo brand — ⚠️ partially met (both mobile apps only; backend and web dashboards pending)
+- Internal satisfaction score >4.0/5.0 — not measured for this update
 
 ---
 
@@ -107,6 +105,17 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 **Goal**: Enable real transactions and equip vendors with complete operational tools
 
 **Deliverables**:
+
+*Carried over from Milestone 3:*
+
+- Publishing the customer app to Apple's App Store
+- Visual redesign for the field worker app and both web dashboards (vendor portal + admin dashboard)
+- Customer ratings and reviews saving correctly after a completed service
+- Automatic SMS updates for booking events
+- Renaming the backend and web dashboards from "CWS" to "Ongo"
+- Arabic language support
+
+*New:*
 
 - Payment integration (SkipCash, MyFatoorah, QNB — local cards, Visa, Google/Apple Pay)
 - Vendor earnings dashboard with commission tracking
@@ -152,8 +161,8 @@ Phased delivery with continuous deployment and stakeholder validation. Each mile
 |-----------|--------|--------|
 | Foundation & Initial Deployment | Dec 2025 – Feb 2026 | ✅ Completed |
 | API Integration & UI Redesign | Mar – Apr 2026 | ✅ Completed |
-| Cultural Integration & Core Features | May – Jul 2026 | 🔄 In Progress |
-| Payments & Vendor Operations | Q3 2026 | Planned |
+| Cultural Integration & Core Features | May – Jul 2026 | ✅ Completed |
+| Payments & Vendor Operations | Q3 2026 | 🔄 In Progress |
 | Beta Launch | Q3–Q4 2026 | Planned |
 
 ## Key Risks
