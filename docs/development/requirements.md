@@ -1,14 +1,13 @@
 ---
 title: Requirements
-description: MVP feature requirements for Ongo — organized by platform
+description: As-built MVP requirements for Ongo — organized by platform
 icon: material/clipboard-list-outline
 ---
 
 # Requirements
 
 !!! info "Document Info"
-    Based on **Ongo Feature List MVP v4\_S** — last revised February 8, 2025, Doha, Qatar.
-    This document reflects the finalized MVP scope for all four Ongo platforms.
+    This document reflects the **as-built MVP scope**, reconciled against the four codebases in **July 2026** (Week 3 of the delivery sprint). It **supersedes** the design-time *Ongo Feature List MVP v4\_S* (Feb 8, 2025), which described the originally-planned scope. Where the build deliberately diverged from that plan, this document describes what is actually being delivered. See **Scope Evolution** at the end for the significant pivots.
 
 ---
 
@@ -35,32 +34,43 @@ The MVP focuses on features that **directly enable booking and fulfilment**. Eve
   </div>
 </div>
 
-### Optimization Principles
+The platform runs an **on-demand dispatch model**: a customer books a service, the request is broadcast to nearby available field units, and the **first unit to accept** fulfils it. This is closer to a ride-hailing flow than the vendor-selection flow in the original plan — see [Booking & Dispatch Model](#booking-dispatch-model).
 
-| Principle | Decision |
-|-----------|----------|
-| **Integrations** | Minimize costly third-party integrations |
-| **Tracking** | SMS-based status updates instead of real-time GPS tracking |
-| **Service areas** | Static radius for MVP; dynamic radius deferred |
-| **Vendor app** | Vendor mobile app deferred to Phase II — web portal only |
-| **Pricing** | Simple flat commission model; dynamic pricing deferred |
-| **Reviews** | Star rating + pre-set options only; no free text in MVP |
+### Deliberate MVP simplifications
 
-!!! warning "Deferred to Post-MVP"
-    - Real-time GPS tracking for on-road units
+These decisions keep the MVP lean and are described inline in each section:
+
+| Area | Decision |
+|------|----------|
+| **Vendor app** | Web portal only — no vendor native mobile app |
+| **Pricing** | Flat commission model; dynamic pricing deferred |
+| **Reviews** | Star rating + pre-set options only; no free text |
+| **Customer tracking** | Status-message updates with fixed ETAs; no customer-facing live map |
+| **Vendor self-service** | Vendor financials/analytics live in the **Admin** app for MVP, not the vendor portal |
+
+!!! warning "Out of Scope — Deferred to Post-MVP"
+    - **Auto-assign to highest-rated vendor** (MVP uses first-to-accept dispatch)
+    - Customer-facing real-time GPS map during service
+    - Vendor live fleet-monitoring map
     - Vendor native mobile app (Phase II)
-    - Live map monitoring of fleet
-    - Dynamic service radius
-    - In-app messaging / chat
-    - Cash on delivery (COD)
-    - Email / social login
-    - Free-text reviews
+    - Vendor self-serve financial & analytics dashboards (admin-only for MVP)
+    - Cash on Delivery (COD)
+    - Free-text reviews · Dynamic pricing · In-app messaging / chat
+    - Booking dispute resolution · Payment refunds
+    - CMS (FAQ / ToS / copy editing) · Bulk push-notification campaigns
+    - Custom report generation & data export
+    - Offline mode
+    - SkipCash & QNB payment gateways (MyFatoorah only for MVP)
+    - Scheduled-booking enhancements: vendor-side acceptance & near-time dispatch
+
+!!! danger "Launch-critical dependency — the communications stack"
+    Phone OTP (SMS/WhatsApp), booking SMS, and FCM push notifications **all** depend on **Twilio** and **Firebase** being taken to production ("go-live"), which is **not yet complete**. Until then, **social login is the dependable authentication path**. This is the single biggest launch risk and cuts across auth *and* notifications.
 
 ---
 
 ## Service Packages
 
-Two types of packages exist across the platform. All vendors **must** support Standard packages.
+Two package types exist. All vendors **must** support Standard packages. In both cases the customer chooses a **service** — never a specific vendor.
 
 ### Standard Service Packages (SSP)
 
@@ -72,6 +82,8 @@ Pre-set by Admin. Vendors toggle availability — they cannot change pricing.
 | **Shine Wash** | ~60 min | Mid tier |
 | **Detail Wash** | ~120 min | Premium tier |
 
+When a customer books an SSP, the request goes to **nearby online field units across all vendors** (see dispatch model).
+
 ### Custom Service Packages (CSP)
 
 Created by vendors, approved by Admin before going live.
@@ -81,52 +93,75 @@ Created by vendors, approved by Admin before going live.
 - Subject to admin approval per vendor
 - Can include promotional pricing
 
+When a customer books a CSP, the request goes **only to the field units of the vendor who owns that service** (still geo-filtered — see below).
+
+---
+
+## Booking & Dispatch Model
+
+This is the core engine of the platform. The customer selects a **service**, not a vendor; the system finds and assigns a field unit on demand.
+
+!!! info "How dispatch works"
+    1. Customer creates a booking for a service (SSP or CSP) at a location. **No vendor is assigned yet.**
+    2. The system finds **nearby online field units** within a service radius (~5 km) using geo-filtering:
+        - **SSP** → units across **all** vendors
+        - **CSP** → units of the **owning vendor** only
+    3. The request is pushed to those units in real time. The **first unit to accept wins** — that unit (and its vendor) is assigned the booking.
+    4. If **no unit accepts within ~5 minutes**, the booking is marked **No Units Found** and the customer is informed.
+
+### Booking status lifecycle
+
+| Status | Meaning |
+|--------|---------|
+| **Searching** | Broadcast out; waiting for a unit to accept |
+| **Accepted** | A field unit claimed the job |
+| **On Way** | Unit has started the journey |
+| **Arriving** | Unit is close (~3 mins away) |
+| **In Progress** | Service has started |
+| **Completed** | Service finished |
+| **Cancelled** | Cancelled by customer/system |
+| **No Units Found** | No unit accepted within the timeout |
+
+### Instant vs Scheduled
+
+- **Instant ("Now")** — dispatched immediately; a nearby unit accepts and heads over.
+- **Scheduled** — the customer picks a future time. In MVP, scheduled bookings use the **same self-accept dispatch** as instant bookings.
+
+!!! note "Scheduled booking — known MVP limitation"
+    A scheduled booking is broadcast at the time it is created and needs a field unit **online at that moment** to claim it; otherwise it becomes **No Units Found**. Vendor-side acceptance of scheduled jobs and near-time re-dispatch are **post-MVP** improvements. "Online" means a unit is on shift within working hours.
+
 ---
 
 ## 1. Customer App — Flutter
 
 ### 1.1 Account Management
 
-- Sign up via phone number (Qatar `+974`) with WhatsApp OTP — no email or social login in MVP
-- Profile creation: name, email (optional), language preference
-- Single saved address (home/work) with building, floor, apartment, street, additional directions
+- **Sign in with Google or Apple** (social login) — the primary, production-ready path for MVP
+- **Phone number sign-up (Qatar `+974`) with OTP** — SMS by default, WhatsApp available as a channel
+- Profile: name, email (optional; seeded from social login on first sign-in), language preference
+- **Multiple saved addresses**, each labelled (e.g. home/work) with building, floor, apartment, street, additional directions and a default flag; plus an **ad-hoc pinned location** per booking
 - Saved vehicles: type, colour, plate number, optional photo
 - Order history
 
+!!! warning "Phone OTP is pending go-live"
+    Google/Apple social login works today. **Phone OTP (SMS + WhatsApp via Twilio) is built but not yet production-ready** — WhatsApp is in sandbox and needs business go-live approval; SMS is untested in production. Treat social login as the reliable launch path. See the launch-critical dependency callout above.
+
 ### 1.2 Booking Flow
 
-Two distinct booking routes based on package type:
+The customer picks a **service** and the system dispatches a unit. There is one flow, differing only by package type:
 
-=== "Route I — Standard Packages"
+1. Enter/confirm location (pin on map + address details)
+2. Choose vehicle (type, saved name, optional photo)
+3. Select a service:
+    - **Standard package** — Quick / Shine / Detail wash at pre-set pricing, or
+    - **Custom package** — a vendor's custom service (with any special requests/notes)
+4. Choose time: **Now** or **Schedule**
+5. Confirmation page shows all details + total price
+6. Pay
+7. The app shows live booking status as a **nearby unit is found and accepts** (see dispatch model)
 
-    1. Customer selects geographical area
-    2. Phone verification (OTP or WhatsApp)
-    3. Profile details entered (name + agree to terms)
-    4. Vehicle information added (type, saved name, optional photo)
-    5. Select standard package — Quick / Shine / Detail wash with pre-set pricing
-    6. Option to add vehicle photo before confirming
-    7. Pin address on map + add address details
-    8. Choose time: **Now** or **Schedule**
-    9. Confirmation page shows all details + total price
-    10. Auto-assigned vendor based on algorithm (see below)
-    11. Confirmation page shows tracking status + estimated arrival
-    12. Payment deducted
-
-=== "Route II — Custom Packages"
-
-    1. Customer views list of vendors
-    2. Browse vendor services, pricing, descriptions
-    3. Select custom package
-    4. Add special requests / notes
-    5. View estimated arrival time
-    6. Confirm and pay
-
-!!! info "Vendor Auto-Assignment Algorithm (Route I)"
-    When a customer books a standard package, the system auto-assigns a vendor by prioritising:
-
-    1. **Highly rated** vendors first
-    2. **Available** (online / not busy) vendors
-    3. **Within the same city** or within the vendor's defined static radius
+!!! note "No vendor selection"
+    Customers do not browse or pick vendors. For standard packages the vendor is whoever accepts; for custom packages the vendor is the one who owns the chosen service.
 
 ### 1.3 Cancellation Policy
 
@@ -135,53 +170,61 @@ Two distinct booking routes based on package type:
 
 ### 1.4 Location & Tracking
 
-- Address pinning via map (no real-time GPS tracking in MVP)
-- Status-based updates delivered via SMS at key moments:
+- Address pinning via map (no customer-facing live GPS map in MVP)
+- **Status-based updates** delivered via SMS **and push** at key moments:
 
 | Trigger | Notification sent |
 |---------|-------------------|
-| Booking confirmed | Confirmation + vendor contact number |
-| Vendor starts journey | "Your provider is on the way — arriving ~20 mins" |
-| Vendor near location (~3 mins) | "Arriving soon" |
+| Booking confirmed | Confirmation + assigned unit's contact number |
+| Unit starts journey | "Your provider is on the way — arriving ~20 mins" |
+| Unit near location (~3 mins) | "Arriving soon" |
 | Service started | "Service in progress — Est. 45 mins remaining" |
 | Service complete | Completion confirmation + rating prompt |
 
-!!! note "Predictive Tracking"
-    Fixed estimates are used in MVP (20 min journey, 45 min service) rather than live GPS. This is a deliberate cost-saving decision — no real-time tracking infrastructure required.
+!!! note "Fixed estimates"
+    MVP uses **fixed estimates** (≈20 min journey, ≈45 min service) rather than live GPS-derived ETAs — a deliberate simplification. Field units do stream location, but only for **dispatch matching**, not for a customer-facing map.
 
 ### 1.5 Payments
 
 | Method | Provider |
 |--------|----------|
-| Local debit/credit cards (Qatar) | SkipCash / MyFatoorah / QNB Payment Gateway |
-| Visa / Mastercard | Same gateways |
-| Google Pay | Same gateways |
-| Apple Pay | Same gateways |
+| Local debit/credit cards (Qatar) | **MyFatoorah** |
+| Visa / Mastercard | MyFatoorah |
+| Google Pay | MyFatoorah |
+| Apple Pay | MyFatoorah |
 
-- **No COD (Cash on Delivery)** in MVP
+- **MyFatoorah is the only gateway for MVP** (SkipCash / QNB deferred)
+- Payment methods: card, Apple Pay, Google Pay — **no COD**
 - Customer consent required to store card data for future use
 - Itemised receipts available in order history
 - QAR is the primary currency display
 
 ### 1.6 Notifications
 
-- Push notifications (Firebase) — customer must grant permission
-- SMS for: booking confirmation, status updates, vendor contact number post-booking
+- Push notifications (Firebase FCM) — customer must grant permission
+- SMS for: booking confirmation, status updates, assigned unit's contact number post-booking
+
+*(Delivery depends on the comms-stack go-live — see the launch-critical dependency callout.)*
 
 ### 1.7 Ratings & Reviews
 
 - Post-service rating prompt (5-star)
 - Pre-set compliment / complaint options — no free-text in MVP
-- Filter vendors by highest rated
 - All reviews are **moderated by Admin** before publishing (customers are not informed of moderation)
+
+!!! note "No customer-facing vendor browsing"
+    Because customers book services and not vendors, there is **no vendor rating browse/filter** in the customer app. Ratings are still collected — they feed Admin quality control and vendor performance analytics.
 
 ### 1.8 Support
 
-- Emergency contact options within the app
+- In-app support button that **opens WhatsApp** to message the support team (replaces in-app chat)
 
 ---
 
 ## 2. Vendor Portal — Angular Web
+
+!!! info "Vendor role in MVP"
+    With on-demand self-accept dispatch, the vendor admin is a **monitor and configurator**, not a dispatcher. The portal covers onboarding, service management, personnel, and job monitoring. **Vendor financial and analytics dashboards are not in the vendor portal for MVP** — that visibility lives in the Admin app (a deliberate resourcing pivot).
 
 ### 2.1 Registration (Become a Partner)
 
@@ -189,9 +232,9 @@ Two distinct booking routes based on package type:
 - Online registration form with document uploads
 
 !!! info "Required Registration Documents"
-    Trade License · Commercial Registration · Trademark (if applicable) · Qatar ID ·
-    Power of Attorney (if applicable) · Bank Certificate · Signed email declaration ·
-    Proof of registration fee payment · Logo · Cover Photo
+    Trade License · Commercial Registration · Qatar ID · Bank Letter · **Vehicle Registration** · **Insurance Certificate** · Other (optional catch-all — e.g. signed declaration, proof of any registration-fee payment).
+
+    Logo and cover photo are captured as **profile branding**, not verification documents.
 
 ### 2.2 Service Management
 
@@ -201,79 +244,76 @@ Two distinct booking routes based on package type:
     - Special requirements (power outlet, water source)
     - Pricing + optional promotional pricing
 - CSPs require Admin approval before going live
-- Set operating hours and availability settings
-- Service area definition: choose from predefined location list **or** set a static radius
+- Service area definition: choose from a predefined location list **or** set a static radius
 
-!!! note "Static Radius — MVP Scope"
-    Dynamic radius (adjusting based on vehicle movement) is a post-MVP feature. For MVP, vendors define a fixed service area.
+!!! note "Availability is per field unit, not per vendor"
+    There is **no vendor-level online/offline toggle** in MVP. Whether a vendor can receive a job depends on whether its **field units are online** (on shift). A vendor may effectively "close" while keeping a unit on shift.
 
-### 2.3 Booking Management
+### 2.3 Booking Monitoring
 
-- Real-time dashboard notifications for new bookings (now and scheduled)
-- Accept or decline incoming booking requests
-- View daily, weekly, and monthly schedule
-- Manage capacity across multiple on-road units simultaneously
-- **Online / Offline toggle** — per service package menu item + overall vendor toggle
-- **Busy status** — signals customers to expect longer wait times
+- Real-time dashboard view of incoming and active bookings (now and scheduled)
+- Monitor the service status of each on-road unit in the field
+- View capacity across multiple on-road units
 
-### 2.4 Fleet / Unit Management
+!!! note "Dispatch is automatic"
+    The vendor admin does **not** accept/decline bookings or assign them to units — field units **self-accept** from the broadcast. Scheduled-day/week/month calendar views and vendor accept/decline/assign are not part of the MVP portal.
 
-- Assign accepted bookings to specific on-road units (job cart with client info)
-- Monitor service status of each unit in the field
+### 2.4 Financial (Admin-managed for MVP)
 
-### 2.5 Financial
+- Payment collection is automated by the gateway; commission is deducted per transaction
+- Payout data exists in the backend, but **vendor-facing earnings, transaction history, and commission views are not in the vendor portal for MVP** — payouts are managed from the Admin app
 
-- View payment gateway earnings through the dashboard
-- Automated payment collection via gateway
-- Transaction history
-- Commission deductions visible per transaction
-
-### 2.6 Analytics & Performance
-
-- Analytics dashboard: bookings, earnings, commission deductions
-- View customer ratings and reviews
-- Filter by date range and booking type
-
-### 2.7 User Management
+### 2.5 User Management
 
 - Update vendor admin profile details
-- Add sub-users for each on-road unit (fleet accounts)
+- Add sub-users for each on-road unit (fleet/personnel accounts)
 
 ---
 
 ## 3. On-Road Unit App — Flutter
 
-Accessed by on-road wash unit staff via a **Flutter mobile app**. Controlled by on-road supervisor.
+Used by on-road wash-unit staff via a **Flutter mobile app**, consistent with the customer-app codebase.
 
-!!! info "Platform Decision"
-    Built with Flutter, consistent with the customer app codebase and allowing a native mobile experience for on-road teams.
+### 3.1 Home & Availability
 
-### 3.1 Booking View
+- Home dashboard: current active job, upcoming jobs, and daily job-count / performance stats
+- **Online / Offline toggle** — "online" means the unit is on shift and eligible to receive job requests; this drives dispatch
+- Availability state persists and is restored on app start
 
-- Receive notification (SMS or email) when a booking is assigned by Vendor Admin
-- View all details of the assigned job:
-    - Customer name + contact number
+!!! note "No earnings on the unit"
+    The field unit sees job count and performance, but **not earnings** — payments route to the vendor, so earnings are not shown to units in MVP.
+
+### 3.2 Receiving & Accepting Jobs
+
+- New booking requests **pop up in real time** (push / SignalR) for nearby online units
+- The unit **self-accepts** a job — first to accept wins
+- On acceptance, view all job details:
+    - Customer name + contact number (tap to call)
     - Vehicle details (type, colour, plate)
     - Location + address details
     - Package selected + special requests/notes
     - Scheduled time
 
-### 3.2 Status Updates
+### 3.3 Status Updates
 
-- Update booking status at key moments (drives the customer SMS notifications):
-    - Journey started
-    - Near location
-    - Service started
-    - Service completed
+- Update booking status at key moments (drives the customer notifications):
+    - Journey started → **On Way**
+    - Near location → **Arriving**
+    - Service started → **In Progress**
+    - Service completed → **Completed**
 
-### 3.3 Service Quality Checklist
+### 3.4 Service Quality Checklist
 
 - Complete a quality checklist upon service completion
-- Collect customer signature / approval at job completion
+- Upload **before/after photos**
+- **Customer signature / approval capture at completion is planned for MVP** but not yet built — the team will complete it if time allows
 
 ---
 
 ## 4. Admin Dashboard — Angular Web
+
+!!! info "Primary MVP build"
+    The Admin app is the most complete of the four and carries the platform's operational and analytics surface for MVP (including the vendor-facing metrics that were pulled from the vendor portal).
 
 ### 4.1 User Management
 
@@ -282,53 +322,53 @@ Accessed by on-road wash unit staff via a **Flutter mobile app**. Controlled by 
 - Manage on-road unit accounts
 - User roles and permissions
 - Overview dashboard: real-time user stats — new users, total vendors, new vendor registrations
-- Mass communication tools: push notifications to all users or segments
+
+*(Mass communication / bulk push to all users or segments is deferred to post-MVP.)*
 
 ### 4.2 Service Management
 
 - Define and manage Standard Service Package (SSP) categories for all vendors
 - Review and approve Custom Service Packages (CSP) per vendor
-- Set flat commission rates (applied to all vendors in MVP)
-- Manage COD commission rate separately (applied in-dashboard, not via gateway)
+- Set a **flat commission rate** applied to all vendors
 
-!!! info "Commission on COD"
-    For any future COD payments, the commission rate is shown as debited in the vendor admin account. Digital payment commissions are applied automatically by the payment gateway.
+*(No COD commission handling — COD is out of scope.)*
 
 ### 4.3 Booking Oversight
 
 - View all current and historical bookings
-- Resolve booking disputes
-- Manage cancellations and refunds
+- Manage basic cancellations
+
+*(Dispute resolution and refunds are deferred to post-MVP.)*
 
 ### 4.4 Financial Management
 
-- Overall revenue dashboard (platform-wide and per vendor)
+- Revenue dashboard (platform-wide and per vendor)
 - Commission tracking
-- Approve vendor bank account information before payouts
+- **Vendor payouts** — generate payout batches and mark as paid
 
-### 4.5 Content Management
+!!! note "Payout bank approval"
+    A formal "approve vendor bank info before payout" gate is **not yet enforced** — payouts currently do not gate on it. This may be added; the doc will be updated if so.
 
-- Manage FAQs, Terms of Service, app copy
-- Push notification management (manual broadcast)
-- Approve vendor promotional campaigns (for CSPs only)
+### 4.5 Analytics & Reporting
 
-### 4.6 Analytics & Reporting
+- KPI cards: total bookings, revenue, customers, vendors, completion/cancellation rates, commission
+- **Top vendors** ranking
+- **Trend charts**: bookings, revenue, and user growth over time
+- Filter by period
 
-- Comprehensive analytics dashboard
-- Filter by booking type, vendor, date range, geography
-- Generate and export custom reports (usage, revenue, user acquisition)
+*(Custom report generation and data export are deferred to post-MVP.)*
 
-### 4.7 App Configuration
+### 4.6 App Configuration
 
 - Manage app settings and feature parameters
 - Feature toggles (where applicable)
 - Manage third-party integrations (maps, payment gateways)
 
-### 4.8 Quality Control
+### 4.7 Quality Control
 
 - Monitor vendor ratings and performance metrics
 - **Moderate and approve customer reviews** before publishing
-- Enforce service completion standards (via on-road unit checklist)
+- Enforce service completion standards (via the on-road unit checklist)
 
 ---
 
@@ -344,6 +384,7 @@ Accessed by on-road wash unit staff via a **Flutter mobile app**. Controlled by 
 | Booking confirmation response | < 2 seconds |
 | Search / filter response | < 1 second |
 | Payment confirmation | < 5 seconds |
+| Admin analytics endpoints | < 500 ms |
 
 ### Availability
 
@@ -357,16 +398,16 @@ Accessed by on-road wash unit staff via a **Flutter mobile app**. Controlled by 
 
 | Requirement | Standard |
 |-------------|----------|
-| Payment processing | PCI DSS compliant |
+| Payment processing | PCI DSS compliant (via MyFatoorah hosted page — no raw card data handled client-side) |
 | Data at rest | AES-256 encryption |
 | Data in transit | HTTPS / TLS 1.3 |
 | Security reviews | Regular audits |
-| Message / payment encryption | End-to-end |
 
-### Scalability
+### Architecture & Real-time
 
+- Monolith-first backend (.NET) with a microservices-ready design; PostgreSQL 16 + PostGIS for geo-dispatch
+- **SignalR real-time** is core infrastructure — it powers on-demand dispatch and live booking/job status across the customer and field apps
 - Support **500+ concurrent users** in MVP
-- Monolith-first architecture with microservices-ready design
 - Multi-environment deployment: `dev` → `staging` → `prod`
 
 ### Mobile & Device Support
@@ -377,14 +418,28 @@ Accessed by on-road wash unit staff via a **Flutter mobile app**. Controlled by 
 | Android | 8+ (API 26) |
 | PWA | Modern mobile browsers |
 | Biometric auth | Supported where available |
-| Offline | Cached data browsable offline |
+
+*(Offline mode is not implemented — deferred to post-MVP.)*
 
 ### Localisation
 
 | Requirement | Detail |
 |-------------|--------|
-| Languages | Arabic (RTL) + English — seamless toggle |
+| Languages | Arabic (RTL) + English — **planned**; the doc will be updated as it firms up at launch |
 | Currency | QAR primary; amounts formatted with commas |
 | Timezone | Qatar Standard Time (UTC+3) |
 | Weekend | Friday–Saturday pattern |
-| Calendar integration | Islamic calendar for prayer times, Ramadan, Eid, National Day |
+| Calendar | Islamic calendar for prayer times, Ramadan, Eid, National Day |
+
+---
+
+## Scope Evolution
+
+!!! abstract "How the MVP changed from the Feb 2025 plan"
+    The original *Ongo Feature List MVP v4\_S* (Feb 8, 2025, Doha) described a leaner, SMS-first product. During execution the scope evolved in three significant ways, all reflected above:
+
+    1. **Dispatch:** *auto-assign the highest-rated vendor* → **on-demand geo-dispatch, first unit to accept** (auto-assign-highest-rated is now a post-MVP goal).
+    2. **Authentication:** *phone OTP only, defer social login* → **social login (Google/Apple) is the primary, production-ready path**, with phone OTP pending go-live.
+    3. **Infrastructure:** *avoid real-time infrastructure, minimise integrations* → the platform now runs **SignalR real-time** plus Firebase, Twilio, and Azure Blob to support the dispatch model.
+
+    Several features were also **pulled back** during the build — vendor-side dispatch/accept, vendor self-serve financials & analytics (moved to Admin), field-unit earnings visibility, offline mode, and customer-facing vendor browsing. See the Out of Scope list for the full deferred set.
