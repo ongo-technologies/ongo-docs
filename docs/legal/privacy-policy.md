@@ -6,32 +6,40 @@ icon: material/shield-lock-outline
 
 # Privacy Policy
 
-This privacy policy applies to the Ongo app (hereby referred to as "Application") for mobile devices that was created by (hereby referred to as "Service Provider") as a Free service. This service is intended for use "AS IS".
+This privacy policy applies to the Ongo app (hereby referred to as "Application"), a car wash booking service for mobile devices, created by Ongo (hereby referred to as "Service Provider") and operating in Qatar. This service is intended for use "AS IS".
 
 ## Information Collection and Use
 
-The Application collects information when you download and use it. This information may include information such as
+The Application collects information when you download and use it, in order to provide and improve the car wash booking service. This information may include:
 
-*   Your device's Internet Protocol address (e.g. IP address)
-*   The pages of the Application that you visit, the time and date of your visit, the time spent on those pages
-*   The time spent on the Application
-*   The operating system you use on your mobile device
+*   Account information you provide, such as your name, email address, and phone number, when you register or sign in (including via Google Sign-In or Sign in with Apple)
+*   Your device's Internet Protocol address (e.g. IP address) and the operating system you use on your mobile device
+*   Booking details, such as the car wash services you request, vehicle information, and booking history
+*   Push notification tokens, used to send you booking and order status updates
 
-The Application does not gather precise information about the location of your mobile device.
+### Location Data
 
-The Application collects your device's location, which helps the Service Provider determine your approximate geographical location and make use of in below ways:
+The Application collects your device's precise and approximate location (using GPS and network-based location) while you are using it. This is a core part of the service and is used to:
 
-*   Geolocation Services: The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.
-*   Analytics and Improvements: Aggregated and anonymized location data helps the Service Provider to analyze user behavior, identify trends, and improve the overall performance and functionality of the Application.
-*   Third-Party Services: Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings.
+*   Determine your location so nearby car wash service providers can be matched to you and dispatched to your address
+*   Show your location and nearby service availability on the in-app map
+*   Improve and troubleshoot the booking and dispatch experience
 
-The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.
+Location data is only collected while the Application is in use, and you can disable location access at any time through your device settings, though this will limit the Application's core booking features.
 
-For a better experience, while using the Application, the Service Provider may require you to provide us with certain personally identifiable information. The information that the Service Provider request will be retained by them and used as described in this privacy policy.
+### Payments
+
+When you make a payment through the Application, your payment is processed by MyFatoorah, a third-party, PCI-compliant payment gateway. Card and payment details are entered directly with MyFatoorah and are not collected or stored by the Service Provider. The Service Provider receives only confirmation of payment status (e.g. success, failure) and transaction references needed to manage your booking.
+
+The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices, and booking-related updates.
 
 ## Third Party Access
 
-Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement, including with the following categories of service providers who process data on the Service Provider's behalf:
+
+*   **Firebase (Google)** — authentication, push notifications, and app infrastructure
+*   **Google Maps** — maps, location display, and distance/routing features
+*   **MyFatoorah** — payment processing, as described above
 
 The Service Provider may disclose User Provided and Automatically Collected Information:
 
@@ -41,27 +49,27 @@ The Service Provider may disclose User Provided and Automatically Collected Info
 
 ## Opt-Out Rights
 
-You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
+You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network. You may also disable specific permissions (such as location or notifications) at any time through your device settings.
 
 ## Data Retention Policy
 
-The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at developer.jamester@gmail.com and they will respond in a reasonable time.
+The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter, or as required to comply with legal, accounting, or regulatory obligations. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them using the details below and they will respond in a reasonable time.
 
 ## Children
 
 The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.
 
-The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children's Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider (developer.jamester@gmail.com) so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).
+The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children's Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider using the details below so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).
 
 ## Security
 
-The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.
+The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains, including secure, encrypted on-device storage for authentication credentials.
 
 ## Changes
 
 This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
 
-This privacy policy is effective as of 2026-01-29
+This privacy policy is effective as of 2026-10-05
 
 ## Your Consent
 
@@ -69,8 +77,7 @@ By using the Application, you are consenting to the processing of your informati
 
 ## Contact Us
 
-If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at developer.jamester@gmail.com.
+If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider:
 
-* * *
-
-This privacy policy page was generated by [App Privacy Policy Generator](https://app-privacy-policy-generator.nisrulz.com/)
+*   **Phone:** +974 5050 9972
+*   **Email:** support@ongo.qa
